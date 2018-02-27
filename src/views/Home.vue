@@ -1,5 +1,5 @@
 <template>
-  <div>主页</div>
+  <div>主页{ msg }</div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg:process.env.SERVICE_URL
     }
   },
   method:{
