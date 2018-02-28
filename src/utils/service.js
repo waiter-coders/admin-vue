@@ -14,9 +14,9 @@ service.interceptors.request.use(config => {
 })
 
 // 回复拦截器
-service.interceptors.response.use(
-    response => response,
-    error => {
+service.interceptors.response.use(response => {
+    return response
+}, error => {
     return Promise.reject(error)
 })
 
