@@ -1,7 +1,7 @@
-import {service} from '@/utils/service'
+// import {service} from '@/utils/service'
 
 export function isLogin(){
-    service.post()
+    // service.post()
     return true;
 };
 

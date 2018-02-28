@@ -4,7 +4,7 @@ import Router from 'vue-router'
 // 公共视图组件
 import Home from '@/views/Home'
 import Login from '@/views/Login'
-import Paging from '@/views/common/Paging'
+import List from '@/views/common/List'
 import Form from '@/views/common/Form'
 import Statistics from '@/views/common/Statistics'
 
@@ -31,12 +31,19 @@ const router = new Router({
             name: 'helper',
             component: Helper
         },
+        {
+            path: '/:domain/:controller/list',
+            name: 'list',
+            component: Paging,
+            props:true
+
+        },
 
         // 公共路由
         {
-            path: '/:domain/:controller/paging',
-            name: 'paging',
-            component: Paging,
+            path: '/:domain/:controller/list',
+            name: 'list',
+            component: List,
             props:true
         },
         {
