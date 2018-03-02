@@ -31,13 +31,6 @@ const router = new Router({
             name: 'helper',
             component: Helper
         },
-        {
-            path: '/:domain/:controller/list',
-            name: 'list',
-            component: Paging,
-            props:true
-
-        },
 
         // 公共路由
         {

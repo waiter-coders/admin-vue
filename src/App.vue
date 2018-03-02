@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~normalize.css/normalize.css';
+@import 'normalize.css/normalize.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

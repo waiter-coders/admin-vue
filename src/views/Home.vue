@@ -1,5 +1,5 @@
 <template>
-  <div>主页{ msg }</div>
+  <div>主页{{ msg }}</div>
 </template>
 
 <script>
@@ -7,13 +7,13 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg:process.env.SERVICE_URL
+      msg: 'sss'
     }
   },
   method:{
-	getConfig:function(){
-		alert(1);
-	},
+  	getConfig:function(){
+  		alert(1);
+  	},
   }
 }
 </script>
