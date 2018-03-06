@@ -1,14 +1,14 @@
-// import {service} from '@/utils/service'
+import fetch from '@/utils/service'
 
-export function isLogin(){
+export const isLogin = () => {
     // service.post()
     return true;
 };
 
-export function login(){
-
+export const login = param => {
+	return fetch.post('/user/login/', params); 
 };
 
-export function loginOut(){
-
+export const loginOut = param => {
+	return fetch.post('/user/loginout/', params); 
 };

@@ -3,17 +3,17 @@ import Router from 'vue-router'
 
 // 公共视图组件
 import Home from '@/views/Home'
-import Login from '@/views/Login'
+import Login from '@/views/user/Login'
 import List from '@/views/common/List'
 import Form from '@/views/common/Form'
 import Statistics from '@/views/common/Statistics'
 
 // 项目视图组件
-import UserPassword from '@/views/user/Password'
+//import UserPassword from '@/views/user/Password'
 import Helper from '@/views/Helper'
 
 // 接口
-import {isLogin} from '@/api/login'
+import { isLogin } from '@/api/login'
 
 Vue.use(Router)
 
@@ -21,11 +21,11 @@ Vue.use(Router)
 const router = new Router({
     routes: [
         // 项目路由
-        {
-            path: '/user/account/password',
-            name: 'UserPassword',
-            component: UserPassword
-        },
+//      {
+//          path: '/user/account/password',
+//          name: 'UserPassword',
+//          component: UserPassword
+//      },
         {
             path: '/helper',
             name: 'helper',
@@ -67,9 +67,9 @@ const router = new Router({
 // 路由前置钩子，用于处理登录等
 router.beforeEach((to, from, next) => {
     // 登录阻塞
-    if (to.path != '/user/login' && !isLogin()) {
+    /*if (to.path != '/user/login' && !isLogin()) {
         return next({'path':'/user/login', 'replace':true})
-    }
+    }*/
 
     // 继续路由
     next()

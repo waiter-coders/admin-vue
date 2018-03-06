@@ -1,21 +1,20 @@
 <template>
-  <div>项目全页面</div>
+	<div>
+		
+	</div>
 </template>
 
 <script>
 export default {
-	name: 'login',
+	name: 'layout',
 	data() {
 		return {
 			
 		}
-	},
-	methods: {
-		
 	}
+	
 }
 </script>
 
-<style scoped="scoped" lang="scss">
-
+<style>
 </style>
