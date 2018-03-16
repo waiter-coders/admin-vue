@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 公共视图组件
+import Layout from '@/views/Layout'
 import Home from '@/views/Home'
 import Login from '@/views/user/Login'
 import List from '@/views/common/List'
@@ -26,41 +27,73 @@ const router = new Router({
 //          name: 'UserPassword',
 //          component: UserPassword
 //      },
+		{
+            path: '/',
+            name: 'layout',
+            title: '首页',
+            component: Layout,
+	        children: [
+		        {
+		            path: '/:domain/:controller/list',
+		            name: 'list',
+		            title: '列表',
+		            component: List,
+		            props:true
+		        },
+		        {
+		            path: '/:domain/:controller/form',
+		            name: 'form',
+		            title: '表单',
+		            component: Form,
+		            props:true
+		        },
+		        {
+		            path: '/:domain/:controller/statistics',
+		            name: 'statistics',
+		            title: '统计',
+		            component: Statistics,
+		            props:true
+        		}
+		    ]
+        },
         {
             path: '/helper',
             name: 'helper',
+            title: '帮助页面',
             component: Helper
-        },
-
-        // 公共路由
-        {
-            path: '/:domain/:controller/list',
-            name: 'list',
-            component: List,
-            props:true
-        },
-        {
-            path: '/:domain/:controller/form',
-            name: 'form',
-            component: Form,
-            props:true
-        },
-        {
-            path: '/:domain/:controller/statistics',
-            name: 'statistics',
-            component: Statistics,
-            props:true
         },
         {
             path: '/user/login',
             name: 'login',
+            title: '登录',
             component: Login
         },
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        }
+//      {
+//          path: '/',
+//          name: 'home',
+//          component: Home
+//      },
+
+        // 公共路由
+//      {
+//          path: '/:domain/:controller/list',
+//          name: 'list',
+//          component: List,
+//          props:true
+//      },
+//      {
+//          path: '/:domain/:controller/form',
+//          name: 'form',
+//          component: Form,
+//          props:true
+//      },
+//      {
+//          path: '/:domain/:controller/statistics',
+//          name: 'statistics',
+//          component: Statistics,
+//          props:true
+//      }
+        
     ]
 })
 

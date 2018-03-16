@@ -1,7 +1,2 @@
+//import Mock from 'mockjs'
 
-export default {
-	login : () => {
-		console.log(config);
-		return true;
-	}
-}

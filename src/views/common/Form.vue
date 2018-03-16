@@ -1,5 +1,7 @@
 <template>
-  <div :class="msg" v-event:click="getConfig">公共表单</div>
+  <div>
+  	公共表单{{msg}}
+  </div>
 </template>
 
 <script>
@@ -11,9 +13,9 @@ export default {
     }
   },
   method:{
-	getConfig:function(){
-		alert(1);
-	},
+		getConfig:function(){
+			alert(1);
+		},
   }
 }
 </script>

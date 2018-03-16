@@ -1,9 +1,9 @@
 <template>
-  <div :class="msg" v-event:click="getConfig">公共分页组件</div>
+  <div>公共分页组件</div>
 </template>
 
 <script>
-import {getList} from '@/api/common/paging'
+//import { getList } from '@/api/common/paging'
 export default {
   name: 'HelloWorld',
   data () {
@@ -16,12 +16,7 @@ export default {
     },
     methods: {
         getList() {
-            this.listLoading = true
-            fetchList(this.listQuery).then(response => {
-                this.list = response.data.items
-                this.total = response.data.total
-                this.listLoading = false
-            })
+            
         }
     },
 }
@@ -29,7 +24,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+/*h1, h2 {
   font-weight: normal;
 }
 ul {
@@ -42,5 +37,5 @@ li {
 }
 a {
   color: #42b983;
-}
+}*/
 </style>

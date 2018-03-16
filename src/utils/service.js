@@ -20,13 +20,13 @@ service.interceptors.request.use(config => {
 })
 
 // 回复拦截器
-service.interceptors.response.use(response => {
+service.interceptors.response.use(res => {
 	LoadingEl.close();
 	if(res.data.code !== 0){
 		Message.error('操作失败，原因：'+ res.data.msg);
 		console.log( res.data.msg );
 	}
-    return response.data;
+    return res.data;
 }, error => {
 	LoadingEl.close();
 	Message.error('请求出错！');

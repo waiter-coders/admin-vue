@@ -1,0 +1,35 @@
+
+@mixin bgs ($url){
+    background-image:$url;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+
+@mixin center(){
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+}
+
+@mixin horiCenter(){
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);    
+}
+
+@mixin wh($width,$height){
+    width:$width;
+    height:$height;
+}
+
+@mixin fc($size,$color){
+    font-size:$size;
+    color:$color; 
+}
+
+@mixin fj($type: space-between,$align: center){
+    display: flex;
+    justify-content: $type;
+    align-items: $align;
+}
