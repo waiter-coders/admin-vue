@@ -34,26 +34,12 @@ const router = new Router({
             component: Layout,
 	        children: [
 		        {
-		            path: '/:domain/:controller/list',
-		            name: 'list',
-		            title: '列表',
-		            component: List,
+		            path: '/:belong/:domain/:controller/show',
+		            name: 'common',
+		            title: '框架加载器',
+		            component: Common,
 		            props:true
-		        },
-		        {
-		            path: '/:domain/:controller/form',
-		            name: 'form',
-		            title: '表单',
-		            component: Form,
-		            props:true
-		        },
-		        {
-		            path: '/:domain/:controller/statistics',
-		            name: 'statistics',
-		            title: '统计',
-		            component: Statistics,
-		            props:true
-        		}
+		        }
 		    ]
         },
         {
