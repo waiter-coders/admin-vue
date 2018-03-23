@@ -5,13 +5,11 @@ import Router from 'vue-router'
 import Layout from '@/views/Layout'
 import Home from '@/views/Home'
 import Login from '@/views/user/Login'
-import List from '@/views/common/List'
-import Form from '@/views/common/Form'
-import Statistics from '@/views/common/Statistics'
+import Builder from '@/views/Builder'
+
 
 // 项目视图组件
-//import UserPassword from '@/views/user/Password'
-import Helper from '@/views/Helper'
+import UserPassword from '@/views/user/Password' // 修改密码
 
 // 接口
 import { isLogin } from '@/api/login'
@@ -22,64 +20,33 @@ Vue.use(Router)
 const router = new Router({
     routes: [
         // 项目路由
-//      {
-//          path: '/user/account/password',
-//          name: 'UserPassword',
-//          component: UserPassword
-//      },
-		{
-            path: '/',
-            name: 'layout',
-            title: '首页',
-            component: Layout,
-	        children: [
-		        {
-		            path: '/:belong/:domain/:controller/show',
-		            name: 'common',
-		            title: '框架加载器',
-		            component: Common,
-		            props:true
-		        }
-		    ]
-        },
+         {
+             path: '/user/account/password',
+             name: 'UserPassword',
+             component: UserPassword
+         },
+
+        // 公共构建器
         {
-            path: '/helper',
-            name: 'helper',
-            title: '帮助页面',
-            component: Helper
+            path: '/:belong/:domain/show',
+            name: 'builder',
+            title: '构建器',
+            component: Builder,
+            props:true
         },
+
+        // 基本页面
         {
             path: '/user/login',
             name: 'login',
             title: '登录',
             component: Login
         },
-//      {
-//          path: '/',
-//          name: 'home',
-//          component: Home
-//      },
-
-        // 公共路由
-//      {
-//          path: '/:domain/:controller/list',
-//          name: 'list',
-//          component: List,
-//          props:true
-//      },
-//      {
-//          path: '/:domain/:controller/form',
-//          name: 'form',
-//          component: Form,
-//          props:true
-//      },
-//      {
-//          path: '/:domain/:controller/statistics',
-//          name: 'statistics',
-//          component: Statistics,
-//          props:true
-//      }
-        
+         {
+             path: '/',
+             name: 'home',
+             component: Home
+         }
     ]
 })
 

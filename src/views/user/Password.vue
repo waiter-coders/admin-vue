@@ -1,9 +1,8 @@
 <template>
- <div>主页{{ msg }}</div>
+	<div>修改密码{{ msg }}</div>
 </template>
 
 <script>
- // 获取域的config信息，根据config信息装载对应模块
     export default {
         name: 'HelloWorld',
         data () {
