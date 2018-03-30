@@ -7,27 +7,27 @@ export default {
         return {
             data: [
                 {
-                    'type':'list',
-                    'config': {
-                        'fields':[
-                            {"name":"id", 'field':"id", "type":"int", "primaryKey":true, "fastEdit":false},
-                            {"name":"姓名", 'field':"username", "primaryKey":false, "fastEdit":true},
-                            {"name":"性别", 'field':"sex", "type":"enum", "enum":{1:"男",2:"女"}},
+                    "type":"list",
+                    "config": {
+                        "fields":[
+                            {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+                            {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
+                            {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
                         ],
-                        'search' : [
+                        "search" : [
                             {"field":"username", "search":"like"},
                             {"field":"sex"}
                         ],
-                        'publicActions':[
+                        "publicActions":[
                             {"name":"添加", "action":"page", "url":"", "isDisabled":false}
                         ],
-                        'itemActions':[
+                        "itemActions":[
                             {"name":"编辑", "action":"page", "url":"", "isDisabled":false},
                             {"name":"删除", "action":"ajax", "url":"", "isDisabled":false, "confirm":true},
                             {"name":"详情", "action":"page", "url":"", "isDisabled":false}
                         ],
-                        'checkbox':{},
-                        'paging':{},
+                        "checkbox":{},
+                        "paging":{}
                     }
                 }
             ],

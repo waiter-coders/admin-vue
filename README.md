@@ -9,3 +9,40 @@ admin-vue中，主要是在最基本vue项目结构的基础上，提供了一�
 项目采用比较常用的结构划分:router(项目路由)、views（页面视图）、components（视图小组件）、api（服务器接口）。
 ![struct.png](struct.png)
 
+### list 模块
+##### 配置
+
+```json
+[
+    {
+        "type":"list",
+        "config": {
+            "fields":[
+                {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+                {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
+                {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
+            ],
+            "search" : [
+                {"field":"username", "search":"like"},
+                {"field":"sex"}
+            ],
+            "publicActions":[
+                {"name":"添加", "action":"page", "url":"", "isDisabled":false}
+            ],
+            "itemActions":[
+                {"name":"编辑", "action":"page", "url":"", "isDisabled":false},
+                {"name":"删除", "action":"ajax", "url":"", "isDisabled":false, "confirm":true},
+                {"name":"详情", "action":"page", "url":"", "isDisabled":false}
+            ],
+            "checkbox":{},
+            "paging":{}
+        }
+    }
+]
+```
+
+##### getList接口
+
+##### totalNum接口
+
+##### action接口
