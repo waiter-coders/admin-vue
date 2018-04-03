@@ -60,6 +60,18 @@ builder视图做为一个比较特殊的视图，在路由文件中采用如下�
 
 ```
 
+其中，belong为模块的分类，domain为模块本身。builder组件会通过"belong/domain/getConfig"的接口，获取相应模块配置信息。自定义开发中，也可把自定义路由放置在其前面，以便应用自定义路由。
+
+
+### list 组件
+
+
+##### list组件的配置信息
+该配置信息见builder样例
+
+##### list组件的获取数据的接口
+
+
 ##### getList接口
 
 ##### totalNum接口
