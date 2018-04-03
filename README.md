@@ -39,8 +39,27 @@
 ```
 配置文件采用列表形式，以便页面中同时存在多个组件。
 本样例第一个组件为list（type :list），第二个参数config为list组件的配置信息。builder组件会把config的内容传递给list组件，让它进一步进行自己的渲染工作。
-类似，form（表单）、statistics（统计）等组件，也采用类似机制。
 
+form（表单）、statistics（统计）等组件，也采用类似机制。
+
+##### builder的路由方案
+builder视图做为一个比较特殊的视图，在路由文件中采用如下配置：
+
+```json
+[
+...
+        // 公共构建器
+        {
+            path: '/:belong/:domain/show',
+            name: 'builder',
+            title: '构建器',
+            component: Builder,
+            props:true
+        },
+ ...
+]
+
+```
 
 ##### getList接口
 
@@ -48,4 +67,4 @@
 
 ##### action接口
 
-##### builder的路由方案
+
