@@ -14,25 +14,6 @@
     {
         "type":"list",
         "config": {
-            "fields":[
-                {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
-                {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
-                {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
-            ],
-            "search" : [
-                {"field":"username", "search":"like"},
-                {"field":"sex"}
-            ],
-            "publicActions":[
-                {"name":"添加", "action":"page", "url":"", "isDisabled":false}
-            ],
-            "itemActions":[
-                {"name":"编辑", "action":"page", "url":"", "isDisabled":false},
-                {"name":"删除", "action":"ajax", "url":"", "isDisabled":false, "confirm":true},
-                {"name":"详情", "action":"page", "url":"", "isDisabled":false}
-            ],
-            "checkbox":{},
-            "paging":{}
         }
     }
 ]
@@ -64,10 +45,32 @@ builder视图做为一个比较特殊的视图，在路由文件中采用如下�
 
 
 ### list 组件
-组件和服务端，有一些约定的配置信息格式，和接口定义。以便相互交互。一下对列表组件做相应的说明。
+组件和服务端，有一些约定的配置信息格式，和接口定义。以便相互交互。以下对列表组件做相应的说明。
 
 ##### list组件的配置信息
-该配置信息见builder样例
+``` javascript
+{
+  "fields":[
+      {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+      {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
+      {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
+  ],
+  "search" : [
+      {"field":"username", "search":"like"},
+      {"field":"sex"}
+  ],
+  "publicActions":[
+      {"name":"添加", "action":"page", "url":"", "isDisabled":false}
+  ],
+  "itemActions":[
+      {"name":"编辑", "action":"page", "url":"", "isDisabled":false},
+      {"name":"删除", "action":"ajax", "url":"", "isDisabled":false, "confirm":true},
+      {"name":"详情", "action":"page", "url":"", "isDisabled":false}
+  ],
+  "checkbox":{},
+  "paging":{}
+  }
+```
 
 ##### list组件的获取数据的接口
 
