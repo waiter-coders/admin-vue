@@ -1,17 +1,16 @@
 ## admin-vue
 
 ### 概述
-该项目为waiterphp-admin项目的前端源码部分。
-waiterphp-admin设计的目的，是为了快速开发的后台的基本功能，并保持架构的灵活性，以便实现复杂功能的定制。[了解更多，请点击这里。](https://github.com/waiterphp/admin)
-admin-vue中，主要是在最基本vue项目结构的基础上，提供了一些基于config-builder的业务代码，来配合后端实现快速开发。项目本身基于[vue](https://cn.vuejs.org/)和[webpack](http://webpack.github.io/)。并不影响项目本身结构。所以也可以很灵活的定制自己的前端功能。
+该项目为waiterphp-admin项目的前端源码部分。项目使用vue-webpack基本项目结构。提供一些基础业务代码，来实现后台的快速开发。基础代码并不影响项目本身的结构，故可在此基础上很灵活的实现二次开发。
 
 ### 基本结构
-项目采用比较常用的结构划分:router(项目路由)、views（页面视图）、components（视图小组件）、api（服务器接口）。
+项目采用比较常用的结构划分，主要核心组件有:router(项目路由)、views（页面视图）、components（视图小组件）、api（服务器接口）。
 ![struct.png](struct.png)
 
-### list 模块
-##### 配置
+### builder视图组件
 
+##### builder的路由方案
+##### list模块的配置格式
 ```json
 [
     {
@@ -40,6 +39,8 @@ admin-vue中，主要是在最基本vue项目结构的基础上，提供了一�
     }
 ]
 ```
+##### list模块的接口
+
 
 ##### getList接口
 
