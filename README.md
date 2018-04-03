@@ -45,18 +45,16 @@ form（表单）、statistics（统计）等组件，也采用类似机制。
 ##### builder的路由方案
 builder视图做为一个比较特殊的视图，在路由文件中采用如下配置：
 
-```json
+```javascript
 [
-// ...
-        // 公共构建器
-        {
-            "path": "/:belong/:domain/show",
-            "name": "builder",
-            "title": "构建器",
-            "component": Builder,
-            "props":true
-        },
-// ...
+    // 公共构建器
+    {
+        "path": "/:belong/:domain/show",
+        "name": "builder",
+        "title": "构建器",
+        "component": Builder,
+        "props":true
+    },
 ]
 
 ```
