@@ -50,11 +50,11 @@ builder视图做为一个比较特殊的视图，在路由文件中采用如下�
 // ...
         // 公共构建器
         {
-            path: '/:belong/:domain/show',
-            name: 'builder',
-            title: '构建器',
-            component: Builder,
-            props:true
+            "path": "/:belong/:domain/show",
+            "name": "builder",
+            "title": "构建器",
+            "component": Builder,
+            "props":true
         },
 // ...
 ]
