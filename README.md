@@ -106,16 +106,18 @@ true
 
 ##### 用户可使用模块
 所属api:user
+
 调用样例：canUseDomains()
+
 返回样例：
 
 ```javascript
 [
 	{"domain":"user", "name":"用户管理"},
-    {"domain":"user.account", "name":"用户账号"},
-    {"domain":"record", "name":"数据记录"},
-    {"domain":"record.simpleList", "name":"简单列表"},
-    {"domain":"record.simpleForm", "name":"简单表单"},
+  {"domain":"user.account", "name":"用户账号"},
+  {"domain":"record", "name":"数据记录"},
+  {"domain":"record.simpleList", "name":"简单列表"},
+  {"domain":"record.simpleForm", "name":"简单表单"},
 ]
 ```
 
