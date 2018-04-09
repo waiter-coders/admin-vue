@@ -113,7 +113,7 @@ true
 
 ```javascript
 [
-	{"domain":"user", "name":"用户管理"},
+  {"domain":"user", "name":"用户管理"},
   {"domain":"user.account", "name":"用户账号"},
   {"domain":"record", "name":"数据记录"},
   {"domain":"record.simpleList", "name":"简单列表"},
