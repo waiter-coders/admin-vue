@@ -114,11 +114,11 @@ true
 ```javascript
 [
   {"domain":"user", "name":"用户管理", "childern":[
-    {"domain":"user.account", "name":"用户账号"}
+    {"domain":"account", "name":"用户账号"}
    ]},  
   {"domain":"record", "name":"数据记录", "childern":[
-    {"domain":"record.simpleList", "name":"简单列表"},
-    {"domain":"record.simpleForm", "name":"简单表单"}
+    {"domain":"simpleList", "name":"简单列表"},
+    {"domain":"simpleForm", "name":"简单表单"}
   ]}  
 ]
 ```
