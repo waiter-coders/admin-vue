@@ -132,3 +132,6 @@ true
 |Record/SimpleForm|基础表单页|
 |Classify/SimpleTree|基础分类树|
 |Statistics/Simple|基础统计页|
+
+### 域
+
