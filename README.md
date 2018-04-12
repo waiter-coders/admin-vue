@@ -113,10 +113,10 @@ true
 
 ```javascript
 [
-  {"domain":"user", "name":"用户管理", "childern":[
+  {"domain":"user", "name":"用户管理", "children":[
     {"domain":"account", "name":"用户账号"}
    ]},  
-  {"domain":"record", "name":"数据记录", "childern":[
+  {"domain":"record", "name":"数据记录", "children":[
     {"domain":"simpleList", "name":"简单列表"},
     {"domain":"simpleForm", "name":"简单表单"}
   ]}  
