@@ -5,7 +5,8 @@ const app = {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
     },
-    visitedViews: []
+    visitedViews: [],
+    currentView: {}
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -43,7 +44,10 @@ const app = {
     },
     DEL_ALL_VIEWS: (state ) => {
     	state.visitedViews = [];
-    }
+    },
+		INIT_CURRENT_VIEW: (state, view) => {
+			state.currentView = view;
+		}
   },
   actions: {
     ToggleSideBar({ commit }) {
@@ -60,7 +64,7 @@ const app = {
     },
     delOthersViews({ commit, state }, view) {
     	return new Promise( (resolve) => {
-    		commit('DEL_OTHERS_VIEWS',view)
+    		commit('DEL_OTHERS_VIEWS', view);
     		resolve([...state.visitedViews])
     	})
     },
@@ -69,6 +73,9 @@ const app = {
     		commit('DEL_ALL_VIEWS')
     		resolve([...state.visitedViews])
     	})
+    },
+    initCurrentView({ commit, state }, view){
+    	commit('INIT_CURRENTVIEW', view); 
     }
   }
 }

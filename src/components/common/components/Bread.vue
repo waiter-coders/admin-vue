@@ -9,15 +9,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'bread',
   data() {
   	return {
   		root(){
-  			console.log(this.$route);
-  			return this.$route.path.title;
+  			return this.$route.meta.title;
   		}
   	}
+  },
+  computed:{
+  	...mapGetters([
+  		'currentView'
+  	])
   },
   props: {
     

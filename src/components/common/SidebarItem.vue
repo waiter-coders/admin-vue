@@ -1,20 +1,19 @@
 <template>
 	<div class="menu-item">
 		<template v-for="item in menus">
-			<router-link v-if="item.subMenus && item.subMenus.length == 1" :to="item.subMenus[0].url" :key="item.subMenus[0].name">
-				<el-menu-item :index="item.subMenus[0].url+'-'+item.subMenus[0].id">
-					<icon class="icon" :name="item.icon"></icon>
-					<span slot="title">{{item.subMenus[0].name}}</span>
-				</el-menu-item>
+			<router-link v-if="!item.children" :to="'/'+item.domain+'/list'" :key="item.domain">
+				<el-menu-item :index="item.domain">
+					<span slot="title">{{item.title}}</span>
+				</el-menu-item>				
 			</router-link>
-			
-			<el-submenu v-else :index="item.domain+'-'+item.id">
+			<el-submenu v-else :index="item.domain">
 				<template slot="title">
-					<icon class="icon" :name="item.icon"></icon>
-					<span slot="title">{{item.name}}</span>					
+					<span slot="title">{{item.title}}</span>
 				</template>
-				<router-link v-for="subItem in item.subMenus" :to="subItem.url" :key="subItem.url">					
-					<el-menu-item index="subItem.url+'-'+subItem.id">{{subItem.name}}</el-menu-item>
+				<router-link v-for="subitem in item.children" :to="'/'+item.domain+'/'+subitem.domain+'/list'" :key="item.domain+'/'+subitem.domain">
+					<el-menu-item :index="item.domain+'/'+subitem.domain">
+						<span slot="title">{{subitem.title}}</span>
+					</el-menu-item>
 				</router-link>
 			</el-submenu>
 		</template>
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-//import { mapGetters } from 'vuex'
 export default {
 	name: 'SidebarItem',
 	props:{
@@ -35,16 +33,31 @@ export default {
     		
     	}
     },
-//  computed:{
-//  	...mapGetters([
-//  		'sidebar'
-//  	]),
-//  	isCollapse(){
-//  		return !this.sidebar.opened;
-//  	}
-//  },
+    watch: {
+    	$route() {
+    		this.initCurrentView();
+    	}
+    },
     methods:{
-        
+    	initCurrentView(){
+    		console.log( this.$route.params );
+    		var domain = this.$route.params.domain || this.$route.params.controller;
+    		//var controller = this.$route.params.controller || this.$route.params.domain;
+    		console.log('domain:'+domain);
+    		var menus = this.menus;
+    		var view = menus.forEach(( item, index, arr ) => {
+    			if(domain == item.domain){
+    				console.log(item);
+    				return item;
+    			}
+    			//return 1;
+    		});
+    		console.log( view );
+    	},
+        changeView(item){
+        	console.log('---------------item--------------');
+        	console.log(item);
+        }
     }
 }
 </script>

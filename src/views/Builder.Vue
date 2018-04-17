@@ -11,8 +11,8 @@
 
 <script>
     import { Sidebar, AppMain, Navbar, TagsView } from '@/components/common'
-    import {Form, List, Statistics} from '@/components/builder'
-    import {config,}
+    //import {Form, List, Statistics} from '@/components/builder'
+    //import {config}
     export default {
         name: 'layout',
         components:{

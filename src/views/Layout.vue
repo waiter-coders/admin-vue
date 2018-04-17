@@ -1,29 +1,29 @@
 <template>
-	<div class="app-wrapper" :class="{'hideSidebar': !sidebar.opened}">
+	<div class="app-wrapper" >
 		<sidebar></sidebar>
 		<div class="main-container">
 			<navbar></navbar>
-			<tags-view></tags-view>
+			<!--<tags-view></tags-view>-->
 			<app-main></app-main>
 		</div>
 	</div>
 </template>
 
 <script>
-import { Sidebar, AppMain, Navbar, TagsView } from '@/components/common'
+import { Sidebar, AppMain, Navbar/*, TagsView*/ } from '@/components/common'
 export default {
 	name: 'layout',
 	components:{
 		Sidebar,
 		AppMain,
-		TagsView,
+		//TagsView,
 		Navbar
 	},
-	computed:{
+	/*computed:{
 		sidebar(){
 			return this.$store.state.app.sidebar
 		}
-	},
+	},*/
 	data() {
 		return {
 			
@@ -45,14 +45,14 @@ export default {
 	.menu-wrapper{
 		width:180px;
 	}
-	&.hideSidebar{
+	/*&.hideSidebar{
 		.main-container{
 			margin-left:64px;
 		}
 		.menu-wrapper{
 			width:64px;
 		}
-	}	
+	}*/	
 }	
 
 </style>

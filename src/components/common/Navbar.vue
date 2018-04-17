@@ -1,7 +1,7 @@
 <template>
 	<el-menu class="navbar" mode="horizontal">
 		
-		<hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="!sidebar.opened"></hamburger>
+		<hamburger class="hamburger-container"></hamburger>
 		<bread class="bread-container"></bread>
 		<el-dropdown class="avatar-container" trigger="click">
 			<div class="avatar-wrapper">
@@ -14,11 +14,6 @@
 						首页
 					</el-dropdown-item>
 				</router-link>
-				<!--<a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
-					<el-dropdown-item>
-						项目地址
-					</el-dropdown-item>
-				</a>-->
 				<el-dropdown-item divided><span @click="logout" style="display:block;">退出登录</span></el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
@@ -46,9 +41,9 @@ export default {
 	    ])
 	},
   methods: {
-    toggleSideBar() {
+    /*toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
-    },
+    },*/
     logout() {
 //    this.$store.dispatch('LogOut').then(() => {
 //      location.reload()// 为了重新实例化vue-router对象 避免bug
@@ -86,6 +81,7 @@ export default {
 			display: inline-block;
 			position: absolute;
 			right: 35px;
+			top: 0;
 			.avatar-wrapper {
 					cursor: pointer;
 					margin-top: 5px;
