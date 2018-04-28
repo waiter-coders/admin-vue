@@ -38,25 +38,35 @@ export default {
     		this.initCurrentView();
     	}
     },
+    updated(){
+    	this.initCurrentView();
+    },
     methods:{
     	initCurrentView(){
-    		console.log( this.$route.params );
-    		var domain = this.$route.params.domain || this.$route.params.controller;
-    		//var controller = this.$route.params.controller || this.$route.params.domain;
-    		console.log('domain:'+domain);
-    		var menus = this.menus;
-    		var view = menus.forEach(( item, index, arr ) => {
-    			if(domain == item.domain){
-    				console.log(item);
-    				return item;
+    		const domain = this.$route.params.domain || this.$route.params.controller;
+    		const controller = this.$route.params.controller || '';
+    		let menus = this.menus;
+    		let view = [];
+    		let father = menus.find((value, index, arr)=>{
+    			if(domain == value.domain){
+    				return value;
     			}
-    			//return 1;
     		});
-    		console.log( view );
+    		view.push(father);
+    		if(father.hasOwnProperty("children")){
+    			let child = father.children.find( (value,index,arr) => {
+					if(controller == value.domain){
+						return value;
+					}
+				});
+				view.push(child);
+    		}
+    		console.log(view);
+			this.$store.dispatch('initCurrentView',view);
     	},
         changeView(item){
-        	console.log('---------------item--------------');
-        	console.log(item);
+        	//console.log('---------------item--------------');
+        	//console.log(item);
         }
     }
 }
@@ -66,8 +76,6 @@ export default {
 	width:1.3em;
 	height:1.3em;
 	margin-right:16px;
-	/*text-align:left;
-	transform: scale(2,2);*/
 }
 .el-submenu .el-menu-item{
 	min-width:0px;

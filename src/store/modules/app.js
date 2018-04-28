@@ -46,6 +46,7 @@ const app = {
     	state.visitedViews = [];
     },
 		INIT_CURRENT_VIEW: (state, view) => {
+			//Cookies.set('currentView',view);
 			state.currentView = view;
 		}
   },
@@ -75,7 +76,7 @@ const app = {
     	})
     },
     initCurrentView({ commit, state }, view){
-    	commit('INIT_CURRENTVIEW', view); 
+    	commit('INIT_CURRENT_VIEW', view); 
     }
   }
 }
