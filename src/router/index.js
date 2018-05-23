@@ -30,7 +30,7 @@ const router = new Router({
         },
 
 
-        // 公共菜单路由
+        // 主菜单路由
         {
             path: '/',
             name: 'main',
@@ -59,7 +59,7 @@ const router = new Router({
 
                 // 基于配置文件的工厂页面路由
 		        {
-		            path: '/:domain/:controller/:subController?',
+		            path: '/:domain/:controller?/:subController?',
 		            name: 'factory',
 		            meta:{
 		            	title: '列表'
