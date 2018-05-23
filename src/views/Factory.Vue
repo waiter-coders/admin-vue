@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ConfigApi from '@/api/factory/config'
+import { getConfig } from '@/api/factory/config'
 
 import {Form, List, Statistics} from '@/components/widget'
 export default {
@@ -14,15 +14,24 @@ export default {
         Form, List, Statistics
     },        
     data() {
-        components: []
+        return {
+            components: []
+        };
     },
     created:function(){
         this.getComponents();
     },
     methods:{
         getComponents(){
-            ConfigApi.getConfig().then(function(response){
-                this.components = [];
+            var _this = this;
+            getConfig('aa').then(function(response){
+                var configs = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    var config = response.data[i];      
+                    config.index = i;
+                    configs.push(config);
+                }
+                _this.components = configs;
             });
         },
     }
