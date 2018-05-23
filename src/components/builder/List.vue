@@ -1,5 +1,6 @@
 <template>
   <div class="list-main">
+    <search></search>
     <table-list></table-list>
   </div>
   
@@ -7,6 +8,7 @@
 
 <script>
 //import { getList } from '@/api/common/paging'
+import Search from './list/Search';
 import TableList from './list/Table';
 export default {
   name: 'HelloWorld',
@@ -16,7 +18,8 @@ export default {
     }
   },
   components: {
-    TableList
+    TableList,
+    Search
   },
   created() {
     this.getList()

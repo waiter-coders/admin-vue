@@ -1,5 +1,4 @@
-<template>
-  
+<template> 
   <el-table :data="list" border width="800">
       <el-table-column v-for="item in fields" v-if="item.type!='enum'"  :prop="item.field" 
             :label="item.name" :key="item.id"></el-table-column>
@@ -18,17 +17,22 @@ export default {
             {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
         ],
         list:[
-            {"id":1,"name":"名字1", "publishTime":"2017-12-12 00:11:11","username":"nihao","sex":"男"},
-            {"id":2,"name":"名字2", "publishTime":"2017-12-12 00:11:11","username":"sss","sex":"女"}
+            {"id":1, "name":"名字1", "publishTime":"2017-12-12 00:11:11", "username":"nihao","sex":"1"},
+            {"id":2, "name":"名字2", "publishTime":"2017-12-12 00:11:11", "username":"sss","sex":"2"},
+            {"id":1, "name":"名字1", "publishTime":"2017-12-12 00:11:11", "username":"nihao","sex":"2"},
+            {"id":2, "name":"名字2", "publishTime":"2017-12-12 00:11:11", "username":"sss","sex":"2"}
         ]
       }
   },
   methods:{
       optionFormatter(value,row,column){
-          console.log(row);
-          console.log(column);
-          console.log(value);
-          return 2;
+          var fields = this.fields;
+          var format = fields.find(function(val,i){
+              if(val.field == row.property){
+                  return val;
+              }
+          });
+          return format.enum[value[row.property]];      
       }
   }
 }

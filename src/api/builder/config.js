@@ -1,3 +1,9 @@
-/**
- * Created by tianzheng on 18-2-18.
- */
+import fetch from '@/utils/service';
+
+
+export const getConfig = (controller) => {
+	return fetch({
+		url: '/'+ controller + '/getConfig',
+		method: 'post',
+	});
+}

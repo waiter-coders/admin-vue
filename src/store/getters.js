@@ -1,7 +1,8 @@
 const getters = {
   sidebar: state => state.app.sidebar,
   visitedViews: state => state.app.visitedViews,
-  currentView: state => state.app.currentView
+  currentView: state => state.app.currentView,
+  config: state => state.controller.config
   //token: state => state.user.token,
   //avatar: state => state.user.avatar,
   //name: state => state.user.name,
