@@ -2,82 +2,73 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 公共视图组件
-import Layout from '@/views/Layout'
-import Home from '@/views/Home'
-import Login from '@/views/user/Login'
-import Builder from '@/views/Builder'
-import List from '@/components/builder/List'
+import Main from '@/views/Main' // 主窗口框架（含菜单）
+import Factory from '@/views/Factory' // 页面工厂
 
 
-// 项目视图组件
-import UserPassword from '@/views/user/Password' // 修改密码
+// 页面视图组件
+import Home from '@/views/Home' //首页
+import Login from '@/views/admin/Login' // 登录页
+import AdminAccount from '@/views/admin/Account' // 修改密码页
 
 // 接口
-import { isLogin } from '@/api/user'
+import { isLogin } from '@/api/admin'
 
 Vue.use(Router)
 
-// 项目路由， 公共路由在后面，新的项目路由添加到公共视图路由前，以便覆盖公共路由
+// 页面路由， 公共路由在后面，自定义的页面路由添加到公共视图路由前，以便覆盖公共路由
 const router = new Router({
     routes: [
-        // 项目路由
-         {
-            path: '/user/account/password',
-            name: 'UserPassword',
-            meta: {
-             	title: '修改密码'
-            },
-            component: UserPassword
-         },
-
-        // 公共构建器
+        // 无菜单页面路由        
         {
-            path: '/:belong/:domain/show',
-            name: 'builder',
-            meta: {
-            	title: '构建器'
+            path: '/admin/login',
+            name: 'login',
+            meta: { 
+                title: '登录'
             },
-            component: Builder,
-            props:true
+            component: Login
         },
+
+
+        // 公共菜单路由
         {
             path: '/',
-            name: 'layout',
-            component: Layout,
+            name: 'main',
+            component: Main,
             meta: {
             	title: '首页'
             },
-	        children: [
+	        children: [                
+                // 自定义页面路由
+                {
+                    path: '/',
+                    name: 'home',
+                    meta: {
+                            title: '首页'
+                    },
+                    component: Home
+                },
+                {
+                    path: '/admin/account',
+                    name: 'UserPassword',
+                    meta: {
+                            title: '管理员帐号'
+                    },
+                    component: AdminAccount
+                },
+
+                // 基于配置文件的工厂页面路由
 		        {
-		            path: '/:domain/:controller?/list',
-		            name: 'list',
+		            path: '/:domain/:controller/:subController?',
+		            name: 'factory',
 		            meta:{
 		            	title: '列表'
 		            },
-		            component: List,
+		            component: Factory,
 		            props:true
-		        }/*,
-		        {
-		            path: '/:domain/:controller?/form',
-		            name: 'form',
-		            meta:{
-		            	title: '表单'
-		            },
-		            component: Form,
-		            props:true
-		        }*/
+		        }
 		    ]
-        },
-
-        // 基本页面
-        {
-            path: '/user/login',
-            name: 'login',
-            meta: { 
-            	title: '登录'
-            },
-            component: Login
-        }
+        },        
     ]
 })
 

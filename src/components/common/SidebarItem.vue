@@ -1,16 +1,16 @@
 <template>
 	<div class="menu-item">
 		<template v-for="item in menus">
-			<router-link v-if="!item.children" :to="'/'+item.domain+'/list'" :key="item.domain">
+			<router-link v-if="!item.children" :to="'/'+item.domain" :key="item.domain">
 				<el-menu-item :index="item.domain">
 					<span slot="title">{{item.title}}</span>
 				</el-menu-item>				
 			</router-link>
-			<el-submenu v-else :index="item.domain">
+			<el-submenu v-else :index="item.domain" :key="item.index">
 				<template slot="title">
 					<span slot="title">{{item.title}}</span>
 				</template>
-				<router-link v-for="subitem in item.children" :to="'/'+item.domain+'/'+subitem.domain+'/list'" :key="item.domain+'/'+subitem.domain">
+				<router-link v-for="subitem in item.children" :to="'/'+item.domain+'/'+subitem.domain" :key="item.domain+'/'+subitem.domain">
 					<el-menu-item :index="item.domain+'/'+subitem.domain">
 						<span slot="title">{{subitem.title}}</span>
 					</el-menu-item>

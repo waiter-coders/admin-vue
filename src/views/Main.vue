@@ -12,7 +12,7 @@
 <script>
 import { Sidebar, AppMain, Navbar/*, TagsView*/ } from '@/components/common'
 export default {
-	name: 'layout',
+	name: 'main',
 	components:{
 		Sidebar,
 		AppMain,

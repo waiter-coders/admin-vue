@@ -6,9 +6,9 @@ export const isLogin = () => {
 };
 
 export const login = param => {
-	return fetch.post('/user/login/', params); 
+	return fetch.post('/admin/login/', params); 
 };
 
 export const loginOut = param => {
-	return fetch.post('/user/loginout/', params); 
+	return fetch.post('/admin/loginout/', params); 
 };

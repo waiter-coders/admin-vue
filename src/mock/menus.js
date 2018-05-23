@@ -31,7 +31,7 @@ export default {
 	getMenus: () =>{
 		return {
 			data: [
-                {"domain":"user", "title":"用户管理", "children":[
+                {"domain":"admin", "title":"用户管理", "children":[
                 	{"domain":"account","title":"用户账号"}
                 ]},
                 {"domain":"record", "title":"数据记录", "children":[

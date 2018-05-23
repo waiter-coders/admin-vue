@@ -11,7 +11,7 @@ export default {
     fetchDomains: () =>{
         return {
             data: [
-                {"domain":"user", "name":"用户管理", "belong":""},
+                {"domain":"admin", "name":"用户管理", "belong":""},
                 {"domain":"account", "name":"用户账号", "belong":"user"},
                 {"domain":"record", "name":"数据记录", "belong":""},
                 {"domain":"paging", "name":"列表", "belong":"record"},

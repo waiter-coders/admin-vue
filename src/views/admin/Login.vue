@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user';
+import { login } from '@/api/admin';
 //import { setUser } from '@/utils';
 export default {
   name: 'Login',
