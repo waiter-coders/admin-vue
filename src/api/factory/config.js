@@ -1,9 +1,9 @@
 import fetch from '@/utils/service';
 
 
-export const getConfig = (controller) => {
+export const getConfigs = (controller) => {
 	return fetch({
-		url: '/'+ controller + '/getConfig',
+		url: '/'+ controller + '/getConfigs',
 		method: 'post',
 	});
 }

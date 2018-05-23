@@ -1,11 +1,11 @@
 <template>
     <div>
-        <component :is="component.type" :config="component.config" v-for="component in components" v-bind:key="component.index">组件初始化失败</component>
+        <component :is="config.type" :config="config" v-for="config in configs" v-bind:key="config.index">组件初始化失败</component>
     </div>
 </template>
 
 <script>
-import { getConfig } from '@/api/factory/config'
+import { getConfigs } from '@/api/factory/config'
 
 import {Form, List, Statistics} from '@/components/widget'
 export default {
@@ -15,23 +15,23 @@ export default {
     },        
     data() {
         return {
-            components: []
+            configs: []
         };
     },
     created:function(){
-        this.getComponents();
+        this.getConfigs();
     },
     methods:{
-        getComponents(){
+        getConfigs(){
             var _this = this;
-            getConfig('aa').then(function(response){
+            getConfigs('aa').then(function(response){
                 var configs = [];
                 for (var i = 0; i < response.data.length; i++) {
                     var config = response.data[i];      
                     config.index = i;
                     configs.push(config);
                 }
-                _this.components = configs;
+                _this.configs = configs;
             });
         },
     }

@@ -7,6 +7,6 @@ Mock.setup({
 })
 
 Mock.mock(/\/menus\/list/, 'get', menusApi.getMenus);
-Mock.mock(/[\w|\/]+\/getConfig/, 'post', factoryApi.getConfig);
+Mock.mock(/[\w|\/]+\/getConfigs/, 'post', factoryApi.getConfigs);
 
 export default Mock;
