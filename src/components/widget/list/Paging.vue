@@ -1,24 +1,41 @@
 <template>
-<!-- 公共功能按钮 -->
-
-<!-- 自定义动作弹框 -->
-<div class="modal fade" id="action-modal" tabindex="-1" role="dialog" aria-labelledby="action-modal" >
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="padding: 50px 30px;">
-            <div class="form-horizontal">
-                <div id="action-modal-box"></div>
-                <div class="form-group">
-                    <div class="col-sm-offset-5 col-sm-10">
-                        <button id="action-do">操作</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 分页 -->
+<nav style="width: 80%;text-align: center;">
+    <ul class="pagination pagination-sm">
+        <li v-if="paging.total == 1">
+            <a :href="paging.preUrl" aria-label="Previous"><span aria-hidden="true">上一页</span></a>
+        </li>
+        <li >
+        <a :href="paging.firstUrl" aria-label="Previous"><span aria-hidden="true">首页</span></a>
+        </li>
+        <li v-for="(key, url) in paging.pageRange" v-bind:key="key">
+            <a :href="url">{{ num }}</a>
+        </li>
+        <li>
+        <a :href="paging.lastUrl" aria-label="Previous"><span aria-hidden="true">末页</span></a>
+        </li>
+        <li v-if="paging.current != paging.total">
+            <a :href="paging.nextUrl" aria-label="Next"><span aria-hidden="true">下一页</span></a>
+        </li>
+    </ul>
+</nav>
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+            paging:{
+
+            }
+        };
+    },
+    created:function(){
+        this.loadPaging();
+    },
+    methods: {
+        loadPaging : function(){
+            this.paging = {};
+        },
+    },
 }
 </script>

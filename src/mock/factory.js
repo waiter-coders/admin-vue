@@ -42,14 +42,16 @@ export default {
 					{"field":"sex"}
 				],
 				"publicActions":[
-					{"name":"添加", "action":"page", "url":"", "isDisabled":false}
+					{"name":"添加", "type":"page", "url":"", "isDisabled":false}
 				],
 				"itemActions":[
-					{"name":"编辑", "action":"page", "url":"", "isDisabled":false},
-					{"name":"删除", "action":"ajax", "url":"", "isDisabled":false, "confirm":true},
-					{"name":"详情", "action":"page", "url":"", "isDisabled":false}
+					{"name":"编辑", "type":"page", "url":"", "isDisabled":false},
+					{"name":"删除", "type":"ajax", "url":"", "isDisabled":false, "confirm":true},
+					{"name":"详情", "type":"page", "url":"", "isDisabled":false}
 				],
-				"selectActions":{},
+				"batchActions":[
+					{"name":"批量添加", "type":"ajax", "url":"", "isDisabled":false}
+				],
 				"paging":{}
 			  }],
            	//data: List,
