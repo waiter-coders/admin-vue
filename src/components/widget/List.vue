@@ -22,6 +22,7 @@ import Search from './list/Search';
 import Actions from './list/Actions';
 import TableList from './list/Table';
 import Paging from './list/Paging';
+import { Loading } from 'element-ui';
 
 export default {
   name: 'List',
@@ -44,18 +45,20 @@ export default {
     this.getList('/paging/list', this.currentPage, this.pageSize)
   },
   methods: {
-      getList(url, curPage, pageSize, searchs) {
-        getList(url, curPage, pageSize, searchs).then(res=>{
+      getList(url, currentPage, pageSize, searchs) {
+        var loadingInstance = Loading.service({ target:'.list-table', text:'加载中……'});
+        getList(url, currentPage, pageSize, searchs).then(res=>{
           this.listData = res.data;
           this.pageSize = res.data.pageSize;
           this.total = res.data.total
         });
+        loadingInstance.close();
       },
       handleSizeChange(pageSize) {
         this.pageSize = pageSize;
       },
-      handleCurrentChange(curPage) {
-        this.currentPage = curPage;
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage;
         this.getList('/paging/list', this.currentPage, this.pageSize);
       },
       handleSearch(searchValue) {

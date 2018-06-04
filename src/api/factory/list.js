@@ -1,11 +1,11 @@
 import fetch from '@/utils/service';
 
-export const getList = (url, curPage, pageSize, searchs) => {
+export const getList = (url, currentPage, pageSize, searchs) => {
 	return fetch({
 		url: url,
 		method: 'get',
 		data: {
-			curPage,
+			currentPage,
 			pageSize,
 			searchs
 		}
