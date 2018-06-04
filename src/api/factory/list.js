@@ -1,3 +1,13 @@
-//export function getList(condition, offset, length, callback) {
-//  callback([{"title":"aaaaa"},{"title":"aa"}])
-//}
+import fetch from '@/utils/service';
+
+export const getList = (url, curPage, pageSize, searchs) => {
+	return fetch({
+		url: url,
+		method: 'get',
+		data: {
+			curPage,
+			pageSize,
+			searchs
+		}
+	});
+}

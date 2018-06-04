@@ -24,7 +24,6 @@ service.interceptors.response.use(res => {
 	LoadingEl.close();
 	if(res.data.code !== 0){
 		Message.error('操作失败，原因：'+ res.data.msg);
-		console.log( res.data.msg );
 	}
     return res.data;
 }, error => {

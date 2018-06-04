@@ -1,6 +1,6 @@
 <template>
 <div>
-    <a href="" v-for="action in actions" v-bind:key="action.index">{{ action.name }}</a>
+    <el-button type="primary" v-for="action in actions" v-bind:key="action.index">{{ action.name }}</el-button>
 </div>
 </template>
 <script>

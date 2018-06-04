@@ -1,41 +1,38 @@
 <template>
-<!-- 分页 -->
-<nav style="width: 80%;text-align: center;">
-    <ul class="pagination pagination-sm">
-        <li v-if="paging.total == 1">
-            <a :href="paging.preUrl" aria-label="Previous"><span aria-hidden="true">上一页</span></a>
-        </li>
-        <li >
-        <a :href="paging.firstUrl" aria-label="Previous"><span aria-hidden="true">首页</span></a>
-        </li>
-        <li v-for="(key, url) in paging.pageRange" v-bind:key="key">
-            <a :href="url">{{ num }}</a>
-        </li>
-        <li>
-        <a :href="paging.lastUrl" aria-label="Previous"><span aria-hidden="true">末页</span></a>
-        </li>
-        <li v-if="paging.current != paging.total">
-            <a :href="paging.nextUrl" aria-label="Next"><span aria-hidden="true">下一页</span></a>
-        </li>
-    </ul>
-</nav>
+    <div class="block waiter-paging">
+        <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[30, 50, 100]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+        </el-pagination>
+    </div>
 </template>
 <script>
-export default {
-    data(){
-        return {
-            paging:{
+  import { getList } from '@/api/factory/list'
 
-            }
-        };
-    },
-    created:function(){
-        this.loadPaging();
+  export default {
+    props: {
+      pageSize: Number,
+      total: Number,
+      currentPage: Number,
     },
     methods: {
-        loadPaging : function(){
-            this.paging = {};
-        },
-    },
-}
+      handleSizeChange(val) {
+        this.$emit('size-change', val)
+      },
+      handleCurrentChange(val) {
+        this.$emit('current-change', val)
+      }
+    }
+  }
 </script>
+<style scoped>
+.waiter-paging {    
+    text-align: right;
+    margin-top: 20px;
+    }
+</style>
