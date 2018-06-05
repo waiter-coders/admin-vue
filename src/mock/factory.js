@@ -42,12 +42,14 @@ export default {
 					{"field":"sex"}
 				],
 				"publicActions":[
-					{"name":"添加", "type":"page", "url":"", "isDisabled":false}
+					{"name":"添加", "type":"page", "url":"/record/paging/add", "callback":"add",  "isDisabled":false},
+					{"name":"批量删除", "type":"ajax", "url":"/paging/list", "isDisabled":false},
+					{"name":"下载", "type":"callback",  "callback":"download",  "isDisabled":false}
 				],
 				"itemActions":[
-					{"name":"编辑", "type":"page", "url":"", "isDisabled":false},
-					{"name":"删除", "type":"ajax", "url":"", "isDisabled":false, "confirm":true},
-					{"name":"详情", "type":"page", "url":"", "isDisabled":false}
+					{"name":"编辑", "type":"page", "url":"/record/paging/edit", "callback":"edit", "isDisabled":false},
+					{"name":"删除", "type":"ajax", "url":"/record/paging/delete", "isDisabled":false, "confirm":true},
+					{"name":"详情", "type":"page", "url":"/record/paging/show", "isDisabled":false}
 				],
 				"batchActions":[
 					{"name":"批量添加", "type":"ajax", "url":"", "isDisabled":false}

@@ -33,7 +33,7 @@ const router = new Router({
         // 主菜单路由
         {
             path: '/',
-            name: 'main',
+            // name: 'main', 父级路由不能有name
             component: Main,
             meta: {
             	title: '首页'

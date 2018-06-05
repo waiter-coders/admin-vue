@@ -2,9 +2,9 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :search="config.search" @search="handleSearch"></search>
-      <actions class="list-public-actions"></actions>
+      <actions class="list-public-actions" :actions="config.publicActions" @download="handleDownload"></actions>
     </div>    
-    <table-list class="list-table" :listData="listData"></table-list>
+    <table-list class="list-table" :listData="listData" :itemActions="config.itemActions"></table-list>
     <paging class="list-paging" 
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
@@ -63,6 +63,9 @@ export default {
       },
       handleSearch(searchValue) {
         this.getList('/paging/list', 1, this.pageSize, searchValue);
+      },
+      handleDownload(){
+        this.$alert('下载');
       }
   }
 }
