@@ -79,7 +79,6 @@ export default {
   			if(valid){
   				var par = _this.form;
 		  		login(par).then( res => {
-		  			console.log(res);
 		  			if( res.code === 0 ){
 		  				//setUser( _this.form.username , _this.form.remember );
 		  				_this.$router.push('/');

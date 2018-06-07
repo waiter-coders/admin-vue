@@ -54,14 +54,11 @@ export default {
     //generateTitle, // generateTitle by vue-i18n
     generateRoute() {
       if (this.$route.name) {
-      	console.log( this.$route );
         return this.$route
       }
       return false
     },
     isActive(route) {
-    	console.log(route);
-    	console.log(route.path === this.$route.path )
        return route.path === this.$route.path || route.name === this.$route.name
     },
     addViewTags() {
@@ -72,7 +69,6 @@ export default {
       this.$store.dispatch('addVisitedViews', route)
     },
     moveToCurrentTag() {
-    	console.log(this.$refs.tag);
 //    const tags = this.$refs.tag
 //    this.$nextTick(() => {
 //      for (const tag of tags) {

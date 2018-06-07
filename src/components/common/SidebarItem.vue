@@ -61,7 +61,6 @@ export default {
 				});
 				view.push(child);
     		}
-    		console.log(view);
 			this.$store.dispatch('initCurrentView',view);
     	},
         changeView(item){

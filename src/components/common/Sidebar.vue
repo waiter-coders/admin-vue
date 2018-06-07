@@ -39,7 +39,6 @@ export default {
         	var _this = this;
         	getMenus().then(res => {
         		//console.log( res );
-        		console.log( res.data );
         		_this.menu = res.data;
         	});
         },

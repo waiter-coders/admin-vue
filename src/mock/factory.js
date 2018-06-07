@@ -38,8 +38,8 @@ export default {
 					{"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
 				],
 				"search" : [
-					{"field":"username", "search":"like"},
-					{"field":"sex"}
+					{"field":"username", "type":"text", "value": "", "inputTip":"请输入姓名"},
+					{"field":"sex","type":"enum", "enum":{"0":"请选择", "1":"男","2":"女"}, "value":"0", "inputTip":"请选择性别"}
 				],
 				"publicActions":[
 					{"name":"添加", "type":"page", "url":"/record/paging/add", "callback":"add",  "isDisabled":false},
