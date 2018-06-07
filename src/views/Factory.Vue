@@ -1,6 +1,6 @@
 <template>
     <div>
-        <component :is="config.type" :config="config" v-for="config in configs" v-bind:key="config.index">组件初始化失败</component>
+        <component :is="config.type" :config="config" v-for="(config,index) in configs" v-bind:key="index">组件初始化失败</component>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
     },        
     data() {
         return {
-            configs: []
+             configs: []
         };
     },
     created:function(){
@@ -24,14 +24,19 @@ export default {
     methods:{
         getConfigs(){
             var _this = this;
-            getConfigs('aa').then(function(response){
-                var configs = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    var config = response.data[i];      
-                    config.index = i;
-                    configs.push(config);
-                }
-                _this.configs = configs;
+            var controller = _this.$route.path;
+            _this.$store.dispatch('addConfig', controller);
+            getConfigs(controller).then(function(response){
+                ///var configs = [];
+                console.log( response.data );
+                // for (var i = 0; i < response.data.length; i++) {
+                //     var config = response.data[i];  
+                //    // console.log( config );    
+                //     config.index = i;
+                //     configs.push(config);
+                // }
+                _this.configs = response.data;
+                //console.log( configs );
             });
         },
     }
