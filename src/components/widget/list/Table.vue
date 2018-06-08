@@ -7,7 +7,7 @@
             :label="item.name" :key="item.id"  :formatter="optionFormatter"></el-table-column>
         <el-table-column v-if="itemActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <el-button size="mini" v-for="action in itemActions" :disabled="action.disabled" @click="handleAction(scope.$index, scope.row, action)">{{action.name}}</el-button>
+                <el-button size="mini" v-for="(action, index) in itemActions" :key="'itemAction_'+index" @click="handleAction( scope.row, action)">{{action.name}}</el-button>
             </template>
         </el-table-column>
   </el-table>
@@ -31,9 +31,9 @@ export default {
           });
           return format.enum[value[row.property]];      
       },
-      handleAction(index, row){
-          console.log( index );
+      handleAction(row, action){         
           console.log( row );
+          console.log( action );
       }
   }
 }

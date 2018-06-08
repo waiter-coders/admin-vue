@@ -49,7 +49,7 @@ export default {
 				"itemActions":[
 					{"name":"编辑", "type":"page", "url":"/record/paging/edit", "callback":"edit", "isDisabled":false},
 					{"name":"删除", "type":"ajax", "url":"/record/paging/delete", "isDisabled":false, "confirm":true},
-					{"name":"详情", "type":"page", "url":"/record/paging/show", "isDisabled":false}
+					{"name":"详情", "type":"page", "url":"/record/paging/show", "isDisabled":true}
 				],
 				"batchActions":[
 					{"name":"批量添加", "type":"ajax", "url":"", "isDisabled":false}

@@ -4,9 +4,9 @@ var data = Mock.mock({
     'code': 0,
     'msg': 'success',
     'fields': [
-        {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+        {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},      
+        {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}},
         {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
-        {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
     ],
     'list': [
         {
