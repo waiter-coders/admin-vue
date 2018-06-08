@@ -4,7 +4,7 @@
       <search class="list-search" :search="config.search" @search="handleSearch"></search>
       <actions class="list-public-actions" :actions="config.publicActions" @download="handleDownload"></actions>
     </div>    
-    <table-list class="list-table" :listData="listData" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
+    <table-list v-loading="loading" class="list-table" :listData="listData" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
     <paging class="list-paging" 
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
       getList(url, currentPage, pageSize, searchs) {
-        var loadingInstance = Loading.service({ target:'.list-table', text:'加载中……'});
+        var loadingInstance = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
         getList(url, currentPage, pageSize, searchs).then(res=>{
           this.listData = res.data;
           this.pageSize = res.data.pageSize;
