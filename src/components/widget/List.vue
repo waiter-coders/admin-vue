@@ -1,13 +1,13 @@
 <template>
   <div class="list-container">
     <div class="list-header">
-      <search class="list-search" :search="config.search" @search="handleSearch"></search>
-      <actions class="list-public-actions" :actions="config.publicActions" @download="handleDownload"></actions>
+      <search class="list-search" :search="config.search" @search="search"></search>
+      <actions class="list-public-actions" :actions="config.publicActions" @download="download"></actions>
     </div>    
-    <table-list v-loading="loading" class="list-table" :listData="listData" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
+    <table-list class="list-table" :listData="listData" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
     <paging class="list-paging" 
-    @size-change="handleSizeChange"
-    @current-change="handleCurrentChange"
+    @size-change="setPageSize"
+    @current-change="toPage"
     :pageSize="pageSize" 
     :total="total" 
     :currentPage="currentPage"
@@ -42,29 +42,29 @@ export default {
     Paging
   },
   created() {
-    this.getList('/paging/list', this.currentPage, this.pageSize);
+    this.getList(this.$route.path, this.currentPage, this.pageSize);
   },
   methods: {
       getList(url, currentPage, pageSize, searchs) {
-        var loadingInstance = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
-        getList(url, currentPage, pageSize, searchs).then(res=>{
-          this.listData = res.data;
-          this.pageSize = res.data.pageSize;
-          this.total = res.data.total
+        var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
+        getList(url, currentPage, pageSize, searchs).then(response=>{
+          this.listData = response.data;
+          this.pageSize = response.data.pageSize;
+          this.total = response.data.total
         });
-        loadingInstance.close();
+        loading.close();
       },
-      handleSizeChange(pageSize) {
+      setPageSize(pageSize) {
         this.pageSize = pageSize;
       },
-      handleCurrentChange(currentPage) {
+      toPage(currentPage) {
         this.currentPage = currentPage;
-        this.getList('/paging/list', this.currentPage, this.pageSize);
+        this.getList(this.$route.path, this.currentPage, this.pageSize);
       },
-      handleSearch(searchValue) {
-        this.getList('/paging/list', 1, this.pageSize, searchValue);
+      search(searchValue) {
+        this.getList(this.$route.path, 1, this.pageSize, searchValue);
       },
-      handleDownload(){
+      download() {
         this.$alert('下载');
       }
   }
