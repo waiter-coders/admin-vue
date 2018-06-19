@@ -1,8 +1,8 @@
 <template>
     <div class="block waiter-paging">
         <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        @size-change="PageSizeChange"
+        @current-change="toPage"
         :current-page="currentPage"
         :page-sizes="[30, 50, 100]"
         :page-size="pageSize"
@@ -21,11 +21,11 @@
       currentPage: Number,
     },
     methods: {
-      handleSizeChange(val) {
-        this.$emit('size-change', val)
+      PageSizeChange(pageSize) {
+        this.$emit('size-change', pageSize)
       },
-      handleCurrentChange(val) {
-        this.$emit('current-change', val)
+      toPage(currentPage) {
+        this.$emit('current-change', currentPage)
       }
     }
   }
