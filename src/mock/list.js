@@ -1,4 +1,4 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 var data = Mock.mock({
   'code': 0,
   'msg': 'success',
@@ -23,10 +23,10 @@ var data = Mock.mock({
   'total': 200,
   'curPage': 1
 
-});
+})
 
 export default {
   data,
   code: data.code,
   msg: data.msg
-};
+}
