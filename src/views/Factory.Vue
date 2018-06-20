@@ -7,15 +7,15 @@
 <script>
 import { getConfigs } from '@/api/factory/config'
 
-import {Form, List, Statistics} from '@/components/widget'
+import {AdminForm, AdminList, AdminStatistics} from '@/components/widget'
 export default {
     name: 'factory',
     components:{
-        Form, List, Statistics
+        AdminForm, AdminList, AdminStatistics
     },        
     data() {
         return {
-             configs: []
+            configs: []
         };
     },
     created:function(){
@@ -27,16 +27,8 @@ export default {
             var controller = _this.$route.path;
             _this.$store.dispatch('addConfig', controller);
             getConfigs(controller).then(function(response){
-                ///var configs = [];
-                console.log( response.data );
-                // for (var i = 0; i < response.data.length; i++) {
-                //     var config = response.data[i];  
-                //    // console.log( config );    
-                //     config.index = i;
-                //     configs.push(config);
-                // }
                 _this.configs = response.data;
-                //console.log( configs );
+                console.log(_this.configs);
             });
         },
     }

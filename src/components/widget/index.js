@@ -1,3 +1,3 @@
-export { default as List } from './List'
-export { default as Form } from './Form'
-export { default as Statistics } from './Statistics'
+export { default as AdminList } from './AdminList'
+export { default as AdminForm } from './AdminForm'
+export { default as AdminStatistics } from './AdminStatistics'

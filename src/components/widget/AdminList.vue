@@ -25,7 +25,7 @@ import Paging from './list/Paging';
 import { Loading } from 'element-ui';
 
 export default {
-  name: 'List',
+  name: 'AdminList',
   props:['config'],
   data () {
     return {
@@ -42,10 +42,10 @@ export default {
     Paging
   },
   created() {
-    this.getList(this.$route.path, this.currentPage, this.pageSize);
+    this.getData(this.$route.path, this.currentPage, this.pageSize);
   },
   methods: {
-      getList(url, currentPage, pageSize, searchs) {
+      getData(url, currentPage, pageSize, searchs) {
         var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
         getList(url, currentPage, pageSize, searchs).then(response=>{
           this.listData = response.data;
@@ -59,10 +59,10 @@ export default {
       },
       toPage(currentPage) {
         this.currentPage = currentPage;
-        this.getList(this.$route.path, this.currentPage, this.pageSize);
+        this.getData(this.$route.path, this.currentPage, this.pageSize);
       },
       search(searchValue) {
-        this.getList(this.$route.path, 1, this.pageSize, searchValue);
+        this.getData(this.$route.path, 1, this.pageSize, searchValue);
       },
       download() {
         this.$alert('下载');

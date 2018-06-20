@@ -41,6 +41,7 @@ export default {
             {
                 searchModel[this.search[item].field] = this.search[item].value
             }
+            console.log(searchModel);
             return searchModel
         }
     }

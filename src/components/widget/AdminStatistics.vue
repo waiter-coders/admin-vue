@@ -1,21 +1,20 @@
 <template>
   <div>
-  	公共表单{{msg}}
+  	{{msg}}
+  	统计页
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Form',
+  name: 'AdminStatistics',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  method:{
-		getConfig:function(){
-			alert(1);
-		},
+  methods: {
+		
   }
 }
 </script>

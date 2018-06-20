@@ -31,7 +31,8 @@ export default {
 	getConfigs: () =>{
 		return {
 			data: [{
-				"type":"list",
+				//"type":"admin-list",
+				"type":"admin-form",
 				"fields":[
 					{"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
 					{"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
