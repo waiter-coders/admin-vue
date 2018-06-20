@@ -28,11 +28,26 @@ for(let i = 0; i < count; i++){
 }
 //返回比较规范的列表，可以在这里提供多种方法，提供对menu参数的访问，该模块的数据，不仅仅用于刷新Menu,而且用户其他地方获取该板块的相关信息？
 export default {
-	getConfigs: () =>{
+	getConfigs: (request, response, next) =>{
+		if (request.url.indexOf("form") > 0) {
+			return {
+				data: [{
+					"type":"admin-form",
+					"fields":[
+						{"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+						{"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
+						{"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
+					],					
+					}],
+							 //data: List,
+				code: 0,
+				msg: 'success'
+			};
+		}
+
 		return {
 			data: [{
-				//"type":"admin-list",
-				"type":"admin-form",
+				"type":"admin-list",
 				"fields":[
 					{"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
 					{"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
@@ -56,10 +71,10 @@ export default {
 					{"name":"批量添加", "type":"ajax", "url":"", "isDisabled":false}
 				],
 				"paging":{}
-			  }],
-           	//data: List,
+				}],
+							//data: List,
 			code: 0,
 			msg: 'success'
-		};
+		};		
 	} 
 }
