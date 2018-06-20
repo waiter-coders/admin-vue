@@ -12,9 +12,12 @@
 [
     {
         "type":"list",
-        "config": {
-        }
-    }
+        // ...
+    },
+    {
+        "type":"form",
+        //...
+    }
 ]
 ```
 配置信息采用列表形式，以便页面中同时存在多个组件。对于单个组件，使用type来代表所要使用的小组件名，config为小组件的配置信息，builder视图会把它传递给对应小组件。
@@ -101,3 +104,14 @@ true
 ```
 
 
+### form 组件
+返回样例：
+``` javascript
+{
+  "fields":[
+      {"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
+      {"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
+      {"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
+  ],
+}
+```
