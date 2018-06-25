@@ -1,6 +1,6 @@
 <template>
   <div class="admin-form">
-  	<el-form ref="form" label-width="80px" class="form-inline" @submit.native.prevent>
+  	<el-form ref="form" :model="formData" label-width="80px" class="form-inline" @submit.native.prevent>
        <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in config.fields" v-bind:key="index">组件初始化失败</component>
        <el-form-item>
          <el-button type="primary" @click="submitForm">提交</el-button>
@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      formData: {}
     }
   },
   props: ['config'],
@@ -24,7 +25,6 @@ export default {
   },
   filters: {
     typeFilter: function(key){
-      console.log(key);
       var value = '';
       switch (key) {
         case 'int':
@@ -32,6 +32,9 @@ export default {
           break;
         case 'enum':
           value = 'admin-select'
+          break;
+        case 'multi':
+          value = 'check-box'
           break;
         default:
           value = 'admin-input'
@@ -42,7 +45,8 @@ export default {
   },
   methods :{
     submitForm: function(){
-      console.log(this);
+      console.log( this );
+      console.log( this.$ref );
     }
   }
 }

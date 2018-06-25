@@ -16,7 +16,7 @@ export default {
   },
   props: ['field'],
   mounted:function(){
-    console.log(this.formData);
+    //console.log(this.formData);
   },
   methods: {
     getFormData: function(){
