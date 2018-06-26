@@ -9,20 +9,17 @@
 </template>
 
 <script>
+import { initFormData } from '@/utils/loader';
 export default {
   name: 'AdminSelect',
   data () {
     return {
-      formData: this.getFormData()
+      formData: initFormData(this.field.field)
     }
   },
   props: ['field'],
   methods: {
-		getFormData: function(){
-      var model = {};
-      model[this.field.field] = '';
-      return model;
-    }
+    
   }
 }
 </script>

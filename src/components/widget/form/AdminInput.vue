@@ -1,17 +1,18 @@
 <template>
   <div>
-  	<el-form-item :label="field.name">
+  	<el-form-item :label="field.name" v-if="!field.primaryKey">
       <el-input v-model="formData[field.field]" :name="field.field"></el-input>
     </el-form-item>
   </div>
 </template>
 
 <script>
+import { initFormData } from '@/utils/loader';
 export default {
   name: 'AdminInput',
   data () {
     return {
-      formData: this.getFormData()
+      formData: initFormData(this.field.field)
     }
   },
   props: ['field'],

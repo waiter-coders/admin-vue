@@ -8,21 +8,17 @@
     </div>
 </template>
 <script>
+import { initFormData } from '@/utils/loader';
 export default {
     name:'CheckBox',
     data() {
         return {
-            formData: this.getFormData()
+            formData: initFormData(this.field.field)
         }
     },
     props:['field'],
     methods: {
-        getFormData: function(){
-            var model = {};
-            model[this.field.field] = [];
-            //console.log(model);
-            return model;
-        }
+
     }
 }
 </script>
