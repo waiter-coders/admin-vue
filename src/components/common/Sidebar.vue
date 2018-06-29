@@ -13,7 +13,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
-import { getMenus } from '@/api/common/menus'
+import { getMenus } from '@/api/admin/dashboard'
 export default {
     data (){
     	return {

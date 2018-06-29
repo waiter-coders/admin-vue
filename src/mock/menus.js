@@ -30,22 +30,35 @@ for(let i = 0; i < count; i++){
 export default {
 	getMenus: () =>{
 		return {
-			data: [
-                {"domain":"admin", "title":"用户管理", "children":[
-                	{"domain":"account","title":"用户账号"}
-                ]},
-                {"domain":"record", "title":"数据记录", "children":[
-                	{"domain":"paging","title":"列表","children":[
-	                	{"domain":"add","title":"列表"},
-	                	{"domain":"edit","title":"表单"}
-	                ]},
-                	{"domain":"form","title":"表单"}
-                ]},
-                {"domain":"cms", "title":"cms管理"},
-            ],
-           	//data: List,
-			code: 0,
-			msg: 'success'
+			"code": 0,
+			"data": [{
+				"domain": "admin",
+				"title": "系统管理",
+				"children": [{
+					"domain": "account",
+					"title": "管理员信息",
+					"children": [{
+						"domain": "edit",
+						"title": "管理员信息编辑"
+					}]
+				}, {
+					"domain": "invite",
+					"title": "邀请新管理员"
+				}]
+			}, {
+				"domain": "statistics",
+				"title": "网站统计",
+				"children": [{
+					"domain": "pvUv",
+					"title": "每日pv(uv)"
+				}, {
+					"domain": "userRatio",
+					"title": "用户分布"
+				}]
+			}, {
+				"domain": "doc",
+				"title": "后台开发文档"
+			}]
 		};
 	} 
 }

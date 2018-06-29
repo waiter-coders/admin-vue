@@ -1,6 +1,5 @@
 <template>
-	<el-menu class="navbar" mode="horizontal">
-		
+	<el-menu class="navbar" mode="horizontal">		
 		<hamburger class="hamburger-container"></hamburger>
 		<bread class="bread-container"></bread>
 		<el-dropdown class="avatar-container" trigger="click">

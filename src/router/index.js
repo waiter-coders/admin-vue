@@ -9,10 +9,11 @@ import Factory from '@/views/Factory' // 页面工厂
 // 页面视图组件
 import Home from '@/views/Home' //首页
 import Login from '@/views/admin/Login' // 登录页
+import Document from '@/views/Document' // 登录页
 import AdminAccount from '@/views/admin/Account' // 修改密码页
 
 // 接口
-import { isLogin } from '@/api/admin'
+import { isLogin } from '@/api/user'
 
 Vue.use(Router)
 
@@ -47,12 +48,12 @@ const router = new Router({
           component: Home
         },
         {
-          path: '/admin/account',
-          name: 'UserPassword',
+          path: '/doc',
+          name: 'doc',
           meta: {
             title: '管理员帐号'
           },
-          component: AdminAccount
+          component: Document
         },
 
         // 基于配置文件的工厂页面路由

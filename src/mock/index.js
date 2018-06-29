@@ -7,8 +7,8 @@ Mock.setup({
 	timeout: '350-600'
 })
 
-Mock.mock(/\/menus\/list/, 'get', menusApi.getMenus);
-Mock.mock(/[\w|\/]+\/getConfigs/, 'post', factoryApi.getConfigs);
-Mock.mock(/\/record\/paging/, 'get', pagingList);
+Mock.mock(/\/dashboard\/getMenus/, 'get', menusApi.getMenus);
+Mock.mock(/\/[\w|\/]+\/getConfigs/, 'get', factoryApi.getConfigs);
+Mock.mock(/\/[\w|\/]+\/getList/, 'get', pagingList);
 
 export default Mock;

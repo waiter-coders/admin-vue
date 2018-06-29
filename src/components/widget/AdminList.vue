@@ -4,7 +4,7 @@
       <search class="list-search" :search="config.search" @search="search"></search>
       <actions class="list-public-actions" :actions="config.publicActions" @download="download"></actions>
     </div>    
-    <table-list class="list-table" :listData="listData" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
+    <table-list class="list-table" :list="list" :itemActions="config.itemActions" :publicActions="config.publicActions.length > 0"></table-list>
     <paging class="list-paging" 
     @size-change="setPageSize"
     @current-change="toPage"
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/factory/list'
+import { getList } from '@/api/admin/adminList'
 import Search from './list/Search';
 import Actions from './list/Actions';
 import TableList from './list/Table';
@@ -29,7 +29,7 @@ export default {
   props:['config'],
   data () {
     return {
-      listData:{},
+      list:{},
       pageSize: 30,
       total: 0,
       currentPage: 1,
@@ -42,13 +42,13 @@ export default {
     Paging
   },
   created() {
-    this.getData(this.$route.path, this.currentPage, this.pageSize);
+    this.getData(this.$route.path + '/getList', this.currentPage, this.pageSize);
   },
   methods: {
       getData(url, currentPage, pageSize, searchs) {
         var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
         getList(url, currentPage, pageSize, searchs).then(response=>{
-          this.listData = response.data;
+          this.list = response.data;
           this.pageSize = response.data.pageSize;
           this.total = response.data.total
         });
@@ -59,10 +59,10 @@ export default {
       },
       toPage(currentPage) {
         this.currentPage = currentPage;
-        this.getData(this.$route.path, this.currentPage, this.pageSize);
+        this.getData(this.$route.path+ '/getList', this.currentPage, this.pageSize);
       },
       search(searchValue) {
-        this.getData(this.$route.path, 1, this.pageSize, searchValue);
+        this.getData(this.$route.path+ '/getList', 1, this.pageSize, searchValue);
       },
       download() {
         this.$alert('下载');
