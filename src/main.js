@@ -12,14 +12,6 @@ import './mock'
 
 Vue.component('icon', Icon)
 
-// window.UEDITOR_HOME_URL = '/static/ue/';
-
-import '../static/ue/ueditor.all.min.js'
-import '../static/ue/ueditor.config.js'
-import '../static/ue/lang/zh-cn/zh-cn.js'
-import '../static/ue/ueditor.parse.min.js'
-// import '../static/ue/themes/default/css/ueditor.min.css'
-
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 /* eslint-disable no-new */
