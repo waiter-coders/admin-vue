@@ -9,18 +9,23 @@
 </template>
 
 <script>
+import { initFormData } from '@/utils/loader';
 export default {
   name: 'AdminSelect',
   data () {
     return {
-      formData: this.getFormData()
+      formData: initFormData(this.field.field, this.field.value)
     }
   },
   props: ['field'],
+  mounted:function(){
+    console.log( this.formData );
+  },
   methods: {
-		getFormData: function(){
+    getFormData(key){
       var model = {};
-      model[this.field.field] = '';
+      model[this.field.field] =  '';
+      console.log( model );
       return model;
     }
   }

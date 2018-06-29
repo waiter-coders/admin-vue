@@ -1,3 +1,18 @@
-/**
- * Created by tianzheng on 18-2-18.
- */
+import fetch from '@/utils/service';
+
+export const add = (url, reqData) => {
+    console.log(reqData);
+	return fetch({
+		url: url,
+		method: 'post',
+		data: reqData
+	});
+}
+
+export const edit = (url, reqData) => {
+	return fetch({
+		url: url,
+		method: 'post',
+		data: reqData
+	});
+}

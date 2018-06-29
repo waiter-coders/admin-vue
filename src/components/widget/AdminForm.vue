@@ -1,6 +1,6 @@
 <template>
   <div class="admin-form">
-  	<el-form ref="form" :model="formData" label-width="80px" class="form-inline" @submit.native.prevent>
+  	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
        <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in config.fields" v-bind:key="index">组件初始化失败</component>
        <el-form-item>
          <el-button type="primary" @click="submitForm">提交</el-button>
@@ -11,6 +11,8 @@
 
 <script>
 import {CheckBox, Datetime, Editor, AdminInput, AdminSelect} from './form'
+import { formConfig }  from '@/utils/loader'
+import { add } from '@/api/factory/form'
 export default {
   name: 'AdminForm',
   data () {
@@ -25,28 +27,24 @@ export default {
   },
   filters: {
     typeFilter: function(key){
-      var value = '';
-      switch (key) {
-        case 'int':
-          value = 'admin-input'
-          break;
-        case 'enum':
-          value = 'admin-select'
-          break;
-        case 'multi':
-          value = 'check-box'
-          break;
-        default:
-          value = 'admin-input'
-          break;
-      }
-      return value;
+      return formConfig[key];
     }
   },
   methods :{
+    getFormData: function(){
+     
+    },
     submitForm: function(){
-      console.log( this );
-      console.log( this.$ref );
+      let url = this.config.url;
+      let $el = this.$children[0].$children;
+      let data = {};
+      $el.forEach(element => {
+        Object.assign( data, element.formData);
+      });
+      console.log( data );
+      add(url,data).then( res => {
+        
+      });
     }
   }
 }
