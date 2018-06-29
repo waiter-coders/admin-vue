@@ -34,6 +34,9 @@ export default {
       handleAction(row, action){         
           console.log( row );
           console.log( action );
+          if (action.type == 'page') {
+              this.$router.push( {path: action.url, query: {id: row.id}});
+          } 
       }
   }
 }

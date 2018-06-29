@@ -14,12 +14,20 @@ export default {
   name: 'AdminSelect',
   data () {
     return {
-      formData: initFormData(this.field.field)
+      formData: initFormData(this.field.field, this.field.value)
     }
   },
   props: ['field'],
+  mounted:function(){
+    console.log( this.formData );
+  },
   methods: {
-    
+    getFormData(key){
+      var model = {};
+      model[this.field.field] =  '';
+      console.log( model );
+      return model;
+    }
   }
 }
 </script>

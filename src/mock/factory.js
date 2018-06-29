@@ -42,7 +42,8 @@ export default {
 						{"name":"月份", "field":"month", "type":"datetime", "datetime":"month"},	
 						{"name":"日期", "field":"date", "type":"datetime", "datetime":"date"},	
 						{"name":"日期时间范围", "field":"datetimerange", "type":"datetime", "datetime":"datetimerange"},	
-						{"name":"日期时间", "field":"datetime", "type":"datetime", "datetime":"datetime"}
+						{"name":"日期时间", "field":"datetime", "type":"datetime", "datetime":"datetime"},
+						{"name":"文章内容", "field":"article", "type":"editor"}
 					],
 					"url":"controller/add"					
 					}],
@@ -63,8 +64,7 @@ export default {
 						{"name":"年份", "field":"year", "type":"datetime", "datetime":"year", "value":"2018"},//datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange	
 						{"name":"月份", "field":"month", "type":"datetime", "datetime":"month", "value":"201807"},	
 						{"name":"日期", "field":"date", "type":"datetime", "datetime":"date", "value":"20180706"},	
-						{"name":"周", "field":"week", "type":"datetime", "datetime":"week", "value":"08"},	
-						{"name":"日期时间范围", "field":"datetimerange", "type":"datetime", "datetime":"datetimerange", "value":""},
+						{"name":"日期时间范围", "field":"datetimerange", "type":"datetime", "datetime":"datetimerange", "value":['2018-07-01 00:00:00','2018-08-01 00:00:00']},
 						{"name":"日期时间", "field":"datetime", "type":"datetime", "datetime":"datetime", "value":"2018-06-30 10:10:23"}	
 					],
 					"url":"controller/add"					

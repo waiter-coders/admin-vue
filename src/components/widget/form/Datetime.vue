@@ -11,7 +11,7 @@ export default {
     name: 'datetime',
     data() {
         return {
-            formData: initFormData( this.field.field )
+            formData: initFormData( this.field.field, this.field.value )
         }
     },
     props: ['field'],

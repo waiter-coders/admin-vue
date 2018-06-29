@@ -38,9 +38,6 @@ export default {
       let url = this.config.url;
       let $el = this.$children[0].$children;
       let data = {};
-
-      // let data = 
-      console.log( this.$children[0].$children );
       $el.forEach(element => {
         Object.assign( data, element.formData);
       });

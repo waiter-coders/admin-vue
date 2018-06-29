@@ -12,7 +12,7 @@ export default {
   name: 'AdminInput',
   data () {
     return {
-      formData: initFormData(this.field.field)
+      formData: initFormData(this.field.field, this.field.value)
     }
   },
   props: ['field'],
@@ -20,11 +20,7 @@ export default {
     //console.log(this.formData);
   },
   methods: {
-    getFormData: function(){
-      var model = {};
-      model[this.field.field] = '';
-      return model;
-    }
+
   }
 }
 </script>

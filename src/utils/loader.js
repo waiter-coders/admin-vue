@@ -5,7 +5,8 @@ export const formConfig = {
     'enum':     'admin-select',
     'multi':    'check-box',
     'undefined':'admin-input',
-    'datetime': 'datetime'
+    'datetime': 'datetime',
+    'editor':   'editor'
 };
 //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
 export const timeFormat = {
@@ -14,7 +15,8 @@ export const timeFormat = {
     'date': 'yyyy-MM-dd',
     'week': 'WW',
     'datetime': 'yyyy-MM-dd HH:mm:ss',
-    'timestamp':'timestamp'
+    'timestamp':'timestamp',
+    'datetimerange':'yyyy-MM-dd HH:mm:ss'
 }
 
 export const initFormData = (key,value) =>{
