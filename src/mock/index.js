@@ -1,16 +1,17 @@
 import Mock from 'mockjs'
-import menusApi from './menus'
-import factoryApi from './factory'
-import pagingList from './list'
-import form from './form'
+import dashboard from './dashboard'
+import adminRender from './admin/adminRender'
+import adminList from './admin/adminList'
+import adminForm from './admin/adminForm'
 
 Mock.setup({
-	timeout: '350-600'
+	timeout: '150-300'
 })
 
-Mock.mock(/\/dashboard\/getMenus/, 'get', menusApi.getMenus);
-Mock.mock(/\/[\w|\/]+\/getConfigs/, 'get', factoryApi.getConfigs);
-Mock.mock(/\/[\w|\/]+\/getList/, 'get', pagingList);
-Mock.mock(/[\w|\/]+\/add/, 'post', form.add);
+Mock.mock(/\/dashboard\/getMenus/, 'get', dashboard.getMenus);
+Mock.mock(/\/[\w|\/]+\/getConfigs/, 'get', adminRender.getConfigs);
+Mock.mock(/\/[\w|\/]+\/getList/, 'get', adminList.getList);
+Mock.mock(/\/[\w|\/]+\/getTotalNum/, 'get', adminList.getTotalNum);
+Mock.mock(/[\w|\/]+\/add/, 'post', adminForm.submit);
 
 export default Mock;

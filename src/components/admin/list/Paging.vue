@@ -3,23 +3,17 @@
         <el-pagination
         @size-change="PageSizeChange"
         @current-change="toPage"
-        :current-page="currentPage"
-        :page-sizes="[30, 50, 100]"
-        :page-size="pageSize"
+        :current-page="config.currentPage"
+        :page-sizes="[10, 15, 20]"
+        :page-size="config.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total">
+        :total="config.totalNum">
         </el-pagination>
     </div>
 </template>
 <script>
-  import { getList } from '@/api/factory/list'
-
   export default {
-    props: {
-      pageSize: Number,
-      total: Number,
-      currentPage: Number,
-    },
+    props: ['config'],
     methods: {
       PageSizeChange(pageSize) {
         this.$emit('size-change', pageSize)

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { getConfigs } from '@/api/admin/factory'
+import { getConfigs } from '@/api/admin/adminRender'
 
-import {AdminForm, AdminList, AdminStatistics} from '@/components/widget'
+import {AdminForm, AdminList, AdminStatistics} from '@/components/admin'
 export default {
     name: 'factory',
     components:{
@@ -27,7 +27,7 @@ export default {
             var controller = _this.$route.path;
             // _this.$store.dispatch('addConfig', controller);
             getConfigs(controller).then(function(response){
-                _this.configs = response.data;
+                _this.configs = response;
                 console.log(_this.configs);
             });
         },

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <el-button type="primary" v-for="action in actions" v-bind:key="action.index" @click="action.method(action)">{{ action.name }}</el-button>
+    <el-button type="primary" v-for="(action, index) in actions" v-bind:key="index" @click="action.method(action)">{{ action.name }}</el-button>
 
     <el-dialog
     :title="dialogTitle"

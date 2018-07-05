@@ -12,7 +12,7 @@
 <script>
 import {CheckBox, Datetime, Editor, AdminInput, AdminSelect} from './form'
 import { formConfig }  from '@/utils/loader'
-import { add } from '@/api/factory/form'
+import { add } from '@/api/admin/adminForm'
 export default {
   name: 'AdminForm',
   data () {

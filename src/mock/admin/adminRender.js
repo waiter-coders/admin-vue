@@ -76,37 +76,7 @@ export default {
 		}
 
 		if (request.url == '//admin/account/getConfigs') {
-			return {
-				data: [{
-					"type":"admin-list",
-					"fields":[
-						{"name":"id", "field":"id", "type":"int", "primaryKey":true, "fastEdit":false},
-						{"name":"姓名", "field":"username", "primaryKey":false, "fastEdit":true},
-						{"name":"性别", "field":"sex", "type":"enum", "enum":{"1":"男","2":"女"}}
-					],
-					"search" : [
-						{"field":"username", "type":"text", "value": "", "inputTip":"请输入姓名"},
-						{"field":"sex","type":"enum", "enum":{"0":"请选择", "1":"男","2":"女"}, "value":"0", "inputTip":"请选择性别"}
-					],
-					"publicActions":[
-						{"name":"添加", "type":"page", "url":"/record/paging/add", "callback":"add",  "isDisabled":false},
-						{"name":"批量删除", "type":"ajax", "url":"/paging/list", "isDisabled":false},
-						{"name":"下载", "type":"callback",  "callback":"download",  "isDisabled":false}
-					],
-					"itemActions":[
-						{"name":"编辑", "type":"page", "url":"/record/paging/edit", "callback":"edit", "isDisabled":false},
-						{"name":"删除", "type":"ajax", "url":"/record/paging/delete", "isDisabled":false, "confirm":true},
-						{"name":"详情", "type":"page", "url":"/record/paging/show", "isDisabled":true}
-					],
-					"batchActions":[
-						{"name":"批量添加", "type":"ajax", "url":"", "isDisabled":false}
-					],
-					"paging":{}
-					}],
-								//data: List,
-				code: 0,
-				msg: 'success'
-			};		
+			return {"code":0,"data":[{"type":"admin-list","fields":[{"field":"adminId","name":"id","type":"int","unsigned":true,"primaryKey":true,"pipeline":"int","isVirtual":false},{"field":"name","type":"varchar","length":50,"name":"\u59d3\u540d","fastEdit":true},{"field":"email","type":"varchar","length":50,"name":"\u90ae\u7bb1","isShort":12},{"field":"account","type":"varchar","length":50,"name":"\u8d26\u53f7"}],"search":[{"field":"name","searchType":"like"}],"tableActions":[{"id":"add","type":"page","isShow":true,"isDisabled":false,"url":"","name":"\u6dfb\u52a0","location":"public","needSelectIds":false},{"id":"batchDelete","type":"page","isShow":true,"isDisabled":false,"url":"","name":"batchDelete","location":"public","needSelectIds":true},{"id":"fastAdd","type":"dialog","isShow":true,"isDisabled":false,"url":"\/fastAdd","name":"\u5feb\u901f\u6dfb\u52a0","location":"public","needSelectIds":false}],"rowActions":[{"id":"edit","type":"page","isShow":true,"isDisabled":false,"url":"..\/SimpleEditor\/show?@data.primaryKey=@data.id","name":"edit","location":"item"},{"id":"delete","type":"page","isShow":true,"isDisabled":false,"url":"delete?@data.primaryKey=@data.id","name":"delete","location":"item"},{"id":"showTitle","type":"ajax","isShow":true,"isDisabled":false,"url":"http:\/\/git.oschina.net\/waiterall\/waiterphp","name":"\u6807\u9898","location":"item","message":""}],"paging":{"pageSize":12}}]};		
 		}
 		
 		return {};

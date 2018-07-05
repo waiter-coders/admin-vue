@@ -1,5 +1,5 @@
 //import Cookies from 'js-cookie'
-import { getConfigs } from '@/api/factory/config';
+import { getConfigs } from '@/api/admin/adminRender';
 
 const controller = {
   state: {

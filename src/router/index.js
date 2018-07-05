@@ -2,18 +2,17 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 公共视图组件
-import Main from '@/views/Main' // 主窗口框架（含菜单）
-import Factory from '@/views/Factory' // 页面工厂
+import Dashboard from '@/views/Dashboard' // 主窗口框架（含菜单）
+import AdminRender from '@/views/AdminRender' // 页面工厂
 
 
 // 页面视图组件
 import Home from '@/views/Home' //首页
 import Login from '@/views/admin/Login' // 登录页
-import Document from '@/views/Document' // 登录页
 import AdminAccount from '@/views/admin/Account' // 修改密码页
 
 // 接口
-import { isLogin } from '@/api/user'
+import { isLogin } from '@/api/admin'
 
 Vue.use(Router)
 
@@ -33,7 +32,7 @@ const router = new Router({
     {
       path: '/',
       // name: 'main', 父级路由不能有name
-      component: Main,
+      component:Dashboard,
       meta: {
         title: '首页'
       },
@@ -47,14 +46,6 @@ const router = new Router({
           },
           component: Home
         },
-        {
-          path: '/doc',
-          name: 'doc',
-          meta: {
-            title: '管理员帐号'
-          },
-          component: Document
-        },
 
         // 基于配置文件的工厂页面路由
         {
@@ -63,7 +54,7 @@ const router = new Router({
           meta:{
             title: '列表'
           },
-          component: Factory,
+          component: AdminRender,
           props:true
         }
       ]

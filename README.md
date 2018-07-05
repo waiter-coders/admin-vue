@@ -60,7 +60,7 @@ builder视图做为一个比较特殊的视图，在路由文件中采用如下�
       {"field":"username", "search":"like"},
       {"field":"sex"}
   ],
-  "publicActions":[
+  "tableActions":[
       {"name":"添加", "action":"page", "url":"", "isDisabled":false}
   ],
   "itemActions":[

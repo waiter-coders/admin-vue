@@ -18,11 +18,11 @@ service.interceptors.request.use(config => {
 })
 
 // 回复拦截器
-service.interceptors.response.use(res => {
-	if(res.data.code !== 0){
-		Message.error('操作失败，原因：'+ res.data.msg);
+service.interceptors.response.use(response => {
+	if(response.data.code !== 0){
+		Message.error('操作失败，原因：'+ response.data.msg);
 	}
-    return res.data;
+    return response.data.data;
 }, error => {
 	Message.error('请求出错！');
 	console.log( error );

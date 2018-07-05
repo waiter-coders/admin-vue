@@ -81,5 +81,4 @@ export default {
 	min-width:0px;
 	width:auto;
 }
-
 </style>
