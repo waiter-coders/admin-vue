@@ -16,7 +16,7 @@
 
 <script>
 import { getList, getTotalNum, deleteByIds } from '@/api/admin/adminList'
-import ButtonGroup from '@/components/public/ButtonGroup'
+import ButtonGroup from '@/widgets/public/ButtonGroup'
 import Search from './list/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'

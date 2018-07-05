@@ -7,7 +7,7 @@
 <script>
 import { getConfigs } from '@/api/admin/adminRender'
 
-import {AdminForm, AdminList, AdminStatistics} from '@/components/admin'
+import {AdminForm, AdminList, AdminStatistics} from '@/widgets/admin'
 export default {
     name: 'factory',
     components:{

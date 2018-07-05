@@ -14,7 +14,7 @@
   </el-table>
 </template>
 <script>
-import ButtonGroup from '@/components/public/ButtonGroup';
+import ButtonGroup from '@/widgets/public/ButtonGroup';
 export default {
   name: 'tableList',
   components:{ButtonGroup},

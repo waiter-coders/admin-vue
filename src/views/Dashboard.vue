@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { Menus, Hamburger, Bread, UserActions /*, TagsView*/ } from "@/components/layout";
+import { Menus, Hamburger, Bread, UserActions /*, TagsView*/ } from "@/widgets/layout";
 export default {
   name: "appmain",
   components: {
