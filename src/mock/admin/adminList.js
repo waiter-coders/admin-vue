@@ -31,7 +31,7 @@ export default {
     data: [
       {
         adminId: "2",
-        account: "anna",
+        account: "anna" + Math.random(),
         name: "\u5b89\u5a1c",
         sex: "1",
         platform: "1,2,3",

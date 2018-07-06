@@ -84,18 +84,24 @@ export default {
       },
       actionsClick(action, params) {
         var _this = this;
-          var type = 'type' in params ? params.type : 'page'
-          if (type == 'page') {
-            this.$router.push({ path: params.url , params: params.params})
-          }
-          else if (type == 'ajax') {
+        switch (params.type) {         
+          case 'ajax':
             pageUtil.fetch(params.url, params, params.confirm, params.success, params.error).then(function(){
               _this.reloadData()
             })
-          }
-          else if (type == 'dialog') {
-
-          }
+            break
+          case 'select':  
+            pageUtil.fetch(params.url, params, params.confirm, params.success, params.error).then(function(){
+              _this.reloadData()
+            })            
+            break
+          case 'dialog':
+            alert('dialog');
+            break
+          case 'page':
+          default:
+            this.$router.push({ path: params.url , params: params.params})
+        }
       },
       filterSearchFields(searchFields, allFields){
         var fields = [];        

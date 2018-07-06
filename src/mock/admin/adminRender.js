@@ -102,7 +102,7 @@ export default {
         msg: "success"
       };
     }
-    if (request.url == '//admin/account/add/getConfigs') {
+    if (request.url == '//admin/account/submit/getConfigs') {
       return {
         data: [
           {
@@ -226,17 +226,17 @@ export default {
                 type: "page",
                 isShow: true,
                 isDisabled: false,
-                url: "/admin/account/add",
+                url: "/admin/account/submit",
                 name: "\u6dfb\u52a0",
                 location: "public",
                 needSelectIds: false
               },
               {
                 id: "batchDelete",
-                type: "page",
+                type: "select",
                 isShow: true,
                 isDisabled: false,
-                url: "",
+                url: "/admin/account/deleteByIds",
                 name: "batchDelete",
                 location: "public",
                 needSelectIds: true
@@ -258,7 +258,7 @@ export default {
                 type: "page",
                 isShow: true,
                 isDisabled: false,
-								url: "/admin/accunt/detail?@data.primaryKey=@data.id",							
+								url: "/admin/accunt/submit?@primaryKey=@data.adminId",							
                 name: "edit",
 								location: "item"
 								
@@ -269,7 +269,7 @@ export default {
                 isShow: true,
 								isDisabled: false,
 								confirm:"你确定要删除@data.name?",
-                url: "/admin/account/delete?@data.primaryKey=@data.id",
+                url: "/admin/account/delete?@primaryKey=@data.adminId",
                 name: "delete",
 								location: "item",
 								success:"删除成功"
