@@ -1,13 +1,12 @@
 <template>
   <div class="list-container">
     <div class="list-header">
-      <search class="list-search" :config="search" @click="searchClick" v-if="search.fields.length > 0"></search>
-      <button-group class="list-table-actions" :actions="tableActions" @click="download" v-if="tableActions.length > 0"></button-group>
+      <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
+      <button-group class="list-table-actions" :actions="tableActions" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
     </div>    
-    <table-list class="list-table" :config="list"></table-list>
+    <table-list class="list-table" :config="list" @click="actionsClick"></table-list>
     <paging class="list-paging" 
-    @size-change="setPageSize"
-    @current-change="toPage"
+    @changePaging="changePaging"
     :config="paging"
      v-if="paging.totalNum > paging.pageSize"></paging>
   </div>
@@ -17,12 +16,13 @@
 <script>
 import { getList, getTotalNum, deleteByIds } from '@/api/admin/adminList'
 import ButtonGroup from '@/widgets/public/ButtonGroup'
-import Search from './list/Search'
+import Search from '@/widgets/public/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
 import { Loading } from 'element-ui'
 
 import fetch from '@/utils/service'
+import pageUtil from '@/utils/page'
 
 export default {
   name: 'AdminList',
@@ -60,7 +60,7 @@ export default {
       reloadData() {
         var search = [];
         var _this = this;
-        var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
+        // var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
         getTotalNum(_this.baseUrl, search).then(totalNum=>{
           _this.paging.totalNum = parseInt(totalNum);
           if (totalNum == 0) {
@@ -70,25 +70,32 @@ export default {
           return getList(_this.baseUrl, search, _this.paging.pageSize, offset);          
         }).then(data=>{
           _this.list.data = data;
-          loading.close();
+          // loading.close();
         });;
         
       },
-      action(){
-
-      },
-      setPageSize(pageSize) {
-        this.pageSize = pageSize;
-      },
-      toPage(currentPage) {
-        this.currentPage = currentPage;
-        this.reloadData(this.$route.path+ '/getList', this.currentPage, this.pageSize);
+      changePaging(paging) {
+        this.paging = paging;
+        this.reloadData();
       },
       searchClick(searchValue) {
-        this.reloadData(this.$route.path+ '/getList', 1, this.pageSize, searchValue);
+        // this.search = searchValue;
+        this.reloadData();
       },
-      download() {
-        this.$alert('下载');
+      actionsClick(action, params) {
+        var _this = this;
+          var type = 'type' in params ? params.type : 'page'
+          if (type == 'page') {
+            this.$router.push({ path: params.url , params: params.params})
+          }
+          else if (type == 'ajax') {
+            pageUtil.fetch(params.url, params, params.confirm, params.success, params.error).then(function(){
+              _this.reloadData()
+            })
+          }
+          else if (type == 'dialog') {
+
+          }
       },
       filterSearchFields(searchFields, allFields){
         var fields = [];        

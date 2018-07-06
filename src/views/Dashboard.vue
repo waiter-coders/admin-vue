@@ -39,16 +39,6 @@ export default {
     key() {
       return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
     }
-  },
-  methods: {
-    /*toggleSideBar() {
-      this.$store.dispatch('ToggleSideBar')
-    },*/
-    logout() {
-//    this.$store.dispatch('LogOut').then(() => {
-//      location.reload()// 为了重新实例化vue-router对象 避免bug
-//    })
-    }
   }
 };
 </script>

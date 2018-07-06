@@ -213,6 +213,9 @@ export default {
   },
   getTotalNum: (request, response, next) =>{
     return {"code":0,"data":"200"}
+  },
+  delete:()=>{
+    return {"code":0,"data":true}
   }
   
 };

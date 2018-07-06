@@ -8,7 +8,6 @@
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
                 <button-group class="list-table-actions" :actions="config.rowActions" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
-                <!-- <el-button size="mini" v-for="(action, index) in config.rowActions" :key="'itemAction_'+index" @click="handleAction( scope.row, action)">{{action.name}}</el-button> -->
             </template>
         </el-table-column>
   </el-table>
@@ -30,9 +29,7 @@ export default {
           return format.enum[value[row.property]];      
       },
       rowActionClick(action, params){         
-        //   if (action.type == 'page') {
-        //       this.$router.push( {path: action.url, query: {id: row.id}});
-        //   } 
+        this.$emit('click', action, params)
       }
   }
 }

@@ -16,10 +16,10 @@
     props: ['config'],
     methods: {
       PageSizeChange(pageSize) {
-        this.$emit('size-change', pageSize)
+        this.$emit('changePaging', this.config)
       },
       toPage(currentPage) {
-        this.$emit('current-change', currentPage)
+        this.$emit('changePaging', this.config)
       }
     }
   }
