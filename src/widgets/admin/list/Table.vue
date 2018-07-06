@@ -28,7 +28,7 @@ export default {
           return format.enum[value[row.property]];      
       },
       actionFomrmatter(rowActions, rowData){
-        var newRowActions = rowActions.splice(0)
+        var newRowActions = rowActions//.splice(0)
         var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
         return newRowActions.map(function(action){
             for (var field in rowData) {
