@@ -50,7 +50,7 @@ export default {
       fields:[],
       search:{'url':this.$route.path, 'fields':[]},
       tableActions:[],
-      list:{fields:[], rowActions:[], data:[]},
+      list:{fields:[], rowActions:[], data:[], needSelect:false},
       paging:{
         pageSize: 12,
         totalNum: 0,
@@ -70,6 +70,7 @@ export default {
     this.tableActions = this.config.tableActions;
     this.list.fields = this.fields;
     this.list.rowActions = this.config.rowActions;
+    this.list.needSelect = this.config.tableActions.filter(function(row){return row.location == 'select'}).length > 0;
     this.paging.pageSize = 'pageSize' in this.config.paging ? this.config.paging['pageSize'] : 12;    
     this.reloadData();
   },

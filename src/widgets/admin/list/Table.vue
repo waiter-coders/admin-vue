@@ -1,5 +1,6 @@
 <template> 
   <el-table :data="config.data" border width="800">
+      <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
         <el-table-column v-for="item in config.fields" :prop="item.field" 
             :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
@@ -18,7 +19,8 @@
  config:{
      data:[],
      fields:[],
-     rowActions:[]
+     rowActions:[],
+     needSelect:true
  }
 
 @事件：
