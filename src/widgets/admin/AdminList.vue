@@ -15,8 +15,8 @@
 
 <script>
 import { getList, getTotalNum, deleteByIds } from '@/api/admin/adminList'
-import ButtonGroup from '@/widgets/public/ButtonGroup'
-import Search from '@/widgets/public/Search'
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
+import Search from '@/widgets/admin/public/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
 import { Loading } from 'element-ui'

@@ -26,7 +26,7 @@
 @事件：
 click(action, params)
  */
-import ButtonGroup from '@/widgets/public/ButtonGroup';
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup';
 export default {
   name: 'tableList',
   components:{ButtonGroup},
