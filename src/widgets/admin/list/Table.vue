@@ -50,9 +50,10 @@ export default {
         var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
         return newRowActions.map(function(action){
             for (var field in rowData) {
-                action.url = action.url.replace('@data.' + field, rowData[field])
+                action.url = action.url.replace('@data.' + field + '@', rowData[field])
             }            
-            action.url = action.url.replace('@primaryKey', primaryKey)
+            action.url = action.url.replace('@primaryKey@', primaryKey)
+            action.url = action.url.replace('@data.id@',  rowData[primaryKey])
             return action
         })
       },
