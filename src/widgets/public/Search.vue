@@ -2,8 +2,8 @@
     <div>
         <el-form :inline="true" ref="form" label-width="80px">
             <el-form-item v-for="item in config.fields" :key="item.field">
-                <el-input v-if="item.type == 'varchar'" :name="item.field" :placeholder="item.inputTip" v-model="item.value"></el-input>
-                <el-select v-if="item.type == 'enum'" v-model="item.value" placeholder="请选择">
+                <el-input v-if="item.type == 'string'" :name="item.field" :placeholder="item.inputTip" v-model="item.value"></el-input>
+                <el-select v-if="item.type == 'select'" v-model="item.value" placeholder="请选择">
                     <el-option
                     v-for="(value, index) in item.enum"
                     :key="index"
@@ -26,7 +26,7 @@
 @配置：
 config:{
     fields:[
-        {name:"", field:"", type:"", value:""} // 具体规则请参考form表单
+        {name:"", field:"", type:"", value:""} // type包括：string number text html select multiSelect linkSelect date datetime image file等
     ]
 }
 

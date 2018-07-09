@@ -40,7 +40,7 @@ export default {
               {
                 name: "id",
                 field: "id",
-                type: "int",
+                type: "number",
                 primaryKey: true,
                 fastEdit: false
               },
@@ -53,8 +53,8 @@ export default {
               {
                 name: "性别",
                 field: "sex",
-                type: "enum",
-                enum: { "1": "男", "2": "女" }
+                type: "select",
+                map: { "1": "男", "2": "女" }
               },
               {
                 name: "爱好",
@@ -92,7 +92,7 @@ export default {
                 type: "datetime",
                 datetime: "datetime"
               },
-              { name: "文章内容", field: "article", type: "editor" }
+              { name: "文章内容", field: "article", type: "html" }
             ],
             url: "controller/add"
           }
@@ -111,7 +111,7 @@ export default {
               {
                 name: "id",
                 field: "id",
-                type: "int",
+                type: "number",
                 primaryKey: true,
                 fastEdit: false,
                 value: "12"
@@ -120,21 +120,22 @@ export default {
                 name: "姓名",
                 field: "username",
                 primaryKey: false,
+                type:"string",
                 fastEdit: true,
                 value: "hanhan"
               },
               {
                 name: "性别",
                 field: "sex",
-                type: "enum",
-                enum: { "1": "男", "2": "女" },
+                type: "select",
+                map: { "1": "男", "2": "女" },
                 value: "2"
               },
               {
                 name: "爱好",
                 field: "hobby",
-                type: "multi",
-                multi: { "1": "电影", "2": "看书", "3": "旅行", "4": "烹饪" },
+                type: "multiSelect",
+                map: { "1": "电影", "2": "看书", "3": "旅行", "4": "烹饪" },
                 value: "[2,4]"
               },
               {
@@ -183,102 +184,7 @@ export default {
     }
 
     if (request.url == "//admin/account/getConfigs") {
-      return {
-        code: 0,
-        data: [
-          {
-            type: "admin-list",
-            fields: [
-              {
-                field: "adminId",
-                name: "id",
-                type: "int",
-                unsigned: true,
-                primaryKey: true,
-                pipeline: "int",
-                isVirtual: false
-              },
-              {
-                field: "name",
-                type: "varchar",
-                length: 50,
-                name: "\u59d3\u540d",
-                fastEdit: true
-              },
-              {
-                field: "email",
-                type: "varchar",
-                length: 50,
-                name: "\u90ae\u7bb1",
-                isShort: 12
-              },
-              {
-                field: "account",
-                type: "varchar",
-                length: 50,
-                name: "\u8d26\u53f7"
-              }
-            ],
-            search: [{ field: "name", searchType: "like" }],
-            tableActions: [
-              {
-                id: "add",
-                type: "page",
-                isShow: true,
-                isDisabled: false,
-                url: "/admin/account/submit",
-                name: "\u6dfb\u52a0",
-                location: "public",
-                needSelectIds: false
-              },
-              {
-                id: "batchDelete",
-                type: "select",
-                isShow: true,
-                isDisabled: false,
-                url: "/admin/account/deleteByIds",
-                name: "batchDelete",
-                location: "public",
-                needSelectIds: true
-              },
-              {
-                id: "fastAdd",
-                type: "dialog",
-                isShow: true,
-                isDisabled: false,
-                url: "/fastAdd",
-                name: "\u5feb\u901f\u6dfb\u52a0",
-                location: "public",
-                needSelectIds: false
-              }
-            ],
-            rowActions: [
-              {
-                id: "edit",
-                type: "page",
-                isShow: true,
-                isDisabled: false,
-								url: "/admin/accunt/submit?@primaryKey=@data.adminId",							
-                name: "edit",
-								location: "item"
-								
-              },
-              {
-                id: "delete",
-                type: "ajax",
-                isShow: true,
-								isDisabled: false,
-								confirm:"你确定要删除@data.name?",
-                url: "/admin/account/delete?@primaryKey=@data.adminId",
-                name: "delete",
-								location: "item",
-								success:"删除成功"
-              }
-            ],
-            paging: { pageSize: 12 }
-          }
-        ]
-      };
+      return {"code":0,"data":[{"type":"admin-list","fields":[{"field":"adminId","name":"id","type":"number","unsigned":true,"primaryKey":true,"filter":"number","isVirtual":false},{"field":"account","type":"string","length":50,"name":"\u8d26\u53f7"},{"field":"name","type":"string","length":50,"name":"\u59d3\u540d","fastEdit":true},{"field":"sex","type":"select","name":"\u6027\u522b","map":{"1":"\u7537","2":"\u5973"}},{"field":"birthday","type":"date","name":"\u751f\u65e5"},{"field":"platform","type":"multiSelect","name":"\u6240\u5c5e\u5e73\u53f0","map":{"1":"\u5e73\u53f0A","2":"\u5e73\u53f0B","3":"\u5e73\u53f0C","4":"\u5e73\u53f0D"}},{"field":"face","type":"image","length":50,"name":"\u5934\u50cf"},{"field":"addTime","type":"datetime","name":"\u6dfb\u52a0\u65f6\u95f4"},{"field":"isInvalid","type":"select","name":"\u662f\u5426\u65e0\u6548","map":["\u6709\u6548","\u65e0\u6548"]}],"search":[{"field":"name","searchType":"like"}],"tableActions":[{"id":"add","type":"page","isShow":true,"isDisabled":false,"url":"","name":"\u6dfb\u52a0","location":"public","needSelectIds":false},{"id":"batchDelete","type":"page","isShow":true,"isDisabled":false,"url":"","name":"batchDelete","location":"public","needSelectIds":true},{"id":"fastAdd","type":"dialog","isShow":true,"isDisabled":false,"url":"\/fastAdd","name":"\u5feb\u901f\u6dfb\u52a0","location":"public","needSelectIds":false}],"rowActions":[{"id":"edit","type":"page","isShow":true,"isDisabled":false,"url":"..\/SimpleEditor\/show?@data.primaryKey=@data.id","name":"edit","location":"item"},{"id":"delete","type":"page","isShow":true,"isDisabled":false,"url":"delete?@data.primaryKey=@data.id","name":"delete","location":"item"}],"paging":{"pageSize":12}}]}
     }
 
     return {};

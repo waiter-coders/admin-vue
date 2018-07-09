@@ -1,9 +1,7 @@
 <template> 
   <el-table :data="config.data" border width="800">
-        <el-table-column v-for="item in config.fields" v-if="item.type!='enum'"  :prop="item.field" 
-            :label="item.name" :key="item.id"></el-table-column>
-        <el-table-column v-for="item in config.fields" v-if="item.type=='enum'" :prop="item.field" 
-            :label="item.name" :key="item.id"  :formatter="formatOption"></el-table-column>
+        <el-table-column v-for="item in config.fields" :prop="item.field" 
+            :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
                 <button-group class="list-table-actions" :config="{actions:formatAction(config.rowActions, scope.row)}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
@@ -32,14 +30,20 @@ export default {
   components:{ButtonGroup},
   props: ['config'],
   methods:{
-      formatOption(value,row,column){ 
-          var fields = this.fields;
-          var format = fields.find(function(val,i){
+      itemFormatter(value,row,column){ 
+          var fields = this.config.fields;
+          var field = fields.find(function(val,i){
               if(val.field == row.property){
                   return val;
               }
           });
-          return format.enum[value[row.property]];      
+          switch (field.type) {
+              case 'select':
+                return field.map[value[row.property]];
+                break;
+            default:
+                return value[row.property]
+          }                
       },
       formatAction(rowActions, rowData){
         var newRowActions = rowActions//.splice(0)

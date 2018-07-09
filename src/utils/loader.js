@@ -1,12 +1,12 @@
 // 通过配置文件，装在对应vue组件的工具类
 
 export const formConfig = {
-    'int':      'admin-input',
-    'enum':     'admin-select',
-    'multi':    'check-box',
+    'string':      'admin-input',
+    'select':     'admin-select',
+    'multiSelect':    'check-box',
     'undefined':'admin-input',
     'datetime': 'datetime',
-    'editor':   'editor'
+    'html':   'editor'
 };
 //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
 export const timeFormat = {
