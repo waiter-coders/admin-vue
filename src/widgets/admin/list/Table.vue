@@ -54,6 +54,9 @@ export default {
             }            
             action.url = action.url.replace('@primaryKey@', primaryKey)
             action.url = action.url.replace('@data.id@',  rowData[primaryKey])
+            if ('confirm' in action) {
+                action.confirm = action.confirm.replace('@data.id@',  rowData[primaryKey])
+            }
             return action
         })
       },
