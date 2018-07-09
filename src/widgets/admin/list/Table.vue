@@ -40,9 +40,11 @@ export default {
               }
           });
           switch (field.type) {
-              case 'select':
+            case 'select':
                 return field.map[value[row.property]];
                 break;
+            case 'image':
+                return '<img src="'+value[row.property]+'">'
             default:
                 return value[row.property]
           }                
