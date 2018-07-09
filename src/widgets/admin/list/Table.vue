@@ -64,6 +64,9 @@ export default {
       },
       rowActionClick(action, params){         
         this.$emit('click', action, params)
+      },
+      getSelectIds(){
+          return [1,2,3,4]
       }
   }
 }
