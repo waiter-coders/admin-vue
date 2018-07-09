@@ -2,7 +2,7 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-      <button-group class="list-table-actions" :actions="tableActions" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
+      <button-group class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
     </div>    
     <table-list class="list-table" :config="list" @click="actionsClick"></table-list>
     <paging class="list-paging" 
@@ -23,6 +23,23 @@ import { Loading } from 'element-ui'
 
 import fetch from '@/utils/service'
 import pageUtil from '@/utils/page'
+
+/*
+【列表组件】
+用于渲染列表
+
+@配置：
+config:{
+  fields:[],
+  search:[],
+  tableActions:[],
+  rowActions:[],
+  paging:{}
+}
+
+
+@事件：无返回事件
+*/
 
 export default {
   name: 'AdminList',
@@ -73,13 +90,10 @@ export default {
           // loading.close();
         });;
         
-      },
-      changePaging(paging) {
-        this.paging = paging;
-        this.reloadData();
-      },
-      searchClick(searchValue) {
+      },      
+      searchClick(search) {
         // this.search = searchValue;
+        this.paging.currentPage = 1; // 搜索自动跳回第一页
         this.reloadData();
       },
       actionsClick(action, params) {
@@ -102,6 +116,10 @@ export default {
           default:
             this.$router.push({ path: params.url , params: params.params})
         }
+      },
+      changePaging(paging) {
+        this.paging = paging;
+        this.reloadData();
       },
       filterSearchFields(searchFields, allFields){
         var fields = [];        
