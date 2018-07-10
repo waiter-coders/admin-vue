@@ -1,6 +1,9 @@
 <template>
-    <div>
-        <vue-editor v-model="content"></vue-editor>
+    <div class="editor">
+        <el-form-item :label="field.name">
+            <vue-editor v-model="content"></vue-editor>
+        </el-form-item>
+        
     </div>
 </template>
 <script>
@@ -27,3 +30,9 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+    .editor{
+        margin-bottom: 20px;
+    }
+</style>
+

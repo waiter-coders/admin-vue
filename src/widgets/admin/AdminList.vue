@@ -148,16 +148,16 @@ export default {
   padding:20px 30px;
 }
 .list-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: stretch; */
 }
 .list-search{
-  flex: 1;
+  /* flex: 1; */
 }
 .list-table-actions{
-  flex: 1;
   text-align: right;
+  margin-bottom: 14px;
 }
 
 </style>

@@ -248,7 +248,26 @@ export default {
                 map: ["\u6709\u6548", "\u65e0\u6548"]
               }
             ],
-            search: [{ field: "name", searchType: "like" }],
+            search: [
+              { 
+                field: "name", 
+                searchType: "like", 
+                type:'string',
+                name: '姓名' 
+              },
+              { 
+                field: "sex", 
+                searchType: "like", 
+                type:'select' ,
+                name: "\u6027\u522b",
+                map: { "1": "\u7537", "2": "\u5973" }
+              },
+              {
+                field: "addTime",
+                type: "datetime",
+                name: "\u6dfb\u52a0\u65f6\u95f4"
+              }
+            ],
             tableActions: [
               {
                 id: "add",

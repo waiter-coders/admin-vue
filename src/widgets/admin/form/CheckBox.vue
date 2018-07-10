@@ -2,7 +2,8 @@
     <div>
         <el-form-item :label="field.name">
             <el-checkbox-group v-model="formData[field.field]">
-                <el-checkbox v-for="(item,key) in field.multi" :name="field.field" :label="key" :key="key" :checked="field.value && field.value.includes(key)">{{item}}</el-checkbox>
+                <el-checkbox v-for="(item,key) in field.map" :label="key" :key="key" :checked=" ( field.value && field.value.includes(key) )">{{item}}</el-checkbox>
+                <!-- :checked="field.value && field.value.includes(key)" -->
             </el-checkbox-group>
         </el-form-item>
     </div>
@@ -19,9 +20,9 @@ export default {
     },
     props:['field'],
     methods: {
-        getFormData: function(key, val){
+        getFormData: function(field, val){
             let model = {};
-            model[key] = val || new Array();
+            model[field] = val || new Array();
             return model;
         }
     }

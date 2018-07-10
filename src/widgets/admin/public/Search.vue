@@ -2,18 +2,20 @@
     <div>
         <el-form :inline="true" ref="form" label-width="80px">
             <el-form-item v-for="item in config.fields" :key="item.field">
-                <el-input v-if="item.type == 'string'" :name="item.field" :placeholder="item.inputTip" v-model="item.value"></el-input>
-                <el-select v-if="item.type == 'select'" v-model="item.value" placeholder="请选择">
+                <el-input v-if="item.type == 'string'" size="mini" :name="item.field" :placeholder="'请输入'+item.name" v-model="item.value"></el-input>
+                <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" :placeholder="'请选择'+item.name">
+                    <el-option value="" label="全部" key="quanbu"></el-option>
                     <el-option
-                    v-for="(value, index) in item.enum"
+                    v-for="(value, index) in item.map"
                     :key="index"
                     :label="value"
                     :value="index">
                     </el-option>
                 </el-select>
+                <el-date-picker size="mini" v-if="item.type == 'datetime'" v-model="item.value" type="datetimerange" range-separator="至" start-placeholder="请输入开始时间" end-placeholder="请输入结束时间"></el-date-picker>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary"  icon="el-icon-search" @click="search">搜索</el-button>
+                <el-button type="primary" size="mini"  icon="el-icon-search" @click="search">搜索</el-button>
             </el-form-item>
         </el-form>        
     </div>
@@ -52,3 +54,8 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+.el-form-item{
+  margin-bottom: 10px !important;
+}
+</style>
