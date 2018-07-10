@@ -4,7 +4,7 @@
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
       <button-group class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
     </div>    
-    <table-list class="list-table" :config="list" @click="actionsClick"></table-list>
+    <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
     <paging class="list-paging" 
     @changePaging="changePaging"
     :config="paging"
@@ -15,8 +15,8 @@
 
 <script>
 import { getList, getTotalNum, deleteByIds } from '@/api/admin/adminList'
-import ButtonGroup from '@/widgets/public/ButtonGroup'
-import Search from '@/widgets/public/Search'
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
+import Search from '@/widgets/admin/public/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
 import { Loading } from 'element-ui'
@@ -99,6 +99,9 @@ export default {
       },
       actionsClick(action, params) {
         var _this = this;
+        if (params.location == 'select') {
+          params.ids = this.$refs.table_list.getSelectIds();
+        }
         switch (params.type) {         
           case 'ajax':
             pageUtil.fetch(params.url, params, params.confirm, params.success, params.error).then(function(){

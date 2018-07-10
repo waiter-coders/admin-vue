@@ -255,14 +255,14 @@ export default {
                 type: "page",
                 isShow: true,
                 isDisabled: false,
-                url: "",
+                url: "/admin/account/submit",
                 name: "\u6dfb\u52a0",
                 location: "public",
                 needSelectIds: false
               },
               {
                 id: "batchDelete",
-                type: "page",
+                type: "ajax",
                 isShow: true,
                 isDisabled: false,
                 url: "",

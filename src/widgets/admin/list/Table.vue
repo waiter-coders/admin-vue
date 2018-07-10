@@ -26,7 +26,7 @@
 @事件：
 click(action, params)
  */
-import ButtonGroup from '@/widgets/public/ButtonGroup';
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup';
 export default {
   name: 'tableList',
   components:{ButtonGroup},
@@ -40,9 +40,11 @@ export default {
               }
           });
           switch (field.type) {
-              case 'select':
+            case 'select':
                 return field.map[value[row.property]];
                 break;
+            case 'image':
+                return '<img src="'+value[row.property]+'">'
             default:
                 return value[row.property]
           }                
@@ -64,6 +66,9 @@ export default {
       },
       rowActionClick(action, params){         
         this.$emit('click', action, params)
+      },
+      getSelectIds(){
+          return [1,2,3,4]
       }
   }
 }
