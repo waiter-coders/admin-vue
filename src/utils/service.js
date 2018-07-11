@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 
 const service = axios.create({
-    // baseURL: process.env.SERVICE_URL,
+    baseURL: '/index.php',
     timeout: 5000,
     headers: {'X-Custom-Header': 'foobar'}
 })

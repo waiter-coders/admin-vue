@@ -8,7 +8,7 @@ Mock.setup({
 	timeout: '150-300'
 })
 
-Mock.mock(/\/dashboard\/getMenus/, 'get', dashboard.getMenus);
+Mock.mock(/\/Dashboard\/getMenus/, 'get', dashboard.getMenus);
 Mock.mock(/\/[\w|\/]+\/getConfigs/, 'get', adminRender.getConfigs);
 Mock.mock(/\/[\w|\/]+\/getList/, 'get', adminList.getList);
 Mock.mock(/\/[\w|\/]+\/getTotalNum/, 'get', adminList.getTotalNum);

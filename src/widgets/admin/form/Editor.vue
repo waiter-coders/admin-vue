@@ -1,12 +1,13 @@
 <template>
     <div class="editor">
         <el-form-item :label="field.name">
-            <vue-editor v-model="content"></vue-editor>
+            <vue-editor v-model="formData[field.field]"></vue-editor>
         </el-form-item>
         
     </div>
 </template>
 <script>
+import { initFormData } from '@/utils/loader';
 import { VueEditor } from "vue2-editor";
 export default {
     name: 'editor',
@@ -20,7 +21,8 @@ export default {
                 initialFrameWidth: null,
                 initialFrameHeight: 350
             },
-            content:"<h1>Some initial content</h1>"
+            // content:"<h1>Some initial content</h1>",
+            formData: initFormData(this.field.field, this.field.value)
         }
     },
     props: {

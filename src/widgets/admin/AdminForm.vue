@@ -12,7 +12,7 @@
 <script>
 import {CheckBox, Datetime, Editor, AdminInput, AdminSelect} from './form'
 import { formConfig }  from '@/utils/loader'
-import { add } from '@/api/admin/adminForm'
+import { add, edit } from '@/api/admin/adminForm'
 export default {
   name: 'AdminForm',
   data () {
@@ -42,7 +42,7 @@ export default {
     },
     submitForm: function(){
       let url = this.config.url;
-      let data = this.getFormData()
+      let data = this.getFormData();
       console.log( data );
       add(url,data).then( res => {
         

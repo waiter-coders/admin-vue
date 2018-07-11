@@ -4,7 +4,7 @@
 			background-color="#545c64"
       		text-color="#fff"
       		active-text-color="#ffd04b"
-      		:collapse="isCollapse">
+      		:collapse="isCollapse" unique-opened="true">
 			<menu-item :menus="menu"></menu-item>
 		</el-menu>
 	</div>
@@ -47,7 +47,8 @@ export default {
 </script>
 <style lang="scss">
 .el-menu{
-	height:100%;
+	height: 100%;
+
 }
 .el-menu-item:hover,.el-menu-item:focus{
 	background:rgb(38,52,69);
@@ -61,6 +62,9 @@ export default {
 	    visibility: hidden;
 	    display: inline-block;
 	}
+}
+.el-submenu{
+	overflow: hidden;
 }
 /*.el-menu--collapse>.el-menu-item span, .el-menu--collapse>.el-submenu>.el-submenu__title span {
     height: 0;
