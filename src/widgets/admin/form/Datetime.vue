@@ -21,7 +21,9 @@ export default {
         }
     },
     methods: {
-
+        getElementData(){
+            return this.formData
+        },
     }
 }
 </script>

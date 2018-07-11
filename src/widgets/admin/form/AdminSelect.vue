@@ -22,7 +22,7 @@ export default {
     console.log( this.formData );
   },
   methods: {
-    getFormData(key){
+    getElementData(key){
       var model = {};
       model[this.field.field] =  '';
       console.log( model );

@@ -20,7 +20,9 @@ export default {
     //console.log(this.formData);
   },
   methods: {
-
+    getElementData(){
+      return this.formData
+    },
   }
 }
 </script>

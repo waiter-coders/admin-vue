@@ -32,15 +32,17 @@ export default {
   },
   methods :{
     getFormData: function(){
-     
+      let $el = this.$children[0].$children;
+      $el.pop(); // 去除末尾的按钮组
+      let data = {};
+      $el.forEach(element => {
+        Object.assign( data, element.getElementData());
+      });
+      return data
     },
     submitForm: function(){
       let url = this.config.url;
-      let $el = this.$children[0].$children;
-      let data = {};
-      $el.forEach(element => {
-        Object.assign( data, element.formData);
-      });
+      let data = this.getFormData()
       console.log( data );
       add(url,data).then( res => {
         

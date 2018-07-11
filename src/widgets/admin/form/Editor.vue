@@ -27,6 +27,11 @@ export default {
         field: {
             type: Object
         }
+    },
+    methods:{
+        getElementData(){
+            return this.formData
+        },
     }
 }
 </script>

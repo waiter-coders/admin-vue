@@ -15,12 +15,12 @@ export default {
     data() {
         return {
             //formData: initFormData(this.field.field, this.field.value)
-            formData: this.getFormData(this.field.field,this.field.value),
+            formData: this.getElementData(this.field.field,this.field.value),
         }
     },
     props:['field'],
     methods: {
-        getFormData: function(field, val){
+        getElementData: function(field, val){
             let model = {};
             model[field] = val || new Array();
             return model;
