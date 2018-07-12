@@ -4,7 +4,8 @@
 			background-color="#545c64"
       		text-color="#fff"
       		active-text-color="#ffd04b"
-      		:collapse="isCollapse" unique-opened="true">
+			:unique-opened="unique"
+      		:collapse="isCollapse" >
 			<menu-item :menus="menu"></menu-item>
 		</el-menu>
 	</div>
@@ -17,7 +18,8 @@ import { getMenus } from '@/api/dashboard'
 export default {
     data (){
     	return {
-    		menu:[]
+			menu:[],
+			unique: true
     	}
     },
     mounted(){
@@ -38,7 +40,7 @@ export default {
         getMenu:function(){
         	var _this = this;
         	getMenus().then(res => {
-        		//console.log( res );
+        		console.log( res );
         		_this.menu = res;
         	});
         },
