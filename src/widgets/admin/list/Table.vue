@@ -5,7 +5,7 @@
             :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <button-group class="list-table-actions" :config="{actions:formatAction(config.rowActions, scope.row)}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
+                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
             </template>
         </el-table-column>
   </el-table>
@@ -31,6 +31,29 @@ export default {
   name: 'tableList',
   components:{ButtonGroup},
   props: ['config'],
+  computed:{
+      rowActions:function(){
+        var actionsTable = [];
+        var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
+        for (var i = 0; i < this.config.data.length; i++) {
+            var rowData = this.config.data[i]
+            var actions = this.config.rowActions.map(function(row){
+                var action = Object.assign({}, row)
+                for (var field in rowData) {
+                    action.url = action.url.replace('@data.' + field + '@', rowData[field])
+                }            
+                action.url = action.url.replace('@primaryKey@', primaryKey)
+                action.url = action.url.replace('@data.id@',  rowData[primaryKey])
+                if ('confirm' in action) {
+                    action.confirm = action.confirm.replace('@data.id@',  rowData[primaryKey])
+                }
+                return action
+            })
+            actionsTable.push(actions)
+        }
+        return actionsTable;         
+      },
+  },
   methods:{
       itemFormatter(value,row,column){ 
           var fields = this.config.fields;
@@ -48,21 +71,6 @@ export default {
             default:
                 return value[row.property]
           }                
-      },
-      formatAction(rowActions, rowData){
-        var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
-        return rowActions.map(function(row){
-            var action = Object.assign({}, row)
-            for (var field in rowData) {
-                action.url = action.url.replace('@data.' + field + '@', rowData[field])
-            }            
-            action.url = action.url.replace('@primaryKey@', primaryKey)
-            action.url = action.url.replace('@data.id@',  rowData[primaryKey])
-            if ('confirm' in action) {
-                action.confirm = action.confirm.replace('@data.id@',  rowData[primaryKey])
-            }
-            return action
-        })
       },
       rowActionClick(action, params){         
         this.$emit('click', action, params)
