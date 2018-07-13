@@ -2,7 +2,7 @@ import fetch from '@/utils/service';
 
 export const getMenus = () => {
 	return fetch({
-		url: '/dashboard/getMenus',
+		url: '/index.php/dashboard/getMenus',
 		method: 'get',
 	});
 }
