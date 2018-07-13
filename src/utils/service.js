@@ -2,14 +2,15 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 
 const service = axios.create({
-    // baseURL: process.env.SERVICE_URL,
+    baseURL: '/index.php',
     timeout: 5000,
-    headers: {'X-Custom-Header': 'foobar'}
+    // headers: {'X-Custom-Header': 'foobar'}
 })
 
-let LoadingEl
+// let LoadingEl
 // 请求拦截器
 service.interceptors.request.use(config => {
+    console.log( config );
     return config;
 }, error => {
 	Message.error('请求出错！');
@@ -19,6 +20,7 @@ service.interceptors.request.use(config => {
 
 // 回复拦截器
 service.interceptors.response.use(response => {
+    console.log( response );
 	if(response.data.code !== 0){
 		Message.error('操作失败，原因：'+ response.data.msg);
 	}

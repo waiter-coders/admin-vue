@@ -11,10 +11,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/index.php/':{
-        target:'http://waiter-admin.some-coders.com',
-        changeOrigin:true
-      }
+      '/index.php':{
+        target: 'http://waiter-admin.some-coders.com',
+        changeOrigin: true
+    	}
     },
 
     // Various Dev Server settings
@@ -47,7 +47,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: 'static',//打包的css/js文件目录
     assetsPublicPath: '/',
 
     /**

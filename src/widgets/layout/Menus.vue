@@ -4,7 +4,8 @@
 			background-color="#545c64"
       		text-color="#fff"
       		active-text-color="#ffd04b"
-      		:collapse="isCollapse">
+			:unique-opened="unique"
+      		:collapse="isCollapse" >
 			<menu-item :menus="menu"></menu-item>
 		</el-menu>
 	</div>
@@ -17,7 +18,8 @@ import { getMenus } from '@/api/dashboard'
 export default {
     data (){
     	return {
-    		menu:[]
+			menu:[],
+			unique: true
     	}
     },
     mounted(){
@@ -38,7 +40,7 @@ export default {
         getMenu:function(){
         	var _this = this;
         	getMenus().then(res => {
-        		//console.log( res );
+        		console.log( res );
         		_this.menu = res;
         	});
         },
@@ -47,7 +49,8 @@ export default {
 </script>
 <style lang="scss">
 .el-menu{
-	height:100%;
+	height: 100%;
+
 }
 .el-menu-item:hover,.el-menu-item:focus{
 	background:rgb(38,52,69);
@@ -61,6 +64,9 @@ export default {
 	    visibility: hidden;
 	    display: inline-block;
 	}
+}
+.el-submenu{
+	overflow: hidden;
 }
 /*.el-menu--collapse>.el-menu-item span, .el-menu--collapse>.el-submenu>.el-submenu__title span {
     height: 0;

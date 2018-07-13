@@ -15,6 +15,7 @@
 						<span slot="title">{{subitem.title}}</span>
 					</el-menu-item>
 				</router-link>
+				
 			</el-submenu>
 		</template>
 	</div>
@@ -53,7 +54,7 @@ export default {
     			}
     		});
     		view.push(father);
-    		if(father.hasOwnProperty("children")){
+    		if( father && father.hasOwnProperty("children")){
     			let child = father.children.find( (value,index,arr) => {
 					if(controller == value.domain){
 						return value;
@@ -76,6 +77,9 @@ export default {
 	width:1.3em;
 	height:1.3em;
 	margin-right:16px;
+}
+.el-submenu{
+	overflow: hidden;
 }
 .el-submenu .el-menu-item{
 	min-width:0px;

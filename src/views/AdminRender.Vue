@@ -25,10 +25,12 @@ export default {
         getConfigs(){
             var _this = this;
             var controller = _this.$route.path;
+            console.log( controller );
             // _this.$store.dispatch('addConfig', controller);
             getConfigs(controller).then(function(response){
                 _this.configs = response;
                 console.log(_this.configs);
+                console.log('-------get configs is over');
             });
         },
     }

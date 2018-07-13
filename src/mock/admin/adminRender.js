@@ -99,7 +99,7 @@ export default {
         ],
         //data: List,
         code: 0,
-        msg: "success"
+        msg: "successdddddd"
       };
     }
     if (request.url == "//admin/account/submit/getConfigs") {
@@ -179,13 +179,14 @@ export default {
         ],
         //data: List,
         code: 0,
-        msg: "success"
+        msg: "successefeff"
       };
     }
 
     if (request.url == "//admin/account/getConfigs") {
       return {
         code: 0,
+        msg:'successss2ewe',
         data: [
           {
             type: "admin-list",
