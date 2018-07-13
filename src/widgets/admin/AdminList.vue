@@ -103,7 +103,7 @@ export default {
         }
         switch (params.type) {         
           case 'ajax':
-            pageUtil.fetch(params.url, params, params.confirm, params.success, params.error).then(function(){
+            pageUtil.fetch(params.url, {}, params.confirm, params.success, params.error).then(function(){
               _this.reloadData()
             })
             break

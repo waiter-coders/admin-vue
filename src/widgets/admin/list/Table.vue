@@ -50,9 +50,9 @@ export default {
           }                
       },
       formatAction(rowActions, rowData){
-        var newRowActions = rowActions//.splice(0)
         var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
-        return newRowActions.map(function(action){
+        return rowActions.map(function(row){
+            var action = Object.assign({}, row)
             for (var field in rowData) {
                 action.url = action.url.replace('@data.' + field + '@', rowData[field])
             }            
