@@ -1,7 +1,7 @@
 import service from '@/utils/service'
 
 export const getList = (controller, search, limit, offset) => {
-  return service.get('/index.php' + controller + '/getList',{
+  return service.get(controller + '/getList',{
     params: {      
       search:search,
       limit:limit,
@@ -11,7 +11,7 @@ export const getList = (controller, search, limit, offset) => {
 }
 
 export const getTotalNum = (controller, search) => {
-  return service.get('/index.php' + controller + '/getTotalNum', {
+  return service.get(controller + '/getTotalNum', {
     params: {
       search
     }
@@ -19,7 +19,7 @@ export const getTotalNum = (controller, search) => {
 }
 
 export const deleteByIds = (controller, ids) => {
-  return service.get('/index.php' + controller + '/deleteByIds', {
+  return service.get( controller + '/deleteByIds', {
     params: {
       ids:ids,
     }
