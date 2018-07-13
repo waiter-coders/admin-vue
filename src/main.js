@@ -8,7 +8,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
-import './mock'
+// import './mock'
 
 Vue.component('icon', Icon)
 

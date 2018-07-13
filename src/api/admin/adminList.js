@@ -1,10 +1,8 @@
-import fetch from '@/utils/service'
+import service from '@/utils/service'
 
 export const getList = (controller, search, limit, offset) => {
-  return fetch({
-    url: '/index.php' + controller + '/getList',
-    method: 'get',
-    data: {      
+  return service.get('/index.php' + controller + '/getList',{
+    params: {      
       search:search,
       limit:limit,
       offset:offset
@@ -12,21 +10,17 @@ export const getList = (controller, search, limit, offset) => {
   })
 }
 
-export const getTotalNum = (controller, searchs) => {
-  return fetch({
-    url:  '/index.php' + controller + '/getTotalNum',
-    method: 'get',
-    data: {
-      searchs
+export const getTotalNum = (controller, search) => {
+  return service.get('/index.php' + controller + '/getTotalNum', {
+    params: {
+      search
     }
   })
 }
 
 export const deleteByIds = (controller, ids) => {
-  return fetch({
-    url: '/index.php' + controller + '/deleteByIds',
-    method: 'get',
-    data: {
+  return service.get('/index.php' + controller + '/deleteByIds', {
+    params: {
       ids:ids,
     }
   })

@@ -1,8 +1,8 @@
 <template>
     <div class="block waiter-paging">
         <el-pagination
-        @size-change="changePaging"
-        @current-change="changePaging"
+        @size-change="changePageSize"
+        @current-change="changePageNum"
         :current-page="config.currentPage"
         :page-sizes="[10, 15, 20]"
         :page-size="config.pageSize"
@@ -29,7 +29,12 @@ changePaging(paging)
   export default {
     props: ['config'],
     methods: {
-      changePaging(){
+      changePageSize(pageSize){
+        this.config.pageSize = pageSize;
+        this.$emit('changePaging', this.config)
+      },
+      changePageNum(pageNum){
+        this.config.currentPage = pageNum;
         this.$emit('changePaging', this.config)
       }
     }

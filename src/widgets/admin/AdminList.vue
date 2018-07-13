@@ -52,7 +52,7 @@ export default {
       tableActions:[],
       list:{fields:[], rowActions:[], data:[], needSelect:false},
       paging:{
-        pageSize: 12,
+        pageSize: 10,
         totalNum: 0,
         currentPage: 1,
       }      
@@ -76,24 +76,23 @@ export default {
   },
   methods: {
       reloadData() {
-        var search = [];
         var _this = this;
-        // var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
-        getTotalNum(_this.baseUrl, search).then(totalNum=>{
+        var loading = Loading.service({ target:'.list-table', text:'加载中……', fullscreen: false});
+        getTotalNum(_this.baseUrl, this.search.searchParams).then(totalNum=>{
           _this.paging.totalNum = parseInt(totalNum);
           if (totalNum == 0) {
             return Promise.resolve([]);
           }          
           var offset = (_this.paging.currentPage - 1) * _this.paging.pageSize;
-          return getList(_this.baseUrl, search, _this.paging.pageSize, offset);          
+          return getList(_this.baseUrl, this.search.searchParams, _this.paging.pageSize, offset);          
         }).then(data=>{
           _this.list.data = data;
-          // loading.close();
+          loading.close();
         });;
         
       },      
-      searchClick(search) {
-        // this.search = searchValue;
+      searchClick(searchParams) {
+        this.search.searchParams = searchParams;
         this.paging.currentPage = 1; // 搜索自动跳回第一页
         this.reloadData();
       },

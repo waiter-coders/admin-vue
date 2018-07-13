@@ -1,9 +1,6 @@
-import fetch from '@/utils/service';
+import service from '@/utils/service';
 
 export const getMenus = () => {
-	return fetch({
-		url: '/index.php/dashboard/getMenus',
-		method: 'get',
-	});
+	return service.get('/index.php/dashboard/getMenus');
 }
 
