@@ -49,6 +49,7 @@ export default {
       baseUrl:this.$route.path,
       fields:[],
       search:{'url':this.$route.path, 'fields':[]},
+      hiddenSearch:{},
       tableActions:[],
       list:{fields:[], rowActions:[], data:[], needSelect:false},
       paging:{

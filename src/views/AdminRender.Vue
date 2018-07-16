@@ -7,11 +7,11 @@
 <script>
 import { getConfigs } from '@/api/admin/adminRender'
 
-import {AdminForm, AdminList, AdminStatistics} from '@/widgets/admin'
+import {AdminForm, AdminList, AdminTree, AdminStatistics} from '@/widgets/admin'
 export default {
     name: 'factory',
     components:{
-        AdminForm, AdminList, AdminStatistics
+        AdminForm, AdminList, AdminTree, AdminStatistics
     },        
     data() {
         return {
