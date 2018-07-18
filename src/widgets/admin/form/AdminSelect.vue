@@ -1,7 +1,7 @@
 <template>
   <div>
   	<el-form-item :label="field.name">
-      <el-select v-model="formData[field.field]" :name="field.field">
+      <el-select v-model="field.value" :name="field.field">
         <el-option v-for="(item,key) in field.map" :key="'option_'+key" :label="item" :value="key"></el-option>
       </el-select>
     </el-form-item>
@@ -26,7 +26,9 @@ export default {
       return this.formData[this.field.field] != '';
     },
     getElementData(){
-      return this.formData;
+      var result = {}
+      result[this.field.field] = this.field.value;
+      return result;
     }
   }
 }

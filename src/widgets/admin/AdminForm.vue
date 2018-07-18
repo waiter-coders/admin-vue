@@ -28,6 +28,7 @@ export default {
   },
   filters: {
     typeFilter: function(key){
+
       return formConfig[key];
     }
   },
@@ -41,9 +42,11 @@ export default {
         for (var i in _this.fields) {
           var field = _this.fields[i]['field'];
           if (field in data) {
-            _this.fields[i].value = data[field];
+            fields[i] = _this.fields[i];
+            fields[i].value = data[field];
           }
         }
+        _this.fields = fields;
       });
     }
   },
@@ -56,16 +59,14 @@ export default {
           Object.assign( data, element.getElementData());
         }        
       });
-       if (this.config.primaryKey in this.$route.query) {
-         data[this.config.primaryKey] = this.$route.query[this.config.primaryKey];
-       }
       return data
     },
     submitForm: function(){
       try {
         let data = this.getFormData();
         let url = this.config.url || this.baseUrl
-        formSubmit(url, {formData:data}).then( response => {
+        let id = (this.config.primaryKey in this.$route.query) ? this.$route.query[this.config.primaryKey] : 0;
+        formSubmit(url, {formData:data}, id).then( response => {
           // alert('操作成功');
         });
       } catch(e) {
