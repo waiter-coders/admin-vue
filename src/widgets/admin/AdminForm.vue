@@ -1,7 +1,7 @@
 <template>
   <div class="admin-form">
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
-       <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in config.fields" v-bind:key="index">组件初始化失败</component>
+       <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in fields" v-bind:key="index">组件初始化失败</component>
        <el-form-item>
          <el-button type="primary" @click="submitForm">提交</el-button>
        </el-form-item>
@@ -12,13 +12,14 @@
 <script>
 import {CheckBox, Datetime, Editor, AdminInput, AdminSelect} from './form'
 import { formConfig }  from '@/utils/loader'
-import { add, edit } from '@/api/admin/adminForm'
+import { formSubmit,getFormData } from '@/api/admin/adminForm'
 export default {
   name: 'AdminForm',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      formData: {}
+      baseUrl:this.$route.path,
+      formData: {},
+      fields:{}
     }
   },
   props: ['config'],
@@ -30,23 +31,46 @@ export default {
       return formConfig[key];
     }
   },
+  created(){
+    this.fields = this.config.fields;
+    if (this.config.primaryKey in this.$route.query) {
+      var _this = this;
+      
+      getFormData(this.baseUrl, this.$route.query[this.config.primaryKey]).then(function(data){
+        var fields = [];
+        for (var i in _this.fields) {
+          var field = _this.fields[i]['field'];
+          if (field in data) {
+            _this.fields[i].value = data[field];
+          }
+        }
+      });
+    }
+  },
   methods :{
     getFormData: function(){
       let $el = this.$children[0].$children;
-      $el.pop(); // 去除末尾的按钮组
       let data = {};
       $el.forEach(element => {
-        Object.assign( data, element.getElementData());
+        if (element.getElementData) {
+          Object.assign( data, element.getElementData());
+        }        
       });
+       if (this.config.primaryKey in this.$route.query) {
+         data[this.config.primaryKey] = this.$route.query[this.config.primaryKey];
+       }
       return data
     },
     submitForm: function(){
-      let url = this.config.url;
-      let data = this.getFormData();
-      console.log( data );
-      add(url,data).then( res => {
-        
-      });
+      try {
+        let data = this.getFormData();
+        let url = this.config.url || this.baseUrl
+        formSubmit(url, {formData:data}).then( response => {
+          // alert('操作成功');
+        });
+      } catch(e) {
+          alert(e);
+      }      
     }
   }
 }

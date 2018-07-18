@@ -9,21 +9,26 @@
     </div>
 </template>
 <script>
-// import { initFormData } from '@/utils/loader';
+
 export default {
     name:'CheckBox',
     data() {
         return {
-            //formData: initFormData(this.field.field, this.field.value)
-            formData: this.getElementData(this.field.field,this.field.value),
+            formData: this.initElementData(this.field.field, this.field.value),
         }
     },
     props:['field'],
     methods: {
-        getElementData: function(field, val){
-            let model = {};
-            model[field] = val || new Array();
+        initElementData:function(key, value){
+            var model = {};
+            model[key] = value || new Array();
             return model;
+        },
+        checkElementLegal(){
+            return this.formData[this.field.field].length > 0
+        },
+        getElementData: function(){
+            return this.formData;
         }
     }
 }

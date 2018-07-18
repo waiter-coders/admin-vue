@@ -1,7 +1,7 @@
 <template>
   <div>
   	<el-form-item :label="field.name" v-if="!field.primaryKey">
-      <el-input v-model="formData[field.field]" :name="field.field"></el-input>
+      <el-input v-model="field.value" :name="field.field"></el-input>
     </el-form-item>
   </div>
 </template>
@@ -10,18 +10,18 @@
 import { initFormData } from '@/utils/loader';
 export default {
   name: 'AdminInput',
-  data () {
-    return {
-      formData: initFormData(this.field.field, this.field.value)
-    }
-  },
   props: ['field'],
   mounted:function(){
     //console.log(this.formData);
   },
   methods: {
+    checkElementLegal(){
+      return this.field.value.length > 0
+    },
     getElementData(){
-      return this.formData
+      var result = {}
+      result[this.field.field] = this.field.value;
+      return result;
     },
   }
 }

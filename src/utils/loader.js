@@ -6,7 +6,8 @@ export const formConfig = {
     'multiSelect':    'check-box',
     'undefined':'admin-input',
     'datetime': 'datetime',
-    'html':   'editor'
+    'html':   'editor',
+    'date': 'datetime',
 };
 //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
 export const timeFormat = {

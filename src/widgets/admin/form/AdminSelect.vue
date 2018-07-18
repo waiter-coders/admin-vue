@@ -22,11 +22,11 @@ export default {
     console.log( this.formData );
   },
   methods: {
-    getElementData(key){
-      var model = {};
-      model[this.field.field] =  '';
-      console.log( model );
-      return model;
+    checkElementLegal(){
+      return this.formData[this.field.field] != '';
+    },
+    getElementData(){
+      return this.formData;
     }
   }
 }
