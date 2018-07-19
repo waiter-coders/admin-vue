@@ -2,14 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 公共视图组件
-import Dashboard from '@/views/Dashboard' // 主窗口框架（含菜单）
-import AdminRender from '@/views/AdminRender' // 页面工厂
-
+// import Dashboard from '@/views/Dashboard' // 主窗口框架（含菜单）
+// import AdminRender from '@/views/AdminRender' // 页面工厂
+const Dashboard  = resolve => require(['@/views/Dashboard'], resolve) // 主窗口框架（含菜单）懒加载方案
+const AdminRender  = resolve => require(['@/views/AdminRender'], resolve)// 页面工厂 懒加载方案
 
 // 页面视图组件
-import Home from '@/views/Home' //首页
-import Login from '@/views/admin/Login' // 登录页
-import AdminAccount from '@/views/admin/Account' // 修改密码页
+// import Home from '@/views/Home' //首页
+// import Login from '@/views/admin/Login' // 登录页
+// import AdminAccount from '@/views/admin/Account' // 修改密码页
+const Home = resolve => require(['@/views/Home'], resolve) //首页 懒加载方案
+const Login = resolve => require(['@/views/admin/Login'], resolve) //登录页 懒加载方案
+const AdminAccount = resolve => require(['@/views/admin/Account'], resolve)//修改密码页 懒加载方案
 
 // 接口
 import { isLogin } from '@/api/admin'
