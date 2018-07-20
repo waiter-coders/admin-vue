@@ -42,6 +42,7 @@ import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 
   export default {
     props:['config'],
+    components:[ButtonGroup],
     data(){
       return {
         baseUrl:this.$route.path,
@@ -69,7 +70,9 @@ import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
       },
       allowDrop(){},
       append(node, data) {
-        this.$refs.tree.insertAfter({'nodeId':999, 'label':'', 'isLeaf':true}, node);
+        // this.$refs.tree.insertAfter({'nodeId':999, 'label':'', 'isLeaf':true}, node);
+
+        
       },
 
       remove(node, data) {

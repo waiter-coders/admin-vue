@@ -16,15 +16,18 @@
         </transition>
       </section>
 		</div>
+		<dialog-container :config="dialog"></dialog-container>
 	</div>
 </template>
 
 <script>
 import { Menus, Hamburger, Bread, UserActions /*, TagsView*/ } from "@/widgets/layout";
+import DialogContainer from '@/widgets/layout/DialogContainer'
 export default {
   name: "appmain",
   components: {
-    Menus,Hamburger, Bread, UserActions
+		Menus,Hamburger, Bread, UserActions,
+		DialogContainer
     //TagsView,
   },
   /*computed:{
@@ -33,7 +36,7 @@ export default {
 		}
 	},*/
   data() {
-    return {};
+    return {dialog:{}};
   },
   computed: {
     key() {

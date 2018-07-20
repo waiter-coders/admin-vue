@@ -1,17 +1,11 @@
 <template>
 <div>
-    <el-button type="primary" v-for="(action, index) in actions" v-bind:key="index" @click="action.method(action)">{{ action.name }}</el-button>
-
     <el-dialog
-    :title="dialogTitle"
-    :visible.sync="dialogVisible"
+    :title="title"
+    :visible.sync="isShow"
     width="30%"
     :before-close="handleClose">
-    <span>{{dialogMessage}}</span>
-    <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">{{dialogCancelValue}}</el-button>
-        <el-button type="primary" @click="dialogVisible = false">{{dialogOkValue}}</el-button>
-    </span>
+
     </el-dialog>
 </div>
 </template>
@@ -19,28 +13,27 @@
 
 import request from '@/utils/service';
 export default {
-    props: {
-      actions: Array,
-      dialogTitle: {
-        type:String,
-        default:'提示'
-      },
-      dialogMessage: {
-        type:String,
-        default:'你确定要执行吗？'
-      },
-      dialogCancelValue: {
-        type:String,
-        default:'取消'
-      },
-      dialogOkValue: {
-        type:String,
-        default:'确定'
-      }
-    },
+    props: ['config'],
     data(){
       return {
-        dialogVisible: false,
+        actions: [],
+        title: {
+            type:String,
+            default:'提示'
+        },
+        dialogMessage: {
+            type:String,
+            default:'你确定要执行吗？'
+        },
+        dialogCancelValue: {
+            type:String,
+            default:'取消'
+        },
+        dialogOkValue: {
+            type:String,
+            default:'确定'
+        },
+        isShow:true,
       }
     },
     created: function() {
