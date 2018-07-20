@@ -48,7 +48,7 @@ export default {
     return {
       baseUrl:this.$route.path,
       fields:[],
-      search:{'url':this.$route.path, 'fields':[]},
+      search:{'url':this.$route.path, 'fields':[], 'searchParams':{}},
       hiddenSearch:{},
       tableActions:[],
       list:{fields:[], rowActions:[], data:[], needSelect:false},
@@ -66,13 +66,13 @@ export default {
     Paging
   },
   created() {
-    this.fields = this.config.fields;
-    this.search.fields = this.filterSearchFields(this.config.search, this.config.fields);
-    this.tableActions = this.config.tableActions;
+    this.fields = 'fields' in this.config ? this.config.fields : [];
+    this.search.fields = 'search' in this.config ? this.filterSearchFields(this.config.search, this.config.fields) : [];
+    this.tableActions = 'tableActions' in this.config ? this.config.tableActions : [];
     this.list.fields = this.fields;
-    this.list.rowActions = this.config.rowActions;
-    this.list.needSelect = this.config.tableActions.filter(function(row){return row.location == 'select'}).length > 0;
-    this.paging.pageSize = 'pageSize' in this.config.paging ? this.config.paging['pageSize'] : 12;    
+    this.list.rowActions = 'rowActions' in this.config ? this.config.rowActions : [];
+    this.list.needSelect = this.tableActions.filter(function(row){return row.location == 'select'}).length > 0;
+    this.paging.pageSize = ('paging' in this.config && 'pageSize' in this.config.paging) ? this.config.paging['pageSize'] : 10;    
     this.reloadData();
   },
   methods: {
