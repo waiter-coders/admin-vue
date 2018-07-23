@@ -25,3 +25,5 @@ export const initFormData = (key,value) =>{
     model[key] = value || '';
     return model;
 }
+
+

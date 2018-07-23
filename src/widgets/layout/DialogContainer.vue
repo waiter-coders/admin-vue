@@ -5,7 +5,7 @@
     :visible.sync="isShow"
     width="30%"
     :before-close="handleClose">
-
+        <admin-builder :configs="configs"></admin-builder>
     </el-dialog>
 </div>
 </template>
@@ -16,11 +16,9 @@ export default {
     props: ['config'],
     data(){
       return {
+          configs:[],
         actions: [],
-        title: {
-            type:String,
-            default:'提示'
-        },
+        title:'提示真哥哥热榜',
         dialogMessage: {
             type:String,
             default:'你确定要执行吗？'
@@ -41,6 +39,7 @@ export default {
         for (action in this.actions) {
             this.actions[action]['method'] = this['handle'+this.actions[action]['type']];
         }
+        this.configs = [this.config];
     },
     methods: {
         handlepage: function(action){
@@ -48,23 +47,12 @@ export default {
         },
         handleajax: function(action){
             this.dialogVisible = true;
-            // request({
-            //   url:action.url,
-            //   method: 'post',
-            //   data: {
-            //   }}, ).then(res=>{
-              
-            // });
         },
         handlecallback: function(action){
           this.$emit(action['callback'], action);
         },
         handleClose(done) {
-            this.$confirm('确认关闭？')
-            .then(_ => {
-                done();
-            })
-            .catch(_ => {});
+            done();
         }
     }
 }

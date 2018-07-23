@@ -1,18 +1,13 @@
 <template>
     <div>
-        <component :is="config.type" :config="config" v-for="(config,index) in configs" v-bind:key="index">组件初始化失败</component>
+        <admin-builder :configs="configs"></admin-builder>
     </div>
 </template>
 
 <script>
-import { getConfigs } from '@/api/admin/adminRender'
-
-import {AdminForm, AdminList, AdminTree, AdminStatistics} from '@/widgets/admin'
+import { getConfigs } from "@/api/admin/adminRender";
 export default {
-    name: 'factory',
-    components:{
-        AdminForm, AdminList, AdminTree, AdminStatistics
-    },        
+    name: 'factory',      
     data() {
         return {
             configs: []

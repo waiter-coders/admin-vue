@@ -8,9 +8,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
+import {Builder} from '@/widgets/layout'
 // import './mock'
 
 Vue.component('icon', Icon)
+Vue.component('admin-builder', Builder)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
@@ -19,6 +21,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: { App},
   template: '<App/>'
 })
