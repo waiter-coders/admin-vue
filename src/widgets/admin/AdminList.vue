@@ -9,8 +9,7 @@
     @changePaging="changePaging"
     :config="paging"
      v-if="paging.totalNum > paging.pageSize"></paging>
-  </div>
-  
+  </div>  
 </template>
 
 <script>
@@ -74,6 +73,77 @@ export default {
     this.list.needSelect = this.tableActions.filter(function(row){return row.location == 'select'}).length > 0;
     this.paging.pageSize = ('paging' in this.config && 'pageSize' in this.config.paging) ? this.config.paging['pageSize'] : 10;    
     this.reloadData();
+    this.$emit('showDialog', {
+            type: "admin-form",
+            fields: [
+              {
+                name: "id",
+                field: "id",
+                type: "number",
+                primaryKey: true,
+                fastEdit: false,
+                value: "12"
+              },
+              {
+                name: "姓名",
+                field: "username",
+                primaryKey: false,
+                type: "string",
+                fastEdit: true,
+                value: "hanhan"
+              },
+              {
+                name: "性别",
+                field: "sex",
+                type: "select",
+                map: { "1": "男", "2": "女" },
+                value: "2"
+              },
+              {
+                name: "爱好",
+                field: "hobby",
+                type: "multiSelect",
+                map: { "1": "电影", "2": "看书", "3": "旅行", "4": "烹饪" },
+                value: "[2,4]"
+              },
+              {
+                name: "年份",
+                field: "year",
+                type: "datetime",
+                datetime: "year",
+                value: "2018"
+              }, //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+              {
+                name: "月份",
+                field: "month",
+                type: "datetime",
+                datetime: "month",
+                value: "201807"
+              },
+              {
+                name: "日期",
+                field: "date",
+                type: "datetime",
+                datetime: "date",
+                value: "20180706"
+              },
+              {
+                name: "日期时间范围",
+                field: "datetimerange",
+                type: "datetime",
+                datetime: "datetimerange",
+                value: ["2018-07-01 00:00:00", "2018-08-01 00:00:00"]
+              },
+              {
+                name: "日期时间",
+                field: "datetime",
+                type: "datetime",
+                datetime: "datetime",
+                value: "2018-06-30 10:10:23"
+              }
+            ],
+            url: "controller/add"
+          });
   },
   methods: {
       reloadData() {

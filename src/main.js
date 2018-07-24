@@ -8,11 +8,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
-import {Builder} from '@/widgets/layout'
+import {AdminBuilder,AdminDialog} from '@/widgets/admin'
 // import './mock'
 
 Vue.component('icon', Icon)
-Vue.component('admin-builder', Builder)
+Vue.component('admin-builder', AdminBuilder)
+Vue.component('admin-dialog', AdminDialog)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
