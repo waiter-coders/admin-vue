@@ -39,9 +39,9 @@ export default {
     methods:{
         getMenu:function(){
         	var _this = this;
-        	getMenus().then(res => {
-        		console.log( res );
-        		_this.menu = res;
+        	getMenus().then(response => {
+        		console.log( response );
+        		_this.menu = response;
         	});
         },
     }

@@ -1,5 +1,5 @@
 <template> 
-  <el-table :data="config.data" border width="800">
+  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
         <el-table-column v-for="item in config.fields" :prop="item.field" 
             :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
@@ -31,6 +31,11 @@ export default {
   name: 'tableList',
   components:{ButtonGroup},
   props: ['config'],
+  data(){
+      return {
+        multipleSelection:[]
+      }
+  },      
   computed:{
       rowActions:function(){
         var actionsTable = [];
@@ -76,8 +81,16 @@ export default {
         this.$emit('click', action, params)
       },
       getSelectIds(){
-          return [1,2,3,4]
-      }
+        let ids = []
+        var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
+        this.multipleSelection.map((item)=> {
+            ids.push(item[primaryKey])
+        })
+        return ids;
+      },
+      handleSelectionChange(val){
+          this.multipleSelection = val;
+      },
   }
 }
 </script>

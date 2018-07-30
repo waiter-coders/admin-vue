@@ -36,8 +36,9 @@ export default {
     this.fields = this.config.fields;
     if (this.config.primaryKey in this.$route.query) {
       var _this = this;
-      
-      getFormData(this.baseUrl, this.$route.query[this.config.primaryKey]).then(function(data){
+      let getParams = {};
+      getParams[this.config.primaryKey] = this.$route.query[this.config.primaryKey];
+      getFormData(this.baseUrl, getParams).then(function(data){
         var fields = [];
         for (var i in _this.fields) {
           var field = _this.fields[i]['field'];
@@ -65,8 +66,9 @@ export default {
       try {
         let data = this.getFormData();
         let url = this.config.url || this.baseUrl
-        let id = (this.config.primaryKey in this.$route.query) ? this.$route.query[this.config.primaryKey] : 0;
-        formSubmit(url, {formData:data}, id).then( response => {
+        let getParams = {}
+        getParams[this.config.primaryKey] = (this.config.primaryKey in this.$route.query) ? this.$route.query[this.config.primaryKey] : 0;
+        formSubmit(url, {formData:data}, getParams).then( response => {
           // alert('操作成功');
         });
       } catch(e) {
