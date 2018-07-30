@@ -2,7 +2,7 @@
 <div>
     <el-dialog
     :title="title"
-    :visible.sync="isShow"
+    :visible.sync="display"
     width="30%"
     :before-close="handleClose">
         <admin-builder :configs="configs"></admin-builder>
@@ -16,30 +16,15 @@ export default {
     props: ['config'],
     data(){
       return {
-          configs:[],
-        actions: [],
-        title:'提示真哥哥热榜',
-        dialogMessage: {
-            type:String,
-            default:'你确定要执行吗？'
-        },
-        dialogCancelValue: {
-            type:String,
-            default:'取消'
-        },
-        dialogOkValue: {
-            type:String,
-            default:'确定'
-        },
-        isShow:true,
+        configs:[],        
+        title:'弹框',
+        display:false,
       }
     },
     created: function() {
-        var action = [];
-        for (action in this.actions) {
-            this.actions[action]['method'] = this['handle'+this.actions[action]['type']];
-        }
-        this.configs = [this.config];
+        this.configs = 'config' in this.config ? [this.config.config] : [];
+        this.display = 'display' in this.config ? this.config.display : false;
+        this.title = 'title' in this.config ? this.config.title : '弹框';
     },
     methods: {
         handlepage: function(action){

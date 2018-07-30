@@ -180,6 +180,7 @@ export default {
             break
           case 'dialog':
             alert('dialog');
+            this.$store.m
             break
           case 'page':
           default:

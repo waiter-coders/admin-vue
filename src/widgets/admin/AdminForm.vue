@@ -18,6 +18,7 @@ export default {
   data () {
     return {
       baseUrl:this.$route.path,
+      submitType:'page',
       formData: {},
       fields:{}
     }
@@ -50,6 +51,10 @@ export default {
         _this.fields = fields;
       });
     }
+
+    if ('submitType' in this.config) {
+      this.submitType = this.config.submitType;
+    }
   },
   methods :{
     getFormData: function(){
@@ -64,12 +69,21 @@ export default {
     },
     submitForm: function(){
       try {
+        let _this = this;
         let data = this.getFormData();
         let url = this.config.url || this.baseUrl
         let getParams = {}
         getParams[this.config.primaryKey] = (this.config.primaryKey in this.$route.query) ? this.$route.query[this.config.primaryKey] : 0;
         formSubmit(url, {formData:data}, getParams).then( response => {
-          // alert('操作成功');
+          alert('操作成功');
+          switch(_this.submitType) {
+            case 'dialog':
+              alert('close dialog');
+            case 'page':
+            default:
+              _this.$router.go(-1);
+          }
+          
         });
       } catch(e) {
           alert(e);
