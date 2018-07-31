@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/index.php':{
-        target: 'http://waiter-admin.some-coders.com',
+        target: 'http://admin.some-coders.com',
         changeOrigin: true
     	}
     },

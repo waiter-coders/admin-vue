@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view @showDialog="showDialog"/>
+    <router-view/>
     <admin-dialog :config="dialog"></admin-dialog>
   </div>
 </template>
@@ -8,12 +8,9 @@
 <script>
 export default {
   name: "waiter",
-  computed(){
-    return { dialog: this.$store.state.dialog}
-  },
-  methods: {
-    showDialog(config, callback) {
-      this.dialog = config;
+  computed:{
+    dialog(){
+      return this.$store.state.dialog;
     }
   }
 };

@@ -78,7 +78,8 @@ export default {
           alert('操作成功');
           switch(_this.submitType) {
             case 'dialog':
-              alert('close dialog');
+              _this.$store.dispatch("hiddenDialog");
+              break;
             case 'page':
             default:
               _this.$router.go(-1);
