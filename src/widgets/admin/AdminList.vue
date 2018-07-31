@@ -190,15 +190,16 @@ export default {
     },
     actionsClick(action, params) {
       var _this = this;
+      var post = {};
       if (params.location == "select") {
-        params.ids = this.$refs.table_list.getSelectIds();
+        post.ids = this.$refs.table_list.getSelectIds();
       }
       switch (params.type) {
         case "ajax":
           pageUtil
             .fetch(
               params.url,
-              params,
+              post,
               params.confirm,
               params.success,
               params.error
@@ -224,36 +225,13 @@ export default {
                 type: "string",
                 length: 30,
                 name: "\u7b80\u4ecb"
-              },
-              {
-                field: "tags",
-                type: "string",
-                length: 30,
-                name: "\u6807\u7b7e"
-              },
-              { field: "userId", type: "number", name: "\u7528\u6237id" },
-              { field: "isOnline", type: "number", name: "\u72b6\u6001" },
-              {
-                field: "voteNum",
-                type: "number",
-                name: "\u6295\u7968\u6b21\u6570"
-              },
-              {
-                field: "addTime",
-                type: "number",
-                name: "\u6dfb\u52a0\u65f6\u95f4"
-              },
-              {
-                field: "onlineTime",
-                type: "number",
-                name: "\u5728\u7ebf\u65f6\u95f4"
               }
             ],
             groups: [],
             primaryKey: "qaId",
             url: ""
           }]).then(()=>{
-            alert('update');
+            // alert('update');
           });
           break;
         case "page":
