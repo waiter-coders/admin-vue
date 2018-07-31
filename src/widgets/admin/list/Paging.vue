@@ -4,7 +4,7 @@
         @size-change="changePageSize"
         @current-change="changePageNum"
         :current-page="config.currentPage"
-        :page-sizes="[10, 15, 20]"
+        :page-sizes="[5, 10, 15]"
         :page-size="config.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="config.totalNum">

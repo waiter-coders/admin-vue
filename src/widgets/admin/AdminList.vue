@@ -173,7 +173,7 @@ export default {
           var offset = (_this.paging.currentPage - 1) * _this.paging.pageSize;
           return getList(
             _this.baseUrl,
-            this.search.searchParams,
+            _this.search.searchParams,
             _this.paging.pageSize,
             offset
           );
