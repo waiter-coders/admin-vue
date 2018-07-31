@@ -209,29 +209,32 @@ export default {
             });
           break;
         case "dialog":
-          this.$store.dispatch("showDialog", [{
-            type: "admin-form",
-            submitType:'dialog',
-            fields: [
-              { field: "qaId", name: "id", type: "number", primaryKey: true },
-              {
-                field: "title",
-                type: "string",
-                length: 30,
-                name: "\u540d\u79f0"
-              },
-              {
-                field: "brief",
-                type: "string",
-                length: 30,
-                name: "\u7b80\u4ecb"
-              }
-            ],
-            groups: [],
-            primaryKey: "qaId",
-            url: ""
-          }]).then(()=>{
-            // alert('update');
+          this.$store.dispatch("showDialog", {
+            config:[{
+              type: "admin-form",
+              submitType:'dialog',
+              fields: [
+                { field: "qaId", name: "id", type: "number", primaryKey: true },
+                {
+                  field: "title",
+                  type: "string",
+                  length: 30,
+                  name: "\u540d\u79f0"
+                },
+                {
+                  field: "brief",
+                  type: "string",
+                  length: 30,
+                  name: "\u7b80\u4ecb"
+                }
+              ],
+              groups: [],
+              primaryKey: "qaId",
+              url: ""
+            }],
+            callback:function(){
+              _this.reloadData();
+            }
           });
           break;
         case "page":
