@@ -252,7 +252,9 @@ export default {
             groups: [],
             primaryKey: "qaId",
             url: ""
-          }]);
+          }]).then(()=>{
+            alert('update');
+          });
           break;
         case "page":
         default:

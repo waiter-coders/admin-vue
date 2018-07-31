@@ -3,8 +3,7 @@
     <el-dialog
     :title="config.title"
     :visible.sync="config.display"
-    width="30%"
-    :before-close="handleClose">
+    :before-close="closeCallback">
         <admin-builder :configs="config.config"></admin-builder>
     </el-dialog>
 </div>
@@ -24,7 +23,7 @@ export default {
         handlecallback: function(action){
           this.$emit(action['callback'], action);
         },
-        handleClose(done) {
+        closeCallback(done) {
             done();
         }
     }
