@@ -21,12 +21,22 @@ click(action, actionParams)
 */
 import request from "@/utils/service";
 export default {
-  props: ['config'],
-  data(){
-    return {'actions':[]}
+  props: ['config', 'rowactions'],
+  data() {
+    return {
+      'actions':[]
+    }
   },
   created(){
     this.actions = this.config.actions
+  },
+  watch: {
+    config: {
+      handler(newValue, oldValue) {
+        this.actions = newValue.actions;
+      },
+      deep: true
+    }
   },
   methods: {
     click: function(index) {
