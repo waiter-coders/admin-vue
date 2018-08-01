@@ -5,7 +5,7 @@
             :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" :rowactions="rowActions" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
+                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
             </template>
         </el-table-column>
   </el-table>
