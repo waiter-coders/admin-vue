@@ -21,7 +21,7 @@ click(action, actionParams)
 */
 import request from "@/utils/service";
 export default {
-  props: ['config', 'rowactions'],
+  props: ['config'],
   data() {
     return {
       'actions':[]
