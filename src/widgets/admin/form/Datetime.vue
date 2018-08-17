@@ -1,32 +1,32 @@
 <template>
     <div>
-        <el-form-item v-bind:label="field.name">
-            <el-date-picker v-bind:type="field.datetime" v-model="field.value" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" :value-format="field.datetime | time"></el-date-picker>
+        <el-form-item :label="field.name">
+            <el-date-picker :type="field.datetime" v-model="field.value" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" :value-format="field.datetime | time"></el-date-picker>
         </el-form-item>
     </div>
 </template>
 <script>
-import { initFormData, timeFormat } from "@/utils/loader";
+import { initFormData, timeFormat } from '@/utils/loader'
 export default {
-  name: "datetime",
-  data() {
+  name: 'datetime',
+  data () {
     return {
       formData: initFormData(this.field.field, this.field.value)
-    };
+    }
   },
-  props: ["field"],
+  props: ['field'],
   filters: {
-    time: function(val) {
-      return timeFormat[val];
+    time: function (val) {
+      return timeFormat[val]
     }
   },
   methods: {
-    getElementData() {
-      var result = {};
-      result[this.field.field] = this.field.value;
-      return result;
+    getElementData () {
+      var result = {}
+      result[this.field.field] = this.field.value
+      return result
     }
   }
-};
+}
 </script>
 

@@ -7,7 +7,7 @@
         :page-sizes="[5, 10, 15]"
         :page-size="config.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        v-bind:total="config.totalNum">
+        :total="config.totalNum">
         </el-pagination>
     </div>
 </template>
@@ -27,18 +27,18 @@ config:{
 changePaging(paging)
 */
 export default {
-  props: ["config"],
+  props: ['config'],
   methods: {
-    changePageSize(pageSize) {
-      this.config.pageSize = pageSize;
-      this.$emit("changePaging", this.config);
+    changePageSize (pageSize) {
+      this.config.pageSize = pageSize
+      this.$emit('changePaging', this.config)
     },
-    changePageNum(pageNum) {
-      this.config.currentPage = pageNum;
-      this.$emit("changePaging", this.config);
+    changePageNum (pageNum) {
+      this.config.currentPage = pageNum
+      this.$emit('changePaging', this.config)
     }
   }
-};
+}
 </script>
 <style scoped>
 .waiter-paging {

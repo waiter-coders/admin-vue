@@ -6,44 +6,44 @@
       		active-text-color="#ffd04b"
 			:unique-opened="unique"
       		:collapse="isCollapse" >
-			<menu-item v-bind:menus="menu"></menu-item>
+			<menu-item :menus="menu"></menu-item>
 		</el-menu>
 	</div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import MenuItem from "./MenuItem";
-import { getMenus } from "@/api/dashboard";
+import { mapGetters } from 'vuex'
+import MenuItem from './MenuItem'
+import { getMenus } from '@/api/dashboard'
 export default {
-  data() {
+  data () {
     return {
       menu: [],
       unique: true
-    };
+    }
   },
-  mounted() {
-    this.getMenu();
+  mounted () {
+    this.getMenu()
   },
   computed: {
-    ...mapGetters(["sidebar"]),
-    isCollapse() {
-      return !this.sidebar.opened;
+    ...mapGetters(['sidebar']),
+    isCollapse () {
+      return !this.sidebar.opened
     }
   },
   components: {
     MenuItem
   },
   methods: {
-    getMenu: function() {
-      var _this = this;
+    getMenu: function () {
+      var _this = this
       getMenus().then(response => {
-        console.log(response);
-        _this.menu = response;
-      });
+        console.log(response)
+        _this.menu = response
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .el-menu {

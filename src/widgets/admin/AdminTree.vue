@@ -1,11 +1,11 @@
 <template>
   <div>
   	<el-tree
-      v-bind:data="data"
+      :data="data"
       node-key="nodeId"
       :default-expanded-keys="[]"
       lazy
-      v-bind:load="loadChildren"
+      :load="loadChildren"
       accordion
       draggable
       :allow-drop="allowDrop" ref="tree">
@@ -38,122 +38,122 @@
 
 <script>
 import {
-  getNodes,
-  addNode,
-  changeNodLabel,
-  changeNodePosition,
-  deleteNode
-} from "@/api/admin/adminTree";
-import ButtonGroup from "@/widgets/admin/public/ButtonGroup";
+  getNodes
+  // addNode,
+  // changeNodLabel,
+  // changeNodePosition,
+  // deleteNode
+} from '@/api/admin/adminTree'
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 
 export default {
-  props: ["config"],
+  props: ['config'],
   components: [ButtonGroup],
-  data() {
+  data () {
     return {
       baseUrl: this.$route.path,
       data: []
-    };
+    }
   },
   methods: {
-    formatAjaxData(response) {
+    formatAjaxData (response) {
       //  规范数据
-      var children = [];
+      var children = []
       for (var i in response) {
-        var node = {};
-        node["label"] = response[i]["label"];
-        node["nodeId"] = response[i]["nodeId"];
-        node["isLeaf"] = parseInt(response[i]["isLeaf"]) > 0 ? "leaf" : false;
-        children.push(node);
+        var node = {}
+        node['label'] = response[i]['label']
+        node['nodeId'] = response[i]['nodeId']
+        node['isLeaf'] = parseInt(response[i]['isLeaf']) > 0 ? 'leaf' : false
+        children.push(node)
       }
-      return children;
+      return children
     },
-    loadChildren(node, callback) {
-      var _this = this;
-      getNodes(this.baseUrl, node.data["nodeId"]).then(function(response) {
-        callback(_this.formatAjaxData(response));
-      });
+    loadChildren (node, callback) {
+      var _this = this
+      getNodes(this.baseUrl, node.data['nodeId']).then(function (response) {
+        callback(_this.formatAjaxData(response))
+      })
     },
-    allowDrop() {},
-    append(node, data) {
-      var _this = this;
-      var _node = node;
-      this.$store.dispatch("showDialog", {
+    allowDrop () {},
+    append (node, data) {
+      var _this = this
+      var _node = node
+      this.$store.dispatch('showDialog', {
         config: [
           {
-            type: "admin-form",
-            submitType: "dialog",
+            type: 'admin-form',
+            submitType: 'dialog',
             fields: [
-              { field: "nodeId", name: "id", type: "number", primaryKey: true },
+              { field: 'nodeId', name: 'id', type: 'number', primaryKey: true },
               {
-                field: "label",
-                type: "string",
+                field: 'label',
+                type: 'string',
                 length: 30,
-                name: "标签"
+                name: '标签'
               },
               {
-                field: "position",
-                type: "select",
-                map: { 1: "添加到前面" },
+                field: 'position',
+                type: 'select',
+                map: { 1: '添加到前面' },
                 length: 30,
-                name: "位置"
+                name: '位置'
               }
             ],
             groups: [],
-            primaryKey: "qaId",
-            url: ""
+            primaryKey: 'qaId',
+            url: ''
           }
         ],
-        callback: function() {
+        callback: function () {
           _this.$refs.tree.insertAfter(
-            { nodeId: 999, label: "不错", isLeaf: true },
+            { nodeId: 999, label: '不错', isLeaf: true },
             _node
-          );
+          )
         }
-      });
+      })
     },
-    edit(node, data) {
-      var _this = this;
-      var _node = node;
-      this.$store.dispatch("showDialog", {
+    edit (node, data) {
+      var _this = this
+      var _node = node
+      this.$store.dispatch('showDialog', {
         config: [
           {
-            type: "admin-form",
-            submitType: "dialog",
+            type: 'admin-form',
+            submitType: 'dialog',
             fields: [
-              { field: "nodeId", name: "id", type: "number", primaryKey: true },
+              { field: 'nodeId', name: 'id', type: 'number', primaryKey: true },
               {
-                field: "label",
-                type: "string",
+                field: 'label',
+                type: 'string',
                 length: 30,
-                name: "标签"
+                name: '标签'
               },
               {
-                field: "position",
-                type: "select",
-                map: { 1: "添加到前面" },
+                field: 'position',
+                type: 'select',
+                map: { 1: '添加到前面' },
                 length: 30,
-                name: "位置"
+                name: '位置'
               }
             ],
             groups: [],
-            primaryKey: "qaId",
-            url: ""
+            primaryKey: 'qaId',
+            url: ''
           }
         ],
-        callback: function() {
+        callback: function () {
           _this.$refs.tree.insertAfter(
-            { nodeId: 999, label: "不错", isLeaf: true },
+            { nodeId: 999, label: '不错', isLeaf: true },
             _node
-          );
+          )
         }
-      });
+      })
     },
-    remove(node, data) {
-      this.$refs.tree.remove(node);
+    remove (node, data) {
+      this.$refs.tree.remove(node)
     }
   }
-};
+}
 </script>
 
 <style>

@@ -1,15 +1,15 @@
 <template>
     <div>
-        <el-form v-bind:inline="true" ref="form" label-width="80px">
-            <el-form-item v-for="item in config.fields" v-bind:key="item.field">
-                <el-input v-if="item.type == 'string'" size="mini" v-bind:name="item.field" v-bind:placeholder="'请输入'+item.name" v-model="item.value"></el-input>
-                <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" v-bind:placeholder="'请选择'+item.name">
+        <el-form :inline="true" ref="form" label-width="80px">
+            <el-form-item v-for="item in config.fields" :key="item.field">
+                <el-input v-if="item.type == 'string'" size="mini" :name="item.field" :placeholder="'请输入'+item.name" v-model="item.value"></el-input>
+                <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" :placeholder="'请选择'+item.name">
                     <el-option value="" label="全部" key="quanbu"></el-option>
                     <el-option
                     v-for="(value, index) in item.map"
-                    v-bind:key="index"
-                    v-bind:label="value"
-                    v-bind:value="index">
+                    :key="index"
+                    :label="value"
+                    :value="index">
                     </el-option>
                 </el-select>
                 <el-date-picker size="mini" v-if="item.type == 'datetime'" v-model="item.value" type="datetimerange" range-separator="至" start-placeholder="请输入开始时间" end-placeholder="请输入结束时间"></el-date-picker>
@@ -37,21 +37,21 @@ search(searchData)
 
 */
 export default {
-  name: "search",
-  props: ["config"],
+  name: 'search',
+  props: ['config'],
   methods: {
-    search: function() {
-      this.$emit("search", this.getSearchData());
+    search: function () {
+      this.$emit('search', this.getSearchData())
     },
-    getSearchData: function() {
-      var data = {};
+    getSearchData: function () {
+      var data = {}
       for (var item in this.config.fields) {
-        data[this.config.fields[item].field] = this.config.fields[item].value;
+        data[this.config.fields[item].field] = this.config.fields[item].value
       }
-      return data;
+      return data
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

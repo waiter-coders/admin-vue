@@ -1,22 +1,22 @@
 <template>
-	<div class="app-wrapper" >
-		<div class="menu-wrapper">
+  <div class="app-wrapper" >
+    <div class="menu-wrapper">
       <menus></menus>
-	  </div>
-		<div class="main-container">
-      <el-menu class="navbar" mode="horizontal">		
+    </div>
+    <div class="main-container">
+      <el-menu class="navbar" mode="horizontal">    
         <hamburger class="hamburger-container"></hamburger>
         <bread class="bread-container"></bread>
         <user-actions></user-actions>
       </el-menu>
-			<!--<tags-view></tags-view>-->
-			<section class="app-main" style="min-height: 100%">
+      <!--<tags-view></tags-view>-->
+      <section class="app-main" style="min-height: 100%">
         <transition name="fade" mode="out-in">
-          <router-view v-bind:key="key"></router-view>
+          <router-view :key="key"></router-view>
         </transition>
       </section>
-		</div>
-	</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,11 +24,11 @@ import {
   Menus,
   Hamburger,
   Bread,
-  UserActions /*, TagsView*/
-} from "@/widgets/layout";
+  UserActions /*, TagsView */
+} from '@/widgets/layout'
 
 export default {
-  name: "appmain",
+  name: 'appmain',
   components: {
     Menus,
     Hamburger,
@@ -36,20 +36,20 @@ export default {
     UserActions
     // TagsView,
   },
-  /*computed:{
-		sidebar(){
-			return this.$store.state.app.sidebar
-		}
-	},*/
+  /* computed:{
+    sidebar(){
+      return this.$store.state.app.sidebar
+    }
+  }, */
 
   computed: {
-    key() {
+    key () {
       return this.$route.name !== undefined
         ? this.$route.name + +new Date()
-        : this.$route + +new Date();
+        : this.$route + +new Date()
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -63,13 +63,13 @@ export default {
   }
 
   /*&.hideSidebar{
-		.main-container{
-			margin-left:64px;
-		}
-		.menu-wrapper{
-			width:64px;
-		}
-	}*/
+    .main-container{
+      margin-left:64px;
+    }
+    .menu-wrapper{
+      width:64px;
+    }
+  }*/
   .menu-wrapper {
     width: 180px;
     height: 100%;
@@ -93,16 +93,16 @@ export default {
       padding: 0 10px;
     }
     /*.errLog-container {
-				display: inline-block;
-				position: absolute;
-				right: 150px;
-		}
-		.screenfull {
-				position: absolute;
-				right: 90px;
-				top: 16px;
-				color: red;
-		}*/
+        display: inline-block;
+        position: absolute;
+        right: 150px;
+    }
+    .screenfull {
+        position: absolute;
+        right: 90px;
+        top: 16px;
+        color: red;
+    }*/
     .avatar-container {
       height: 50px;
       display: inline-block;

@@ -1,29 +1,29 @@
 <template>
     <div class="editor">
-        <el-form-item v-bind:label="field.name">
+        <el-form-item :label="field.name">
             <vue-editor v-model="formData[field.field]"></vue-editor>
         </el-form-item>
         
     </div>
 </template>
 <script>
-import { initFormData } from "@/utils/loader";
+import { initFormData } from '@/utils/loader'
 //  import { VueEditor } from "vue2-editor";
 export default {
-  name: "editor",
+  name: 'editor',
   components: {
     //  VueEditor
   },
-  data() {
+  data () {
     return {
-      id: "editor1",
+      id: 'editor1',
       config: {
         initialFrameWidth: null,
         initialFrameHeight: 350
       },
       //  content:"<h1>Some initial content</h1>",
       formData: initFormData(this.field.field, this.field.value)
-    };
+    }
   },
   props: {
     field: {
@@ -31,11 +31,11 @@ export default {
     }
   },
   methods: {
-    getElementData() {
-      return this.formData;
+    getElementData () {
+      return this.formData
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .editor {

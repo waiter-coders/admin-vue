@@ -1,11 +1,11 @@
 <template> 
-  <el-table v-bind:data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
+  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
-        <el-table-column v-for="item in config.fields" v-bind:prop="item.field" 
-            v-bind:label="item.name" v-bind:key="item.id" v-bind:formatter="itemFormatter"></el-table-column>
+        <el-table-column v-for="item in config.fields" :prop="item.field" 
+            :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <button-group class="list-table-actions" v-bind:config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
+                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
             </template>
         </el-table-column>
   </el-table>
@@ -26,83 +26,82 @@
 @事件：
 click(action, params)
  */
-import ButtonGroup from "@/widgets/admin/public/ButtonGroup";
+import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 export default {
-  name: "tableList",
+  name: 'tableList',
   components: { ButtonGroup },
-  props: ["config"],
-  data() {
+  props: ['config'],
+  data () {
     return {
       multipleSelection: []
-    };
+    }
   },
   computed: {
-    rowActions: function() {
-      var actionsTable = [];
-      var primaryKey = this.config.fields.filter(function(row) {
-        return "primaryKey" in row;
-      })[0].field;
+    rowActions: function () {
+      var actionsTable = []
+      var primaryKey = this.config.fields.filter(function (row) {
+        return 'primaryKey' in row
+      })[0].field
       for (var i = 0; i < this.config.data.length; i++) {
-        var rowData = this.config.data[i];
-        var actions = this.config.rowActions.map(function(row) {
-          var action = Object.assign({}, row);
+        var rowData = this.config.data[i]
+        var actions = this.config.rowActions.map(function (row) {
+          var action = Object.assign({}, row)
           for (var field in rowData) {
             action.url = action.url.replace(
-              "@data." + field + "@",
+              '@data.' + field + '@',
               rowData[field]
-            );
+            )
           }
-          action.url = action.url.replace("@primaryKey@", primaryKey);
-          action.url = action.url.replace("@data.id@", rowData[primaryKey]);
-          if ("confirm" in action) {
+          action.url = action.url.replace('@primaryKey@', primaryKey)
+          action.url = action.url.replace('@data.id@', rowData[primaryKey])
+          if ('confirm' in action) {
             action.confirm = action.confirm.replace(
-              "@data.id@",
+              '@data.id@',
               rowData[primaryKey]
-            );
+            )
           }
-          return action;
-        });
-        actionsTable.push(actions);
+          return action
+        })
+        actionsTable.push(actions)
       }
-      return actionsTable;
+      return actionsTable
     }
   },
   methods: {
-    itemFormatter(value, row, column) {
-      var fields = this.config.fields;
-      var field = fields.find(function(val, i) {
-        if (val.field == row.property) {
-          return val;
+    itemFormatter (value, row, column) {
+      var fields = this.config.fields
+      var field = fields.find(function (val, i) {
+        if (val.field === row.property) {
+          return val
         }
-      });
+      })
       switch (field.type) {
-        case "select":
-          return field.map[value[row.property]];
-          break;
-        case "image":
-          return '<img src="' + value[row.property] + '">';
-        default:
-          return value[row.property];
+      case 'select':
+        return field.map[value[row.property]]
+      case 'image':
+        return '<img src="' + value[row.property] + '">'
+      default:
+        return value[row.property]
       }
     },
-    rowActionClick(action, params) {
-      this.$emit("click", action, params);
+    rowActionClick (action, params) {
+      this.$emit('click', action, params)
     },
-    getSelectIds() {
-      let ids = [];
-      var primaryKey = this.config.fields.filter(function(row) {
-        return "primaryKey" in row;
-      })[0].field;
+    getSelectIds () {
+      let ids = []
+      var primaryKey = this.config.fields.filter(function (row) {
+        return 'primaryKey' in row
+      })[0].field
       this.multipleSelection.map(item => {
-        ids.push(item[primaryKey]);
-      });
-      return ids;
+        ids.push(item[primaryKey])
+      })
+      return ids
     },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
+    handleSelectionChange (val) {
+      this.multipleSelection = val
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 </style>

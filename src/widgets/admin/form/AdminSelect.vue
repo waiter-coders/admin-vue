@@ -1,37 +1,37 @@
 <template>
   <div>
-  	<el-form-item v-bind:label="field.name">
-      <el-select v-model="field.value" v-bind:name="field.field">
-        <el-option v-for="(item,key) in field.map" v-bind:key="'option_'+key" v-bind:label="item" v-bind:value="key"></el-option>
+  	<el-form-item :label="field.name">
+      <el-select v-model="field.value" :name="field.field">
+        <el-option v-for="(item,key) in field.map" :key="'option_'+key" :label="item" :value="key"></el-option>
       </el-select>
     </el-form-item>
   </div>
 </template>
 
 <script>
-import { initFormData } from "@/utils/loader";
+import { initFormData } from '@/utils/loader'
 export default {
-  name: "AdminSelect",
-  data() {
+  name: 'AdminSelect',
+  data () {
     return {
       formData: initFormData(this.field.field, this.field.value)
-    };
+    }
   },
-  props: ["field"],
-  mounted: function() {
-    console.log(this.formData);
+  props: ['field'],
+  mounted: function () {
+    console.log(this.formData)
   },
   methods: {
-    checkElementLegal() {
-      return this.formData[this.field.field] != "";
+    checkElementLegal () {
+      return this.formData[this.field.field] !== ''
     },
-    getElementData() {
-      var result = {};
-      result[this.field.field] = this.field.value;
-      return result;
+    getElementData () {
+      var result = {}
+      result[this.field.field] = this.field.value
+      return result
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

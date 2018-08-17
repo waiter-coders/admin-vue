@@ -1,6 +1,6 @@
 <template>
     <div>
-        <component v-bind:is="config.type" v-bind:config="config" v-for="(config,index) in configs" v-bind:key="index">组件初始化失败</component>
+        <component :is="config.type" :config="config" v-for="(config,index) in configs" :key="index">组件初始化失败</component>
     </div>
 </template>
 
@@ -11,17 +11,17 @@ import {
   AdminList,
   AdminTree,
   AdminStatistics
-} from "@/widgets/admin";
+} from '@/widgets/admin'
 export default {
-  name: "factory",
+  name: 'factory',
   components: {
     AdminForm,
     AdminList,
     AdminTree,
     AdminStatistics
   },
-  props: ["configs"]
-};
+  props: ['configs']
+}
 </script>
 
 <style lang="scss">

@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
-    <admin-dialog v-bind:config="dialog"></admin-dialog>
+    <admin-dialog :config="dialog"></admin-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  name: "waiter",
+  name: 'waiter',
   computed: {
-    dialog() {
-      return this.$store.state.dialog;
+    dialog () {
+      return this.$store.state.dialog
     }
   }
 }
