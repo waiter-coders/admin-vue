@@ -26,5 +26,6 @@ module.exports = {
             "error",
             "never"
         ]
-    }
+    },
+    "parser": "babel-eslint"
 };

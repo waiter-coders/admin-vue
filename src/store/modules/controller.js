@@ -15,10 +15,10 @@ const controller = {
     // }
   },
   actions: {
-    initConfig( { commit, state }, config) {
-      //commit('INIT_CONFIG', config);
-    },
-    addConfig({ commit, state}, controller) {
+    // initConfig( { commit, state }, config) {
+    //   //commit('INIT_CONFIG', config);
+    // },
+    addConfig({ commit/*, state*/}, controller) {
       return new Promise( (resolve, reject ) => {
         getConfigs( controller ).then( response => {
           let configs = []

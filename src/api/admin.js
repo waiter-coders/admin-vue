@@ -5,10 +5,10 @@ export const isLogin = () => {
   return true
 }
 
-export const login = param => {
-  return fetch.post('/admin/login/', params)
+export const login = () => {
+  return fetch.post('/admin/login/')
 }
 
-export const loginOut = param => {
-  return fetch.post('/admin/loginout/', params)
+export const loginOut = () => {
+  return fetch.post('/admin/loginout/')
 }

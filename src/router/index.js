@@ -13,10 +13,10 @@ const AdminRender = resolve => require(['@/views/AdminRender'], resolve) // 页�
 // import AdminAccount from '@/views/admin/Account' // 修改密码页
 const Home = resolve => require(['@/views/Home'], resolve) //首页 懒加载方案
 const Login = resolve => require(['@/views/admin/Login'], resolve) //登录页 懒加载方案
-const AdminAccount = resolve => require(['@/views/admin/Account'], resolve) //修改密码页 懒加载方案
+// const AdminAccount = resolve => require(['@/views/admin/Account'], resolve) //修改密码页 懒加载方案
 
 // 接口
-import { isLogin } from '@/api/admin'
+// import { isLogin } from '@/api/admin'
 
 Vue.use(Router)
 
