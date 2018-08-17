@@ -9,27 +9,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  name: 'bread',
+  name: "bread",
   data() {
-  	return {
-  		root(){
-  			return this.$route.meta.title;
-  		}
-  	}
+    return {
+      root() {
+        return this.$route.meta.title;
+      }
+    };
   },
-  computed:{
-  	...mapGetters([
-  		'currentView'
-  	])
+  computed: {
+    ...mapGetters(["currentView"])
   }
-}
+};
 </script>
 
 <style scoped>
-.el-breadcrumb{
-	line-height: inherit;
+.el-breadcrumb {
+  line-height: inherit;
 }
-
 </style>

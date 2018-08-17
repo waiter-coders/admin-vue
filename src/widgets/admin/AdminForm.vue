@@ -10,39 +10,44 @@
 </template>
 
 <script>
-import {CheckBox, Datetime, Editor, AdminInput, AdminSelect} from './form'
-import { formConfig }  from '@/utils/loader'
-import { formSubmit,getFormData } from '@/api/admin/adminForm'
+import { CheckBox, Datetime, Editor, AdminInput, AdminSelect } from "./form";
+import { formConfig } from "@/utils/loader";
+import { formSubmit, getFormData } from "@/api/admin/adminForm";
 export default {
-  name: 'AdminForm',
-  data () {
+  name: "AdminForm",
+  data() {
     return {
-      baseUrl:this.$route.path,
-      submitType:'page',
+      baseUrl: this.$route.path,
+      submitType: "page",
       formData: {},
-      fields:{}
-    }
+      fields: {}
+    };
   },
-  props: ['config'],
+  props: ["config"],
   components: {
-    CheckBox, Datetime, Editor, AdminInput, AdminSelect
+    CheckBox,
+    Datetime,
+    Editor,
+    AdminInput,
+    AdminSelect
   },
   filters: {
-    typeFilter: function(key){
-
+    typeFilter: function(key) {
       return formConfig[key];
     }
   },
-  created(){
+  created() {
     this.fields = this.config.fields;
     if (this.config.primaryKey in this.$route.query) {
       var _this = this;
       let getParams = {};
-      getParams[this.config.primaryKey] = this.$route.query[this.config.primaryKey];
-      getFormData(this.baseUrl, getParams).then(function(data){
+      getParams[this.config.primaryKey] = this.$route.query[
+        this.config.primaryKey
+      ];
+      getFormData(this.baseUrl, getParams).then(function(data) {
         var fields = [];
         for (var i in _this.fields) {
-          var field = _this.fields[i]['field'];
+          var field = _this.fields[i]["field"];
           if (field in data) {
             fields[i] = _this.fields[i];
             fields[i].value = data[field];
@@ -52,54 +57,56 @@ export default {
       });
     }
 
-    if ('submitType' in this.config) {
+    if ("submitType" in this.config) {
       this.submitType = this.config.submitType;
     }
   },
-  methods :{
-    getFormData: function(){
+  methods: {
+    getFormData: function() {
       let $el = this.$children[0].$children;
       let data = {};
       $el.forEach(element => {
         if (element.getElementData) {
-          Object.assign( data, element.getElementData());
-        }        
+          Object.assign(data, element.getElementData());
+        }
       });
-      return data
+      return data;
     },
-    submitForm: function(){
+    submitForm: function() {
       try {
         let _this = this;
         let data = this.getFormData();
-        let url = this.config.url || this.baseUrl
-        let getParams = {}
-        getParams[this.config.primaryKey] = (this.config.primaryKey in this.$route.query) ? this.$route.query[this.config.primaryKey] : 0;
-        formSubmit(url, {formData:data}, getParams).then( response => {
-          alert('操作成功');
-          switch(_this.submitType) {
-            case 'dialog':
+        let url = this.config.url || this.baseUrl;
+        let getParams = {};
+        getParams[this.config.primaryKey] =
+          this.config.primaryKey in this.$route.query
+            ? this.$route.query[this.config.primaryKey]
+            : 0;
+        formSubmit(url, { formData: data }, getParams).then(response => {
+          alert("操作成功");
+          switch (_this.submitType) {
+            case "dialog":
               _this.$store.dispatch("hiddenDialog");
               break;
-            case 'page':
+            case "page":
             default:
               _this.$router.go(-1);
           }
-          
         });
-      } catch(e) {
-          alert(e);
-      }      
+      } catch (e) {
+        alert(e);
+      }
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.admin-form{
+.admin-form {
   padding: 20px 30px;
-  .form-inline{
-    width:800px;
+  .form-inline {
+    width: 800px;
   }
 }
 </style>

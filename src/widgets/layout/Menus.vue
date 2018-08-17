@@ -12,61 +12,59 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import MenuItem from './MenuItem'
-import { getMenus } from '@/api/dashboard'
+import { mapGetters } from "vuex";
+import MenuItem from "./MenuItem";
+import { getMenus } from "@/api/dashboard";
 export default {
-    data (){
-    	return {
-			menu:[],
-			unique: true
-    	}
-    },
-    mounted(){
-    	this.getMenu();
-    },
-    computed:{
-    	...mapGetters([
-    		'sidebar'
-    	]),
-    	isCollapse(){
-    		return !this.sidebar.opened;
-    	}
-    },
-    components:{
-    	MenuItem
-    },
-    methods:{
-        getMenu:function(){
-        	var _this = this;
-        	getMenus().then(response => {
-        		console.log( response );
-        		_this.menu = response;
-        	});
-        },
+  data() {
+    return {
+      menu: [],
+      unique: true
+    };
+  },
+  mounted() {
+    this.getMenu();
+  },
+  computed: {
+    ...mapGetters(["sidebar"]),
+    isCollapse() {
+      return !this.sidebar.opened;
     }
-}
+  },
+  components: {
+    MenuItem
+  },
+  methods: {
+    getMenu: function() {
+      var _this = this;
+      getMenus().then(response => {
+        console.log(response);
+        _this.menu = response;
+      });
+    }
+  }
+};
 </script>
 <style lang="scss">
-.el-menu{
-	height: 100%;
-
+.el-menu {
+  height: 100%;
 }
-.el-menu-item:hover,.el-menu-item:focus{
-	background:rgb(38,52,69);
+.el-menu-item:hover,
+.el-menu-item:focus {
+  background: rgb(38, 52, 69);
 }
-.el-menu--collapse{
-	.el-menu-item span,
-	.el-submenu span{
-		height: 0;
-	    width: 0;
-	    overflow: hidden;
-	    visibility: hidden;
-	    display: inline-block;
-	}
+.el-menu--collapse {
+  .el-menu-item span,
+  .el-submenu span {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: inline-block;
+  }
 }
-.el-submenu{
-	overflow: hidden;
+.el-submenu {
+  overflow: hidden;
 }
 /*.el-menu--collapse>.el-menu-item span, .el-menu--collapse>.el-submenu>.el-submenu__title span {
     height: 0;

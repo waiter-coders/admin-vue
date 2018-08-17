@@ -37,25 +37,25 @@ search(searchData)
 
 */
 export default {
-    name: 'search',
-    props: ['config'],
-    methods: {
-        search: function(){
-            this.$emit('search', this.getSearchData());
-        },
-        getSearchData: function(){
-            var data = {}
-            for (var item in this.config.fields) {
-                data[this.config.fields[item].field] = this.config.fields[item].value
-            }
-            return data
-        }
+  name: "search",
+  props: ["config"],
+  methods: {
+    search: function() {
+      this.$emit("search", this.getSearchData());
+    },
+    getSearchData: function() {
+      var data = {};
+      for (var item in this.config.fields) {
+        data[this.config.fields[item].field] = this.config.fields[item].value;
+      }
+      return data;
     }
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-.el-form-item{
+.el-form-item {
   margin-bottom: 10px !important;
 }
 </style>

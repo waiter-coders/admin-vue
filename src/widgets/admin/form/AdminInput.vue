@@ -7,27 +7,26 @@
 </template>
 
 <script>
-import { initFormData } from '@/utils/loader';
+import { initFormData } from "@/utils/loader";
 export default {
-  name: 'AdminInput',
-  props: ['field'],
-  mounted:function(){
+  name: "AdminInput",
+  props: ["field"],
+  mounted: function() {
     //console.log(this.formData);
   },
   methods: {
-    checkElementLegal(){
-      return this.field.value.length > 0
+    checkElementLegal() {
+      return this.field.value.length > 0;
     },
-    getElementData(){
-      var result = {}
+    getElementData() {
+      var result = {};
       result[this.field.field] = this.field.value;
       return result;
-    },
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

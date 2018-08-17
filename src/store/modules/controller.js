@@ -1,5 +1,5 @@
 //import Cookies from 'js-cookie'
-import { getConfigs } from '@/api/admin/adminRender';
+import { getConfigs } from '@/api/admin/adminRender'
 
 const controller = {
   state: {
@@ -7,12 +7,12 @@ const controller = {
   },
   mutations: {
     SET_CONFIG: (state, configs) => {
-      state.configs = configs;
+      state.configs = configs
     },
-		// INIT_CURRENT_VIEW: (state, view) => {
-		// 	//Cookies.set('currentView',view);
-		// 	state.currentView = view;
-		// }
+    // INIT_CURRENT_VIEW: (state, view) => {
+    //   //Cookies.set('currentView',view);
+    //   state.currentView = view;
+    // }
   },
   actions: {
     initConfig( { commit, state }, config) {
@@ -21,19 +21,19 @@ const controller = {
     addConfig({ commit, state}, controller) {
       return new Promise( (resolve, reject ) => {
         getConfigs( controller ).then( response => {
-          let configs = [];
+          let configs = []
           for (var i = 0; i < response.data.length; i++) {
-              var config = response.data[i];      
-              config.index = i;
-              configs.push(config);
+            var config = response.data[i]      
+            config.index = i
+            configs.push(config)
           }
-          commit('SET_CONFIG', configs);
-          resolve();
+          commit('SET_CONFIG', configs)
+          resolve()
           // _this.configs = configs;
         }).catch( error => {
-          reject(error);
-        });
-      });
+          reject(error)
+        })
+      })
     }
     // ToggleSideBar({ commit }) {
     //   commit('TOGGLE_SIDEBAR')
@@ -48,19 +48,19 @@ const controller = {
     //   })
     // },
     // delOthersViews({ commit, state }, view) {
-    // 	return new Promise( (resolve) => {
-    // 		commit('DEL_OTHERS_VIEWS', view); 
-    // 		resolve([...state.visitedViews])
-    // 	})
+    //   return new Promise( (resolve) => {
+    //     commit('DEL_OTHERS_VIEWS', view); 
+    //     resolve([...state.visitedViews])
+    //   })
     // },
     // delAllViews({ commit, state }){
-    // 	return new Promise( (resolve) => {
-    // 		commit('DEL_ALL_VIEWS')
-    // 		resolve([...state.visitedViews])
-    // 	})
+    //   return new Promise( (resolve) => {
+    //     commit('DEL_ALL_VIEWS')
+    //     resolve([...state.visitedViews])
+    //   })
     // },
     // initCurrentView({ commit, state }, view){
-    // 	commit('INIT_CURRENT_VIEW', view); 
+    //   commit('INIT_CURRENT_VIEW', view); 
     // }
   }
 }

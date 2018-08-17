@@ -26,75 +26,84 @@
 @事件：
 click(action, params)
  */
-import ButtonGroup from '@/widgets/admin/public/ButtonGroup';
+import ButtonGroup from "@/widgets/admin/public/ButtonGroup";
 export default {
-  name: 'tableList',
-  components:{ButtonGroup},
-  props: ['config'],
-  data(){
-      return {
-        multipleSelection:[]
-      }
-  },      
-  computed:{
-      rowActions:function(){
-        var actionsTable = [];
-        var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
-        for (var i = 0; i < this.config.data.length; i++) {
-            var rowData = this.config.data[i]
-            var actions = this.config.rowActions.map(function(row){
-                var action = Object.assign({}, row)
-                for (var field in rowData) {
-                    action.url = action.url.replace('@data.' + field + '@', rowData[field])
-                }            
-                action.url = action.url.replace('@primaryKey@', primaryKey)
-                action.url = action.url.replace('@data.id@',  rowData[primaryKey])
-                if ('confirm' in action) {
-                    action.confirm = action.confirm.replace('@data.id@',  rowData[primaryKey])
-                }
-                return action
-            })
-            actionsTable.push(actions)
-        }
-        return actionsTable;         
-      },
+  name: "tableList",
+  components: { ButtonGroup },
+  props: ["config"],
+  data() {
+    return {
+      multipleSelection: []
+    };
   },
-  methods:{
-      itemFormatter(value,row,column){ 
-          var fields = this.config.fields;
-          var field = fields.find(function(val,i){
-              if(val.field == row.property){
-                  return val;
-              }
-          });
-          switch (field.type) {
-            case 'select':
-                return field.map[value[row.property]];
-                break;
-            case 'image':
-                return '<img src="'+value[row.property]+'">'
-            default:
-                return value[row.property]
-          }                
-      },
-      rowActionClick(action, params){        
-        this.$emit('click', action, params)
-      },
-      getSelectIds(){
-        let ids = []
-        var primaryKey = this.config.fields.filter(function(row){return 'primaryKey' in row})[0].field;
-        this.multipleSelection.map((item)=> {
-            ids.push(item[primaryKey])
-        })
-        return ids;
-      },
-      handleSelectionChange(val){
-          this.multipleSelection = val;
-      },
+  computed: {
+    rowActions: function() {
+      var actionsTable = [];
+      var primaryKey = this.config.fields.filter(function(row) {
+        return "primaryKey" in row;
+      })[0].field;
+      for (var i = 0; i < this.config.data.length; i++) {
+        var rowData = this.config.data[i];
+        var actions = this.config.rowActions.map(function(row) {
+          var action = Object.assign({}, row);
+          for (var field in rowData) {
+            action.url = action.url.replace(
+              "@data." + field + "@",
+              rowData[field]
+            );
+          }
+          action.url = action.url.replace("@primaryKey@", primaryKey);
+          action.url = action.url.replace("@data.id@", rowData[primaryKey]);
+          if ("confirm" in action) {
+            action.confirm = action.confirm.replace(
+              "@data.id@",
+              rowData[primaryKey]
+            );
+          }
+          return action;
+        });
+        actionsTable.push(actions);
+      }
+      return actionsTable;
+    }
+  },
+  methods: {
+    itemFormatter(value, row, column) {
+      var fields = this.config.fields;
+      var field = fields.find(function(val, i) {
+        if (val.field == row.property) {
+          return val;
+        }
+      });
+      switch (field.type) {
+        case "select":
+          return field.map[value[row.property]];
+          break;
+        case "image":
+          return '<img src="' + value[row.property] + '">';
+        default:
+          return value[row.property];
+      }
+    },
+    rowActionClick(action, params) {
+      this.$emit("click", action, params);
+    },
+    getSelectIds() {
+      let ids = [];
+      var primaryKey = this.config.fields.filter(function(row) {
+        return "primaryKey" in row;
+      })[0].field;
+      this.multipleSelection.map(item => {
+        ids.push(item[primaryKey]);
+      });
+      return ids;
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-
 </style>
 

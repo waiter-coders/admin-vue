@@ -20,12 +20,20 @@
 </template>
 
 <script>
-import { Menus, Hamburger, Bread, UserActions /*, TagsView*/ } from "@/widgets/layout";
+import {
+  Menus,
+  Hamburger,
+  Bread,
+  UserActions /*, TagsView*/
+} from "@/widgets/layout";
 
 export default {
   name: "appmain",
   components: {
-		Menus,Hamburger, Bread, UserActions
+    Menus,
+    Hamburger,
+    Bread,
+    UserActions
     //TagsView,
   },
   /*computed:{
@@ -36,7 +44,9 @@ export default {
 
   computed: {
     key() {
-      return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
+      return this.$route.name !== undefined
+        ? this.$route.name + +new Date()
+        : this.$route + +new Date();
     }
   }
 };
@@ -69,20 +79,20 @@ export default {
     left: 0;
     bottom: 0;
     z-index: 111;
-		background:rgb(84, 92, 100);
+    background: rgb(84, 92, 100);
   }
   .navbar {
-		width:100%;
-		height: 50px;
-		line-height: 50px;
-		border-radius: 0px !important;
-		.hamburger-container {
-				line-height: 58px;
-				height: 50px;
-				float: left;
-				padding: 0 10px;
-		}
-		/*.errLog-container {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 0px !important;
+    .hamburger-container {
+      line-height: 58px;
+      height: 50px;
+      float: left;
+      padding: 0 10px;
+    }
+    /*.errLog-container {
 				display: inline-block;
 				position: absolute;
 				right: 150px;
@@ -93,34 +103,33 @@ export default {
 				top: 16px;
 				color: red;
 		}*/
-		.avatar-container {
-			height: 50px;
-			display: inline-block;
-			position: absolute;
-			right: 35px;
-			top: 0;
-			.avatar-wrapper {
-					cursor: pointer;
-					margin-top: 5px;
-					position: relative;
-					.user-avatar {
-							width: 40px;
-							height: 40px;
-							border-radius: 10px;
-					}
-					.el-icon-caret-bottom {
-							position: absolute;
-							right: -20px;
-							top: 25px;
-							font-size: 12px;
-					}
-			}
-		}
-	}
-	.bread-container{
-		height: 50px;
-		line-height: 50px;
-		
-	}
+    .avatar-container {
+      height: 50px;
+      display: inline-block;
+      position: absolute;
+      right: 35px;
+      top: 0;
+      .avatar-wrapper {
+        cursor: pointer;
+        margin-top: 5px;
+        position: relative;
+        .user-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+        .el-icon-caret-bottom {
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .bread-container {
+    height: 50px;
+    line-height: 50px;
+  }
 }
 </style>

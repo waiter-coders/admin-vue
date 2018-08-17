@@ -9,32 +9,31 @@
 </template>
 
 <script>
-import { initFormData } from '@/utils/loader';
+import { initFormData } from "@/utils/loader";
 export default {
-  name: 'AdminSelect',
-  data () {
+  name: "AdminSelect",
+  data() {
     return {
       formData: initFormData(this.field.field, this.field.value)
-    }
+    };
   },
-  props: ['field'],
-  mounted:function(){
-    console.log( this.formData );
+  props: ["field"],
+  mounted: function() {
+    console.log(this.formData);
   },
   methods: {
-    checkElementLegal(){
-      return this.formData[this.field.field] != '';
+    checkElementLegal() {
+      return this.formData[this.field.field] != "";
     },
-    getElementData(){
-      var result = {}
+    getElementData() {
+      var result = {};
       result[this.field.field] = this.field.value;
       return result;
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

@@ -4,21 +4,20 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "HelloWorld",
+  data() {
     return {
-      msg: 'sss'
-    }
+      msg: "sss"
+    };
   },
-  method:{
-  	getConfig:function(){
-  		alert(1);
-  	},
+  method: {
+    getConfig: function() {
+      alert(1);
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	
 </style>

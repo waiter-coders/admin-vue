@@ -10,6 +10,7 @@ export const getList = (controller, search, limit, offset) => {
   })
 }
 
+
 export const getTotalNum = (controller, search) => {
   return service.get(controller + '/getTotalNum', {
     params: {

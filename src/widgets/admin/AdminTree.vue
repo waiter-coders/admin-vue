@@ -37,58 +37,132 @@
 </template>
 
 <script>
-import { getNodes,addNode,changeNodLabel,changeNodePosition,deleteNode } from '@/api/admin/adminTree'
-import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
+import {
+  getNodes,
+  addNode,
+  changeNodLabel,
+  changeNodePosition,
+  deleteNode
+} from "@/api/admin/adminTree";
+import ButtonGroup from "@/widgets/admin/public/ButtonGroup";
 
-  export default {
-    props:['config'],
-    components:[ButtonGroup],
-    data(){
-      return {
-        baseUrl:this.$route.path,
-        data:[]
-      };
+export default {
+  props: ["config"],
+  components: [ButtonGroup],
+  data() {
+    return {
+      baseUrl: this.$route.path,
+      data: []
+    };
+  },
+  methods: {
+    formatAjaxData(response) {
+      // 规范数据
+      var children = [];
+      for (var i in response) {
+        var node = {};
+        node["label"] = response[i]["label"];
+        node["nodeId"] = response[i]["nodeId"];
+        node["isLeaf"] = parseInt(response[i]["isLeaf"]) > 0 ? "leaf" : false;
+        children.push(node);
+      }
+      return children;
     },
-    methods: {
-      formatAjaxData(response){
-        // 规范数据
-          var children = [];
-          for (var i in response) {
-            var node = {};
-            node['label'] = response[i]['label'];
-            node['nodeId'] = response[i]['nodeId'];
-            node['isLeaf'] = parseInt(response[i]['isLeaf']) > 0 ? 'leaf' : false;
-            children.push(node);
+    loadChildren(node, callback) {
+      var _this = this;
+      getNodes(this.baseUrl, node.data["nodeId"]).then(function(response) {
+        callback(_this.formatAjaxData(response));
+      });
+    },
+    allowDrop() {},
+    append(node, data) {
+      var _this = this;
+      var _node = node;
+      this.$store.dispatch("showDialog", {
+        config: [
+          {
+            type: "admin-form",
+            submitType: "dialog",
+            fields: [
+              { field: "nodeId", name: "id", type: "number", primaryKey: true },
+              {
+                field: "label",
+                type: "string",
+                length: 30,
+                name: "标签"
+              },
+              {
+                field: "position",
+                type: "select",
+                map: { 1: "添加到前面" },
+                length: 30,
+                name: "位置"
+              }
+            ],
+            groups: [],
+            primaryKey: "qaId",
+            url: ""
           }
-          return children;
-      },
-      loadChildren(node, callback){
-        var _this = this;
-        getNodes(this.baseUrl, node.data['nodeId']).then(function(response){
-          callback(_this.formatAjaxData(response));
-        });
-      },
-      allowDrop(){},
-      append(node, data) {
-        // this.$refs.tree.insertAfter({'nodeId':999, 'label':'', 'isLeaf':true}, node);
-
-        
-      },
-
-      remove(node, data) {
-        this.$refs.tree.remove(node);
-      },    
+        ],
+        callback: function() {
+          _this.$refs.tree.insertAfter(
+            { nodeId: 999, label: "不错", isLeaf: true },
+            _node
+          );
+        }
+      });
+    },
+    edit(node, data) {
+      var _this = this;
+      var _node = node;
+      this.$store.dispatch("showDialog", {
+        config: [
+          {
+            type: "admin-form",
+            submitType: "dialog",
+            fields: [
+              { field: "nodeId", name: "id", type: "number", primaryKey: true },
+              {
+                field: "label",
+                type: "string",
+                length: 30,
+                name: "标签"
+              },
+              {
+                field: "position",
+                type: "select",
+                map: { 1: "添加到前面" },
+                length: 30,
+                name: "位置"
+              }
+            ],
+            groups: [],
+            primaryKey: "qaId",
+            url: ""
+          }
+        ],
+        callback: function() {
+          _this.$refs.tree.insertAfter(
+            { nodeId: 999, label: "不错", isLeaf: true },
+            _node
+          );
+        }
+      });
+    },
+    remove(node, data) {
+      this.$refs.tree.remove(node);
     }
-  };
+  }
+};
 </script>
 
 <style>
-  .custom-tree-node {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    padding: 12px 35px;
-  }
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 12px 35px;
+}
 </style>

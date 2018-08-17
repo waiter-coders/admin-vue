@@ -6,27 +6,27 @@
     </div>
 </template>
 <script>
-import { initFormData, timeFormat } from '@/utils/loader';
+import { initFormData, timeFormat } from "@/utils/loader";
 export default {
-    name: 'datetime',
-    data() {
-        return {
-            formData: initFormData( this.field.field, this.field.value )
-        }
-    },
-    props: ['field'],
-    filters:{
-        time: function(val){
-            return timeFormat[val];
-        }
-    },
-    methods: {
-        getElementData(){
-           var result = {}
-            result[this.field.field] = this.field.value;
-            return result;
-        },
+  name: "datetime",
+  data() {
+    return {
+      formData: initFormData(this.field.field, this.field.value)
+    };
+  },
+  props: ["field"],
+  filters: {
+    time: function(val) {
+      return timeFormat[val];
     }
-}
+  },
+  methods: {
+    getElementData() {
+      var result = {};
+      result[this.field.field] = this.field.value;
+      return result;
+    }
+  }
+};
 </script>
 

@@ -8,8 +8,8 @@
 <script>
 export default {
   name: "waiter",
-  computed:{
-    dialog(){
+  computed: {
+    dialog() {
       return this.$store.state.dialog;
     }
   }

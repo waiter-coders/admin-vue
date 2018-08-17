@@ -26,23 +26,23 @@ config:{
 @事件：
 changePaging(paging)
 */
-  export default {
-    props: ['config'],
-    methods: {
-      changePageSize(pageSize){
-        this.config.pageSize = pageSize;
-        this.$emit('changePaging', this.config)
-      },
-      changePageNum(pageNum){
-        this.config.currentPage = pageNum;
-        this.$emit('changePaging', this.config)
-      }
+export default {
+  props: ["config"],
+  methods: {
+    changePageSize(pageSize) {
+      this.config.pageSize = pageSize;
+      this.$emit("changePaging", this.config);
+    },
+    changePageNum(pageNum) {
+      this.config.currentPage = pageNum;
+      this.$emit("changePaging", this.config);
     }
   }
+};
 </script>
 <style scoped>
-.waiter-paging {    
-    text-align: right;
-    margin-top: 20px;
-    }
+.waiter-paging {
+  text-align: right;
+  margin-top: 20px;
+}
 </style>

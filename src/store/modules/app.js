@@ -19,10 +19,10 @@ const app = {
     },
     ADD_VISITED_VIEWS: (state, view) => {
       if (state.visitedViews.some(v => v.path === view.path)) return
-      state.visitedViews.push({ 
-      	name: view.name, 
-      	path: view.path,
-      	title: view.title
+      state.visitedViews.push({
+        name: view.name,
+        path: view.path,
+        title: view.title
       })
     },
     DEL_VISITED_VIEWS: (state, view) => {
@@ -36,19 +36,19 @@ const app = {
       state.visitedViews.splice(index, 1)
     },
     DEL_OTHERS_VIEWS: (state, view) => {
-    	for (const [i, v] of state.visitedViews.entries()) {
-    		if (v.path === view.path) {
-    			state.visitedViews.slice(i,i+1);
-    		}
-    	}
+      for (const [i, v] of state.visitedViews.entries()) {
+        if (v.path === view.path) {
+          state.visitedViews.slice(i, i + 1)
+        }
+      }
     },
-    DEL_ALL_VIEWS: (state ) => {
-    	state.visitedViews = [];
+    DEL_ALL_VIEWS: state => {
+      state.visitedViews = []
     },
-		INIT_CURRENT_VIEW: (state, view) => {
-			//Cookies.set('currentView',view);
-			state.currentView = view;
-		}
+    INIT_CURRENT_VIEW: (state, view) => {
+      //Cookies.set('currentView',view);
+      state.currentView = view
+    }
   },
   actions: {
     ToggleSideBar({ commit }) {
@@ -58,25 +58,25 @@ const app = {
       commit('ADD_VISITED_VIEWS', view)
     },
     delVisitedViews({ commit, state }, view) {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         commit('DEL_VISITED_VIEWS', view)
         resolve([...state.visitedViews])
       })
     },
     delOthersViews({ commit, state }, view) {
-    	return new Promise( (resolve) => {
-    		commit('DEL_OTHERS_VIEWS', view);
-    		resolve([...state.visitedViews])
-    	})
+      return new Promise(resolve => {
+        commit('DEL_OTHERS_VIEWS', view)
+        resolve([...state.visitedViews])
+      })
     },
-    delAllViews({ commit, state }){
-    	return new Promise( (resolve) => {
-    		commit('DEL_ALL_VIEWS')
-    		resolve([...state.visitedViews])
-    	})
+    delAllViews({ commit, state }) {
+      return new Promise(resolve => {
+        commit('DEL_ALL_VIEWS')
+        resolve([...state.visitedViews])
+      })
     },
-    initCurrentView({ commit, state }, view){
-    	commit('INIT_CURRENT_VIEW', view); 
+    initCurrentView({ commit, state }, view) {
+      commit('INIT_CURRENT_VIEW', view, state)
     }
   }
 }

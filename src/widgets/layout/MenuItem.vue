@@ -23,66 +23,64 @@
 
 <script>
 export default {
-	name: 'SidebarItem',
-	props:{
-		menus:{
-			type: Array
-		}
-	},
-    data (){
-    	return {
-    		
-    	}
-    },
-    watch: {
-    	$route() {
-    		this.initCurrentView();
-    	}
-    },
-    updated(){
-    	this.initCurrentView();
-    },
-    methods:{
-    	initCurrentView(){
-    		const domain = this.$route.params.domain || this.$route.params.controller;
-    		const controller = this.$route.params.controller || '';
-    		let menus = this.menus;
-    		let view = [];
-    		let father = menus.find((value, index, arr)=>{
-    			if(domain == value.domain){
-    				return value;
-    			}
-    		});
-    		view.push(father);
-    		if( father && father.hasOwnProperty("children")){
-    			let child = father.children.find( (value,index,arr) => {
-					if(controller == value.domain){
-						return value;
-					}
-				});
-				view.push(child);
-    		}
-    		// console.log(view);
-			this.$store.dispatch('initCurrentView',view);
-    	},
-        changeView(item){
-        	//console.log('---------------item--------------');
-        	//console.log(item);
-        }
+  name: "SidebarItem",
+  props: {
+    menus: {
+      type: Array
     }
-}
+  },
+  data() {
+    return {};
+  },
+  watch: {
+    $route() {
+      this.initCurrentView();
+    }
+  },
+  updated() {
+    this.initCurrentView();
+  },
+  methods: {
+    initCurrentView() {
+      const domain = this.$route.params.domain || this.$route.params.controller;
+      const controller = this.$route.params.controller || "";
+      let menus = this.menus;
+      let view = [];
+      let father = menus.find((value, index, arr) => {
+        if (domain == value.domain) {
+          return value;
+        }
+      });
+      view.push(father);
+      if (father && father.hasOwnProperty("children")) {
+        let child = father.children.find((value, index, arr) => {
+          if (controller == value.domain) {
+            return value;
+          }
+        });
+        view.push(child);
+      }
+      // console.log(view);
+      this.$store.dispatch("initCurrentView", view);
+    },
+    changeView(item) {
+      //console.log('---------------item--------------');
+      //console.log(item);
+    }
+  }
+};
 </script>
 <style lang="scss">
-.icon{
-	width:1.3em;
-	height:1.3em;
-	margin-right:16px;
+.icon {
+  width: 1.3em;
+  height: 1.3em;
+  margin-right: 16px;
 }
-.el-submenu{
-	overflow: hidden;
+.el-submenu {
+  overflow: hidden;
 }
-.el-submenu .el-menu-item{
-	min-width:0px;
-	width:auto;
+.el-submenu .el-menu-item {
+  min-width: 0px;
+  width: auto;
 }
 </style>

@@ -8,7 +8,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
-import {AdminBuilder,AdminDialog} from '@/widgets/admin'
+import { AdminBuilder, AdminDialog } from '@/widgets/admin'
 // import './mock'
 
 Vue.component('icon', Icon)
@@ -16,12 +16,12 @@ Vue.component('admin-builder', AdminBuilder)
 Vue.component('admin-dialog', AdminDialog)
 
 Vue.config.productionTip = false
-Vue.use(ElementUI);
+Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App},
+  components: { App },
   template: '<App/>'
 })

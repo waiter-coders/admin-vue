@@ -1,6 +1,6 @@
-import service from '@/utils/service';
+import service from '@/utils/service'
 
 
 export const getConfigs = (controller) => {
-	return service.get(controller + '/getConfigs');
+  return service.get(controller + '/getConfigs')
 }

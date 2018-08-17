@@ -4,8 +4,8 @@ import Router from 'vue-router'
 // 公共视图组件
 // import Dashboard from '@/views/Dashboard' // 主窗口框架（含菜单）
 // import AdminRender from '@/views/AdminRender' // 页面工厂
-const Dashboard  = resolve => require(['@/views/Dashboard'], resolve) // 主窗口框架（含菜单）懒加载方案
-const AdminRender  = resolve => require(['@/views/AdminRender'], resolve)// 页面工厂 懒加载方案
+const Dashboard = resolve => require(['@/views/Dashboard'], resolve) // 主窗口框架（含菜单）懒加载方案
+const AdminRender = resolve => require(['@/views/AdminRender'], resolve) // 页面工厂 懒加载方案
 
 // 页面视图组件
 // import Home from '@/views/Home' //首页
@@ -13,7 +13,7 @@ const AdminRender  = resolve => require(['@/views/AdminRender'], resolve)// 页�
 // import AdminAccount from '@/views/admin/Account' // 修改密码页
 const Home = resolve => require(['@/views/Home'], resolve) //首页 懒加载方案
 const Login = resolve => require(['@/views/admin/Login'], resolve) //登录页 懒加载方案
-const AdminAccount = resolve => require(['@/views/admin/Account'], resolve)//修改密码页 懒加载方案
+const AdminAccount = resolve => require(['@/views/admin/Account'], resolve) //修改密码页 懒加载方案
 
 // 接口
 import { isLogin } from '@/api/admin'
@@ -23,11 +23,11 @@ Vue.use(Router)
 // 页面路由， 公共路由在后面，自定义的页面路由添加到公共视图路由前，以便覆盖公共路由
 const router = new Router({
   routes: [
-    // 无菜单页面路由        
+    // 无菜单页面路由
     {
       path: '/admin/login',
       name: 'login',
-      meta: { 
+      meta: {
         title: '登录'
       },
       component: Login
@@ -36,11 +36,11 @@ const router = new Router({
     {
       path: '/',
       // name: 'main', 父级路由不能有name
-      component:Dashboard,
+      component: Dashboard,
       meta: {
         title: '首页'
       },
-      children: [                
+      children: [
         // 自定义页面路由
         {
           path: '/',
@@ -55,14 +55,14 @@ const router = new Router({
         {
           path: '/:domain/:controller?/:subController?',
           name: 'factory',
-          meta:{
+          meta: {
             title: '列表'
           },
           component: AdminRender,
-          props:true
+          props: true
         }
       ]
-    },        
+    }
   ]
 })
 
@@ -76,6 +76,5 @@ router.beforeEach((to, from, next) => {
   // 继续路由
   next()
 })
-
 
 export default router

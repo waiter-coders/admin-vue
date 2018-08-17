@@ -21,14 +21,14 @@ click(action, actionParams)
 */
 import request from "@/utils/service";
 export default {
-  props: ['config'],
+  props: ["config"],
   data() {
     return {
-      'actions':[]
-    }
+      actions: []
+    };
   },
-  created(){
-    this.actions = this.config.actions
+  created() {
+    this.actions = this.config.actions;
   },
   watch: {
     config: {
@@ -40,12 +40,14 @@ export default {
   },
   methods: {
     click: function(index) {
-      this.$emit('click', this.actions[index].id, this.actions[index]);
+      this.$emit("click", this.actions[index].id, this.actions[index]);
     }
   }
 };
 </script>
 
 <style scoped>
-.btn-hide{display: none;}
+.btn-hide {
+  display: none;
+}
 </style>
