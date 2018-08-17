@@ -1,10 +1,10 @@
 <template>
 <div>
     <el-dialog
-    :title="config.title"
+    v-bind:title="config.title"
     :visible.sync="config.display"
     :before-close="closeCallback">
-        <admin-builder :configs="config.config"></admin-builder>
+        <admin-builder v-bind:configs="config.config"></admin-builder>
     </el-dialog>
 </div>
 </template>

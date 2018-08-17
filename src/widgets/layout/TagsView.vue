@@ -2,8 +2,8 @@
 	<div class="tags-view-container">
 	  <div class="tags-view-wrapper">
     <!--<scroll-pane class='tags-view-wrapper' ref='scrollPane'>-->
-	      <router-link ref='tag' class="tags-view-item" :class="isActive(tag)?'active':''" v-for="tag in Array.from(visitedViews)"
-	        :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
+	      <router-link ref='tag' class="tags-view-item" v-bind:class="isActive(tag)?'active':''" v-for="tag in Array.from(visitedViews)"
+	        v-bind:to="tag.path" v-bind:key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
 	        {{tag.title}}
 	        {{tag.name}}
 	        <!--{{generateTitle(tag.title)}}-->
@@ -11,7 +11,7 @@
 	      </router-link>
       </div>
     <!--</scroll-pane>-->
-    <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
+    <ul class='contextmenu' v-show="visible" v-bind:style="{left:left+'px',top:top+'px'}">
       <li @click="closeSelectedTag(selectedTag)">关闭</li>
       <li @click="closeOthersTags">关闭其他</li>
       <li @click="closeAllTags">全部关闭</li>
@@ -51,7 +51,7 @@ export default {
     this.addViewTags();
   },
   methods: {
-    //generateTitle, // generateTitle by vue-i18n
+    // generateTitle, //  generateTitle by vue-i18n
     generateRoute() {
       if (this.$route.name) {
         return this.$route;
@@ -69,15 +69,15 @@ export default {
       this.$store.dispatch("addVisitedViews", route);
     },
     moveToCurrentTag() {
-      //    const tags = this.$refs.tag
-      //    this.$nextTick(() => {
-      //      for (const tag of tags) {
-      //        if (tag.to === this.$route.path) {
-      //          this.$refs.scrollPane.moveToTarget(tag.$el)
-      //          break
-      //        }
-      //      }
-      //    })
+      //     const tags = this.$refs.tag
+      //     this.$nextTick(() => {
+      //       for (const tag of tags) {
+      //         if (tag.to === this.$route.path) {
+      //           this.$refs.scrollPane.moveToTarget(tag.$el)
+      //           break
+      //         }
+      //       }
+      //     })
     },
     closeSelectedTag(view) {
       this.$store.dispatch("delVisitedViews", view).then(views => {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <component :is="config.type" :config="config" v-for="(config,index) in configs" v-bind:key="index">组件初始化失败</component>
+        <component v-bind:is="config.type" v-bind:config="config" v-for="(config,index) in configs" v-bind:key="index">组件初始化失败</component>
     </div>
 </template>
 

@@ -12,7 +12,7 @@
 			<!--<tags-view></tags-view>-->
 			<section class="app-main" style="min-height: 100%">
         <transition name="fade" mode="out-in">
-          <router-view :key="key"></router-view>
+          <router-view v-bind:key="key"></router-view>
         </transition>
       </section>
 		</div>
@@ -34,7 +34,7 @@ export default {
     Hamburger,
     Bread,
     UserActions
-    //TagsView,
+    // TagsView,
   },
   /*computed:{
 		sidebar(){

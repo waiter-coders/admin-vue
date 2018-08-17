@@ -1,7 +1,7 @@
 <template>
   <div class="admin-form">
-  	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
-       <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in fields" v-bind:key="index">组件初始化失败</component>
+  	<el-form ref="form" v-bind:model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
+       <component v-bind:is="field.type | typeFilter" v-bind:field="field" v-for="(field,index) in fields" v-bind:key="index">组件初始化失败</component>
        <el-form-item>
          <el-button type="primary" @click="submitForm">提交</el-button>
        </el-form-item>

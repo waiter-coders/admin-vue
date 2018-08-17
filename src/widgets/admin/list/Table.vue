@@ -1,11 +1,11 @@
 <template> 
-  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
+  <el-table v-bind:data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
-        <el-table-column v-for="item in config.fields" :prop="item.field" 
-            :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
+        <el-table-column v-for="item in config.fields" v-bind:prop="item.field" 
+            v-bind:label="item.name" v-bind:key="item.id" v-bind:formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
+                <button-group class="list-table-actions" v-bind:config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
             </template>
         </el-table-column>
   </el-table>

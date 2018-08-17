@@ -6,7 +6,7 @@
       		active-text-color="#ffd04b"
 			:unique-opened="unique"
       		:collapse="isCollapse" >
-			<menu-item :menus="menu"></menu-item>
+			<menu-item v-bind:menus="menu"></menu-item>
 		</el-menu>
 	</div>
 </template>

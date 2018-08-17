@@ -44,7 +44,7 @@ const user = {
   },
 
   actions: {
-    // 用户名登录
+    //  用户名登录
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
@@ -59,11 +59,11 @@ const user = {
       })
     },
 
-    // 获取用户信息
+    //  获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
-          if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
+          if (!response.data) { //  由于mockjs 不支持自定义状态码只能这样hack
             reject('error')
           }
           const data = response.data
@@ -78,21 +78,21 @@ const user = {
       })
     },
 
-    // 第三方验证登录
-    // LoginByThirdparty({ commit, state }, code) {
-    //   return new Promise((resolve, reject) => {
-    //     commit('SET_CODE', code)
-    //     loginByThirdparty(state.status, state.email, state.code).then(response => {
-    //       commit('SET_TOKEN', response.data.token)
-    //       setToken(response.data.token)
-    //       resolve()
-    //     }).catch(error => {
-    //       reject(error)
-    //     })
-    //   })
-    // },
+    //  第三方验证登录
+    //  LoginByThirdparty({ commit, state }, code) {
+    //    return new Promise((resolve, reject) => {
+    //      commit('SET_CODE', code)
+    //      loginByThirdparty(state.status, state.email, state.code).then(response => {
+    //        commit('SET_TOKEN', response.data.token)
+    //        setToken(response.data.token)
+    //        resolve()
+    //      }).catch(error => {
+    //        reject(error)
+    //      })
+    //    })
+    //  },
 
-    // 登出
+    //  登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
@@ -106,7 +106,7 @@ const user = {
       })
     },
 
-    // 前端 登出
+    //  前端 登出
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
@@ -115,7 +115,7 @@ const user = {
       })
     },
 
-    // 动态修改权限
+    //  动态修改权限
     ChangeRole({ commit }, role) {
       return new Promise(resolve => {
         commit('SET_TOKEN', role)

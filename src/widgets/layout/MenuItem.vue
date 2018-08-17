@@ -1,17 +1,17 @@
 <template>
 	<div class="menu-item">
 		<template v-for="item in menus">
-			<router-link v-if="!item.children" :to="'/'+item.domain" :key="item.domain">
-				<el-menu-item :index="item.domain">
+			<router-link v-if="!item.children" v-bind:to="'/'+item.domain" v-bind:key="item.domain">
+				<el-menu-item v-bind:index="item.domain">
 					<span slot="title">{{item.title}}</span>
 				</el-menu-item>				
 			</router-link>
-			<el-submenu v-else :index="item.domain" :key="item.index">
+			<el-submenu v-else v-bind:index="item.domain" v-bind:key="item.index">
 				<template slot="title">
 					<span slot="title">{{item.title}}</span>
 				</template>
-				<router-link v-for="subitem in item.children" :to="'/'+item.domain+'/'+subitem.domain" :key="item.domain+'/'+subitem.domain">
-					<el-menu-item :index="item.domain+'/'+subitem.domain">
+				<router-link v-for="subitem in item.children" v-bind:to="'/'+item.domain+'/'+subitem.domain" v-bind:key="item.domain+'/'+subitem.domain">
+					<el-menu-item v-bind:index="item.domain+'/'+subitem.domain">
 						<span slot="title">{{subitem.title}}</span>
 					</el-menu-item>
 				</router-link>
@@ -60,12 +60,12 @@ export default {
         });
         view.push(child);
       }
-      // console.log(view);
+      //  console.log(view);
       this.$store.dispatch("initCurrentView", view);
     },
     changeView(item) {
-      //console.log('---------------item--------------');
-      //console.log(item);
+      // console.log('---------------item--------------');
+      // console.log(item);
     }
   }
 };

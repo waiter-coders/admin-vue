@@ -7,7 +7,7 @@
         :page-sizes="[5, 10, 15]"
         :page-size="config.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="config.totalNum">
+        v-bind:total="config.totalNum">
         </el-pagination>
     </div>
 </template>

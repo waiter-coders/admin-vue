@@ -1,4 +1,4 @@
-// 通过配置文件，装在对应vue组件的工具类
+//  通过配置文件，装在对应vue组件的工具类
 
 export const formConfig = {
   string: 'admin-input',
@@ -9,7 +9,7 @@ export const formConfig = {
   html: 'editor',
   date: 'datetime'
 }
-//datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+// datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
 export const timeFormat = {
   year: 'yyyy',
   month: 'MM',

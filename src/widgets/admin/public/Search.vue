@@ -1,15 +1,15 @@
 <template>
     <div>
-        <el-form :inline="true" ref="form" label-width="80px">
-            <el-form-item v-for="item in config.fields" :key="item.field">
-                <el-input v-if="item.type == 'string'" size="mini" :name="item.field" :placeholder="'请输入'+item.name" v-model="item.value"></el-input>
-                <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" :placeholder="'请选择'+item.name">
+        <el-form v-bind:inline="true" ref="form" label-width="80px">
+            <el-form-item v-for="item in config.fields" v-bind:key="item.field">
+                <el-input v-if="item.type == 'string'" size="mini" v-bind:name="item.field" v-bind:placeholder="'请输入'+item.name" v-model="item.value"></el-input>
+                <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" v-bind:placeholder="'请选择'+item.name">
                     <el-option value="" label="全部" key="quanbu"></el-option>
                     <el-option
                     v-for="(value, index) in item.map"
-                    :key="index"
-                    :label="value"
-                    :value="index">
+                    v-bind:key="index"
+                    v-bind:label="value"
+                    v-bind:value="index">
                     </el-option>
                 </el-select>
                 <el-date-picker size="mini" v-if="item.type == 'datetime'" v-model="item.value" type="datetimerange" range-separator="至" start-placeholder="请输入开始时间" end-placeholder="请输入结束时间"></el-date-picker>
@@ -28,7 +28,7 @@
 @配置：
 config:{
     fields:[
-        {name:"", field:"", type:"", value:""} // type包括：string number text html select multiSelect linkSelect date datetime image file等
+        {name:"", field:"", type:"", value:""} //  type包括：string number text html select multiSelect linkSelect date datetime image file等
     ]
 }
 

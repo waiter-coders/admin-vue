@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
     <el-row>
-    	<el-col :span="24" class="top">
-    		<el-col :span="6" :offset="1">
+    	<el-col v-bind:span="24" class="top">
+    		<el-col v-bind:span="6" v-bind:offset="1">
     			<span>Log</span>
     			<span>in</span>
     		</el-col>
     	</el-col>
     </el-row>
     <el-row class="main" type="flex" justify="center">
-    	<el-col :span="4" :xs="16" class="form">
-    		<el-form ref="form" :model="form" :rules="rules" label-width="50px">
+    	<el-col v-bind:span="4" v-bind:xs="16" class="form">
+    		<el-form ref="form" v-bind:model="form" v-bind:rules="rules" label-width="50px">
     			<div class="owl">
     				<div class="arms">
     					<div class="arm"></div>
@@ -18,7 +18,7 @@
     				</div>
     			</div>
     			<el-row class="form-info">
-    				<el-col :span="24">请输入账号、密码登录</el-col>
+    				<el-col v-bind:span="24">请输入账号、密码登录</el-col>
     			</el-row>
     			<el-form-item label="账号" prop="username">
     				<el-input placeholder="账号" v-model="form.username" clearable ></el-input><!--icon="close" :on-icon-click="clearInput('account')"-->
@@ -27,10 +27,10 @@
     				<el-input placeholder="密码" v-model="form.password" clearable type="password" @focus="pwdFocusBlur('5px','65px','120px')" @blur="pwdFocusBlur('40px','20px','160px')"></el-input>
     			</el-form-item>
     			<el-form-item>
-    				<el-col :span="10">	
+    				<el-col v-bind:span="10">	
     					<el-checkbox v-model="form.remember">7天免登录</el-checkbox>
     				</el-col>
-    				<el-col :span="6" :offset="2">
+    				<el-col v-bind:span="6" v-bind:offset="2">
 	    				<el-button type="primary" @click="login('form')">登录</el-button>
     				</el-col>
     			</el-form-item>
@@ -42,7 +42,7 @@
 
 <script>
 import { login } from "@/api/admin";
-//import { setUser } from '@/utils';
+// import { setUser } from '@/utils';
 export default {
   name: "Login",
   data() {
@@ -55,7 +55,7 @@ export default {
       rules: {
         username: [
           { required: true, message: "请输入账号", trigger: "blur" }
-          //{ type: 'email',message: '请输入正确的邮箱地址', trigger: 'blur'}
+          // { type: 'email',message: '请输入正确的邮箱地址', trigger: 'blur'}
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       },
@@ -78,7 +78,7 @@ export default {
           var par = _this.form;
           login(par).then(res => {
             if (res.code === 0) {
-              //setUser( _this.form.username , _this.form.remember );
+              // setUser( _this.form.username , _this.form.remember );
               _this.$router.push("/");
             } else {
               _this.$message.error(res.msg);

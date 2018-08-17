@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<el-breadcrumb>
-			<el-breadcrumb-item :to="{path: '/'}">首页</el-breadcrumb-item>
-			<el-breadcrumb-item v-for="item in currentView" :key="item.domain">{{item.title}}</el-breadcrumb-item>
+			<el-breadcrumb-item v-bind:to="{path: '/'}">首页</el-breadcrumb-item>
+			<el-breadcrumb-item v-for="item in currentView" v-bind:key="item.domain">{{item.title}}</el-breadcrumb-item>
 			<!--<el-breadcrumb-item>{{root()}}</el-breadcrumb-item>-->
 		</el-breadcrumb>
 	</div>

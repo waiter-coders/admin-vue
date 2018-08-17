@@ -1,7 +1,7 @@
 <template>
   <div>
-  	<el-form-item :label="field.name" v-if="!field.primaryKey">
-      <el-input v-model="field.value" :name="field.field"></el-input>
+  	<el-form-item v-bind:label="field.name" v-if="!field.primaryKey">
+      <el-input v-model="field.value" v-bind:name="field.field"></el-input>
     </el-form-item>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
   name: "AdminInput",
   props: ["field"],
   mounted: function() {
-    //console.log(this.formData);
+    // console.log(this.formData);
   },
   methods: {
     checkElementLegal() {

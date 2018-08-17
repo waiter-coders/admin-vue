@@ -1,6 +1,6 @@
 <template>
 <div>
-    <el-button :type="action.color ? action.color : 'default'" :size="action.size ? action.size : 'mini'" v-for="(action, index) in actions" v-bind:key="index" @click.stop="click(index)" :disabled="action.isDisabled == true" :class="{'btn-hide':action.isShow != true}">{{ action.name }}</el-button>
+    <el-button v-bind:type="action.color ? action.color : 'default'" v-bind:size="action.size ? action.size : 'mini'" v-for="(action, index) in actions" v-bind:key="index" @click.stop="click(index)" v-bind:disabled="action.isDisabled == true" v-bind:class="{'btn-hide':action.isShow != true}">{{ action.name }}</el-button>
 </div>
 </template>
 <script>

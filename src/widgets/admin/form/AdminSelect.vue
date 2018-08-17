@@ -1,8 +1,8 @@
 <template>
   <div>
-  	<el-form-item :label="field.name">
-      <el-select v-model="field.value" :name="field.field">
-        <el-option v-for="(item,key) in field.map" :key="'option_'+key" :label="item" :value="key"></el-option>
+  	<el-form-item v-bind:label="field.name">
+      <el-select v-model="field.value" v-bind:name="field.field">
+        <el-option v-for="(item,key) in field.map" v-bind:key="'option_'+key" v-bind:label="item" v-bind:value="key"></el-option>
       </el-select>
     </el-form-item>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <admin-dialog :config="dialog"></admin-dialog>
+    <admin-dialog v-bind:config="dialog"></admin-dialog>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
       return this.$store.state.dialog;
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

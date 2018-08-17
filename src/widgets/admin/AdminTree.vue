@@ -1,11 +1,11 @@
 <template>
   <div>
   	<el-tree
-      :data="data"
+      v-bind:data="data"
       node-key="nodeId"
       :default-expanded-keys="[]"
       lazy
-      :load="loadChildren"
+      v-bind:load="loadChildren"
       accordion
       draggable
       :allow-drop="allowDrop" ref="tree">
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     formatAjaxData(response) {
-      // 规范数据
+      //  规范数据
       var children = [];
       for (var i in response) {
         var node = {};

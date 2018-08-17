@@ -1,13 +1,13 @@
 <template>
   <div class="list-container">
     <div class="list-header">
-      <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-      <button-group class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
+      <search class="list-search" v-bind:config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
+      <button-group class="list-table-actions" v-bind:config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
     </div>    
-    <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
+    <table-list class="list-table" v-bind:config="list" @click="actionsClick" ref="table_list"></table-list>
     <paging class="list-paging" 
     @changePaging="changePaging"
-    :config="paging"
+    v-bind:config="paging"
      v-if="paging.totalNum > paging.pageSize"></paging>
   </div>  
 </template>
@@ -123,7 +123,7 @@ export default {
           type: "datetime",
           datetime: "year",
           value: "2018"
-        }, //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+        }, // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
         {
           name: "月份",
           field: "month",
@@ -185,7 +185,7 @@ export default {
     },
     searchClick(searchParams) {
       this.search.searchParams = searchParams;
-      this.paging.currentPage = 1; // 搜索自动跳回第一页
+      this.paging.currentPage = 1; //  搜索自动跳回第一页
       this.reloadData();
     },
     actionsClick(action, params) {

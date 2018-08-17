@@ -6,11 +6,11 @@ axios.defaults.headers.post['Content-Type'] =
 const service = axios.create({
   baseURL: '/index.php',
   timeout: 5000
-  // headers: {'X-Custom-Header': 'foobar'}
+  //  headers: {'X-Custom-Header': 'foobar'}
 })
 
-// let LoadingEl
-// 请求拦截器
+//  let LoadingEl
+//  请求拦截器
 service.interceptors.request.use(
   config => {
     return config
@@ -21,7 +21,7 @@ service.interceptors.request.use(
   }
 )
 
-// 回复拦截器
+//  回复拦截器
 service.interceptors.response.use(
   response => {
     if (response.data.code !== 0) {

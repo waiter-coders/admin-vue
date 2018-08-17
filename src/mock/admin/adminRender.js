@@ -7,7 +7,7 @@ var obj = {
   'icon|+1': ['all', 'account', 'form', 'category'],
   path: '@url',
   name:
-    '@string(https://shop.vivo.com.cn/product/10390?cid=gw_x_floor02, 3, 9)',
+    '@string(https:// shop.vivo.com.cn/product/10390?cid=gw_x_floor02, 3, 9)',
   title: '@ctitle(5, 9)'
 }
 for (let i = 0; i < count; i++) {
@@ -28,10 +28,10 @@ for (let i = 0; i < count; i++) {
     })
   )
 }
-//返回比较规范的列表，可以在这里提供多种方法，提供对menu参数的访问，该模块的数据，不仅仅用于刷新Menu,而且用户其他地方获取该板块的相关信息？
+// 返回比较规范的列表，可以在这里提供多种方法，提供对menu参数的访问，该模块的数据，不仅仅用于刷新Menu,而且用户其他地方获取该板块的相关信息？
 export default {
   getConfigs: (request, response, next) => {
-    if (request.url == '//admin/invite/getConfigs') {
+    if (request.url == '// admin/invite/getConfigs') {
       return {
         data: [
           {
@@ -67,7 +67,7 @@ export default {
                 field: 'year',
                 type: 'datetime',
                 datetime: 'year'
-              }, //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+              }, // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
               {
                 name: '月份',
                 field: 'month',
@@ -97,12 +97,12 @@ export default {
             url: 'controller/add'
           }
         ],
-        //data: List,
+        // data: List,
         code: 0,
         msg: 'successdddddd'
       }
     }
-    if (request.url == '//admin/account/submit/getConfigs') {
+    if (request.url == '// admin/account/submit/getConfigs') {
       return {
         data: [
           {
@@ -144,7 +144,7 @@ export default {
                 type: 'datetime',
                 datetime: 'year',
                 value: '2018'
-              }, //datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+              }, // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
               {
                 name: '月份',
                 field: 'month',
@@ -177,13 +177,13 @@ export default {
             url: 'controller/add'
           }
         ],
-        //data: List,
+        // data: List,
         code: 0,
         msg: 'successefeff'
       }
     }
 
-    if (request.url == '//admin/account/getConfigs') {
+    if (request.url == '// admin/account/getConfigs') {
       return {
         code: 0,
         msg: 'successss2ewe',

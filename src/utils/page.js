@@ -1,16 +1,25 @@
 import service from './service'
 import { Message, MessageBox } from 'element-ui'
 
-const sendRequest = function(url, params, confirmMsg, successMsg, errorMsg, isPost){
+const sendRequest = function (
+  url,
+  params,
+  confirmMsg,
+  successMsg,
+  errorMsg,
+  isPost
+) {
   var confirm = Promise.resolve(true)
-  if (confirmMsg != undefined && confirmMsg.length > 0) {
+  if (confirmMsg !== undefined && confirmMsg.length > 0) {
     confirm = MessageBox.confirm(confirmMsg)
   }
-  return confirm.then(function(){
-    var ajax = isPost ? service.post(url, {params:params}) : service.get(url, {params:params}) 
-    return ajax.then(function(){
+  return confirm.then(function () {
+    var ajax = isPost
+      ? service.post(url, { params: params })
+      : service.get(url, { params: params })
+    return ajax.then(function () {
       var success = Promise.resolve(true)
-      if (successMsg != undefined && successMsg.length > 0) {
+      if (successMsg !== undefined && successMsg.length > 0) {
         success = Message.success(successMsg)
       }
       return success
@@ -18,10 +27,14 @@ const sendRequest = function(url, params, confirmMsg, successMsg, errorMsg, isPo
   })
 }
 
-const fetch = function(url, params, confirmMsg, successMsg, errorMsg){return sendRequest(url, params, confirmMsg, successMsg, errorMsg, false)}
-const post = function(url, params, confirmMsg, successMsg, errorMsg){return sendRequest(url, params, confirmMsg, successMsg, errorMsg, true)}
+const fetch = function (url, params, confirmMsg, successMsg, errorMsg) {
+  return sendRequest(url, params, confirmMsg, successMsg, errorMsg, false)
+}
+const post = function (url, params, confirmMsg, successMsg, errorMsg) {
+  return sendRequest(url, params, confirmMsg, successMsg, errorMsg, true)
+}
 
 export default {
-  fetch:fetch,
-  post:post
+  fetch: fetch,
+  post: post
 }
