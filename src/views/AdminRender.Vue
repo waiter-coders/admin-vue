@@ -1,35 +1,33 @@
 <template>
     <div>
-        <admin-builder :configs="configs"></admin-builder>
+        <admin-builder v-bind:configs="configs"></admin-builder>
     </div>
 </template>
 
 <script>
-import { getConfigs } from "@/api/admin/adminRender";
+import { getConfigs } from '@/api/admin/adminRender'
 export default {
-  name: "factory",
-  data() {
+  name: 'factory',
+  data () {
     return {
       configs: []
-    };
+    }
   },
-  created: function() {
-    this.getConfigs();
+  created: function () {
+    this.getConfigs()
   },
   methods: {
-    getConfigs() {
-      var _this = this;
-      var controller = _this.$route.path;
-      console.log(controller);
+    getConfigs () {
+      var _this = this
+      var controller = _this.$route.path
       //  _this.$store.dispatch('addConfig', controller);
-      getConfigs(controller).then(function(response) {
-        _this.configs = response;
-      });
+      getConfigs(controller).then(function (response) {
+        _this.configs = response
+      })
     }
   }
-};
+}
 </script>
-
 <style lang="scss">
 .app-wrapper {
   width: 100%;
