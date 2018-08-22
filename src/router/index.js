@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
 //  公共视图组件
 //  import Dashboard from '@/views/Dashboard' //  主窗口框架（含菜单）
@@ -18,10 +18,10 @@ const Login = resolve => require(['@/views/admin/Login'], resolve) // 登录页 
 //  接口
 //  import { isLogin } from '@/api/admin'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 //  页面路由， 公共路由在后面，自定义的页面路由添加到公共视图路由前，以便覆盖公共路由
-const router = new Router({
+const router = new VueRouter({
   routes: [
     //  无菜单页面路由
     {

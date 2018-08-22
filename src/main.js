@@ -4,8 +4,7 @@ import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import ELEMENT from 'element-ui'
 import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
 import { AdminBuilder, AdminDialog } from '@/widgets/admin'
@@ -16,7 +15,7 @@ Vue.component('admin-builder', AdminBuilder)
 Vue.component('admin-dialog', AdminDialog)
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(ELEMENT)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

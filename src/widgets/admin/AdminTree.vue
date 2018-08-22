@@ -94,7 +94,7 @@ export default {
               {
                 field: 'position',
                 type: 'select',
-                map: { 1: '添加到前面' },
+                map: { 1: '兄弟节点', 2: '子节点' },
                 length: 30,
                 name: '位置'
               }
