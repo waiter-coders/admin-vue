@@ -2,14 +2,14 @@ import Mock from 'mockjs'
 
 const List = []
 const count = 10
-var obj = {
-  'id|+1': 1,
-  'icon|+1': ['all', 'account', 'form', 'category'],
-  path: '@url',
-  name:
-    '@string(https:// shop.vivo.com.cn/product/10390?cid=gw_x_floor02, 3, 9)',
-  title: '@ctitle(5, 9)'
-}
+// var obj = {
+//   'id|+1': 1,
+//   'icon|+1': ['all', 'account', 'form', 'category'],
+//   path: '@url',
+//   name:
+//     '@string(https:// shop.vivo.com.cn/product/10390?cid=gw_x_floor02, 3, 9)',
+//   title: '@ctitle(5, 9)'
+// }
 for (let i = 0; i < count; i++) {
   List.push(
     Mock.mock({
@@ -183,7 +183,7 @@ export default {
       }
     }
 
-    if (request.url == '// admin/account/getConfigs') {
+    if (request.url === '// admin/account/getConfigs') {
       return {
         code: 0,
         msg: 'successss2ewe',

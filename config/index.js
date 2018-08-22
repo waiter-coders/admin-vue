@@ -6,15 +6,14 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/index.php':{
-        target: 'http://waiter-admin.some-coders.com',
+      '/index.php': {
+        target: 'http://admin.teamcorp.cn/',
         changeOrigin: true
-    	}
+      }
     },
 
     // Various Dev Server settings
@@ -25,7 +24,6 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
     /**
      * Source Maps
      */
@@ -47,7 +45,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',//打包的css/js文件目录
+    assetsSubDirectory: 'static', // 打包的css/js文件目录
     assetsPublicPath: '/',
 
     /**
