@@ -1,7 +1,7 @@
 import service from '@/utils/service'
 
-export const getNodes = (controller, nodeId) => {
-  return service.get(controller + '/getNodes', {
+export const getTree = (controller, nodeId) => {
+  return service.get(controller + '/getTree', {
     params: {
       nodeId
     }

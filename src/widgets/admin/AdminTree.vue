@@ -1,11 +1,9 @@
 <template>
   <div>
   	<el-tree
-      :data="data"
+      :data="tree"
       node-key="nodeId"
       :default-expanded-keys="[]"
-      lazy
-      :load="loadChildren"
       accordion
       draggable
       :allow-drop="allowDrop" ref="tree">
@@ -38,7 +36,7 @@
 
 <script>
 import {
-  getNodes
+  getTree
   // addNode,
   // changeNodLabel,
   // changeNodePosition,
@@ -52,8 +50,11 @@ export default {
   data () {
     return {
       baseUrl: this.$route.path,
-      data: []
+      tree: []
     }
+  },
+  created () {
+    this.loadTree()
   },
   methods: {
     formatAjaxData (response) {
@@ -68,10 +69,11 @@ export default {
       }
       return children
     },
-    loadChildren (node, callback) {
+    loadTree (node, callback) {
       var _this = this
-      getNodes(this.baseUrl, node.data['nodeId']).then(function (response) {
-        callback(_this.formatAjaxData(response))
+      getTree(this.baseUrl, 0).then(function (response) {
+        _this.tree = response
+        // callback(_this.formatAjaxData(response))
       })
     },
     allowDrop () {},
