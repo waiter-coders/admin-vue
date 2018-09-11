@@ -102,7 +102,7 @@ export default {
               }
             ],
             groups: [],
-            primaryKey: 'qaId',
+            primaryKey: 'nodeId',
             url: ''
           }
         ],
