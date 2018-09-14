@@ -74,12 +74,12 @@ export default {
       try {
         let _this = this
         let data = this.getFormData()
-        let url = this.config.url || this.baseUrl
         let getParams = {}
         getParams[this.config.primaryKey] =
           this.config.primaryKey in this.$route.query
             ? this.$route.query[this.config.primaryKey]
             : 0
+        let url = this.config.url || this.baseUrl
         formSubmit(url, { formData: data }, getParams).then(response => {
           alert('操作成功')
           switch (_this.submitType) {
