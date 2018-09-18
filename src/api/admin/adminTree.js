@@ -25,10 +25,12 @@ export const changeNodLabel = (controller, nodeId, label) => {
   })
 }
 
-export const changeNodePosition = (controller, nodeId, parentId, preNodeId, nexeNodeId) => {
+export const changeNodePosition = (controller, nodeId, moveToId, moveType) => {
   return service.get(controller + '/changeNodePosition', {
     params: {
-      nodeId, parentId, preNodeId, nexeNodeId
+      nodeId,
+      moveToId,
+      moveType
     }
   })
 }

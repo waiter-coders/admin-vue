@@ -43,10 +43,10 @@
 
 <script>
 import {
-  getTree
+  getTree,
   // addNode,
   // changeNodLabel,
-  // changeNodePosition,
+  changeNodePosition
   // deleteNode
 } from '@/api/admin/adminTree'
 import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
@@ -83,30 +83,15 @@ export default {
         // callback(_this.formatAjaxData(response))
       })
     },
-    handleDragStart (node, ev) {
-      console.log('drag start', node)
-    },
-    handleDragEnter (draggingNode, dropNode, ev) {
-      console.log('tree drag enter: ', dropNode.label)
-    },
-    handleDragLeave (draggingNode, dropNode, ev) {
-      console.log('tree drag leave: ', dropNode.label)
-    },
-    handleDragOver (draggingNode, dropNode, ev) {
-      console.log('tree drag over: ', dropNode.label)
-    },
-    handleDragEnd (draggingNode, dropNode, dropType, ev) {
-      console.log('tree drag end: ', dropNode && dropNode.label, dropType)
-    },
     handleDrop (draggingNode, dropNode, dropType, ev) {
+      console.info(draggingNode)
+      changeNodePosition(this.baseUrl, draggingNode.data.nodeId, dropNode.data.nodeId, dropType)
       console.log('tree drop: ', dropNode.label, dropType)
     },
     allowDrag () {
-      console.info('drag')
       return true
     },
     allowDrop () {
-      console.info('drop')
       return true
     },
     append (node, data) {
