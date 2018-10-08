@@ -16,6 +16,7 @@
         </transition>
       </section>
     </div>
+    <admin-dialog :config="dialog"></admin-dialog>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import {
   Menus,
   Hamburger,
   Bread,
+  AdminDialog,
   UserActions /*, TagsView */
 } from '@/widgets/layout'
 
@@ -33,7 +35,8 @@ export default {
     Menus,
     Hamburger,
     Bread,
-    UserActions
+    UserActions,
+    AdminDialog
     // TagsView,
   },
   /* computed:{
@@ -47,6 +50,9 @@ export default {
       return this.$route.name !== undefined
         ? this.$route.name + +new Date()
         : this.$route + +new Date()
+    },
+    dialog () {
+      return this.$store.state.dialog
     }
   }
 }

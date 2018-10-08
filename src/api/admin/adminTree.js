@@ -8,16 +8,16 @@ export const getTree = (controller, nodeId) => {
   })
 }
 
-export const addNode = (controller, label, parentId, preNodeId, nexeNodeId) => {
+export const addNode = (controller, label, moveToId, moveType) => {
   return service.get(controller + '/addNode', {
     params: {
-      label, parentId, preNodeId, nexeNodeId
+      label, moveToId, moveType
     }
   })
 }
 
-export const changeNodLabel = (controller, nodeId, label) => {
-  return service.get(controller + '/changeNodLabel', {
+export const changeNodeLabel = (controller, nodeId, label) => {
+  return service.get(controller + '/changeNodeLabel', {
     params: {
       nodeId,
       label

@@ -1,18 +1,18 @@
 <template>
   <div class="admin-form">
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
-       <component :is="field.type | typeFilter" :field="field" v-for="(field,index) in fields" :key="index">组件初始化失败</component>
+       <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">组件初始化失败</component>
        <el-form-item>
-         <el-button type="primary" @click="submitForm">提交</el-button>
+         <el-button type="primary" @click="action.method(getFormData())" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
        </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { CheckBox, Datetime, Editor, AdminInput, AdminSelect } from './form'
+import { CheckBox, Datetime, Editor, AdminInput, AdminSelect, AdminImage } from '@/widgets/admin/form'
 import { formConfig } from '@/utils/loader'
-import { formSubmit, getFormData } from '@/api/admin/adminForm'
+import { getFormData, formSubmit } from '@/api/admin/adminForm'
 export default {
   name: 'AdminForm',
   data () {
@@ -20,7 +20,8 @@ export default {
       baseUrl: this.$route.path,
       submitType: 'page',
       formData: {},
-      fields: {}
+      fields: {},
+      actions: {}
     }
   },
   props: ['config'],
@@ -29,15 +30,18 @@ export default {
     Datetime,
     Editor,
     AdminInput,
-    AdminSelect
+    AdminSelect,
+    AdminImage
   },
   filters: {
     typeFilter: function (key) {
       return formConfig[key]
     }
   },
+
   created () {
     this.fields = this.config.fields
+    this.actions = this.config.actions
     if (this.config.primaryKey in this.$route.query) {
       var _this = this
       let getParams = {}
@@ -54,26 +58,23 @@ export default {
         _this.fields = fields
       })
     }
-
-    if ('submitType' in this.config) {
-      this.submitType = this.config.submitType
-    }
   },
   methods: {
     getFormData: function () {
-      let $el = this.$children[0].$children
       let data = {}
-      $el.forEach(element => {
-        if (element.getElementData) {
-          Object.assign(data, element.getElementData())
-        }
+      this.fields.forEach(element => {
+        data[element.field] = element.value
       })
       return data
     },
-    submitForm: function () {
+    dialogGet: function () {
+
+    },
+    submitForm: function (data) {
       try {
         let _this = this
         let data = this.getFormData()
+        console.info(data)
         let getParams = {}
         getParams[this.config.primaryKey] =
           this.config.primaryKey in this.$route.query
@@ -82,14 +83,7 @@ export default {
         let url = this.config.url || this.baseUrl
         formSubmit(url, { formData: data }, getParams).then(response => {
           alert('操作成功')
-          switch (_this.submitType) {
-          case 'dialog':
-            _this.$store.dispatch('hiddenDialog')
-            break
-          case 'page':
-          default:
-            _this.$router.go(-1)
-          }
+          _this.$router.go(-1)
         })
       } catch (e) {
         alert(e)

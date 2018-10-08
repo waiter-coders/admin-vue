@@ -1,7 +1,7 @@
 <template>
   <div>
-  	<el-form-item :label="field.name" v-if="!field.primaryKey">
-      <el-input v-model="field.value" :name="field.field"></el-input>
+  	<el-form-item :label="field.name">
+      <el-input v-model="inputValue" :name="field.field"></el-input>
     </el-form-item>
   </div>
 </template>
@@ -10,18 +10,15 @@
 // import { initFormData } from '@/utils/loader'
 export default {
   name: 'AdminInput',
-  props: ['field'],
-  mounted: function () {
-    // console.log(this.formData);
+  props: ['field', 'value'],
+  data () {
+    return {
+      inputValue: this.value
+    }
   },
-  methods: {
-    checkElementLegal () {
-      return this.field.value.length > 0
-    },
-    getElementData () {
-      var result = {}
-      result[this.field.field] = this.field.value
-      return result
+  watch: {
+    inputValue: function (newValue, oldValue) {
+      this.$emit('input', newValue)
     }
   }
 }

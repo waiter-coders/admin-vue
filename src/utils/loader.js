@@ -7,7 +7,8 @@ export const formConfig = {
   undefined: 'admin-input',
   datetime: 'datetime',
   html: 'editor',
-  date: 'datetime'
+  date: 'datetime',
+  image: 'admin-input'
 }
 // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
 export const timeFormat = {

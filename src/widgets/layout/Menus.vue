@@ -38,7 +38,6 @@ export default {
     getMenu: function () {
       var _this = this
       getMenus().then(response => {
-        console.log(response)
         _this.menu = response
       })
     }

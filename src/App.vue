@@ -1,18 +1,12 @@
 <template>
   <div id="app">
     <router-view/>
-    <admin-dialog :config="dialog"></admin-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'waiter',
-  computed: {
-    dialog () {
-      return this.$store.state.dialog
-    }
-  }
+  name: 'waiter'
 }
 </script>
 

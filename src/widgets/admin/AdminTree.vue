@@ -5,11 +5,6 @@
       node-key="nodeId"
       :default-expanded-keys="[]"
       accordion
-      @node-drag-start="handleDragStart"
-      @node-drag-enter="handleDragEnter"
-      @node-drag-leave="handleDragLeave"
-      @node-drag-over="handleDragOver"
-      @node-drag-end="handleDragEnd"
       @node-drop="handleDrop"
       draggable
       :allowDrag="allowDrag"
@@ -44,10 +39,10 @@
 <script>
 import {
   getTree,
-  // addNode,
-  // changeNodLabel,
-  changeNodePosition
-  // deleteNode
+  addNode,
+  changeNodeLabel,
+  changeNodePosition,
+  deleteNode
 } from '@/api/admin/adminTree'
 import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 
@@ -80,13 +75,10 @@ export default {
       var _this = this
       getTree(this.baseUrl, 0).then(function (response) {
         _this.tree = response
-        // callback(_this.formatAjaxData(response))
       })
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {
-      console.info(draggingNode)
       changeNodePosition(this.baseUrl, draggingNode.data.nodeId, dropNode.data.nodeId, dropType)
-      console.log('tree drop: ', dropNode.label, dropType)
     },
     allowDrag () {
       return true
@@ -97,79 +89,85 @@ export default {
     append (node, data) {
       var _this = this
       var _node = node
+      var formFields = [
+        {field: 'label', type: 'string', length: 30, name: '标签'},
+        {field: 'position', type: 'select', map: { 'after': '兄弟节点', 'inner': '子节点' }, name: '位置'}
+      ]
+
+      var addAction = {
+        'name': '添加',
+        'method': function (data) {
+          _this.$store.dispatch('hiddenDialog')
+          addNode(_this.baseUrl, data.label, _node.data.nodeId, data.position).then(function (newNodeId) {
+            let newNode = { nodeId: newNodeId, label: data.label, isLeaf: true }
+            if (data.position === 'after') {
+              _this.$refs.tree.insertAfter(newNode, _node)
+            }
+            if (data.position === 'inner') {
+              _this.$refs.tree.append(newNode, _node)
+            }
+          })
+        }}
       this.$store.dispatch('showDialog', {
         config: [
           {
             type: 'admin-form',
-            submitType: 'dialog',
-            fields: [
-              { field: 'nodeId', name: 'id', type: 'number', primaryKey: true },
-              {
-                field: 'label',
-                type: 'string',
-                length: 30,
-                name: '标签'
-              },
-              {
-                field: 'position',
-                type: 'select',
-                map: { 1: '兄弟节点', 2: '子节点' },
-                length: 30,
-                name: '位置'
-              }
-            ],
+            submitType: 'dialogGet',
+            fields: formFields,
             groups: [],
-            primaryKey: 'nodeId',
-            url: ''
+            actions: [addAction]
           }
-        ],
-        callback: function () {
-          _this.$refs.tree.insertAfter(
-            { nodeId: 999, label: '不错', isLeaf: true },
-            _node
-          )
-        }
+        ]
       })
     },
     edit (node, data) {
       var _this = this
       var _node = node
+      var formFields = [
+        {field: 'label', type: 'string', length: 30, name: '标签', value: node.data.label}
+      ]
+
+      var editBtn = {
+        'name': '编辑',
+        'method': function (data) {
+          _this.$store.dispatch('hiddenDialog')
+          changeNodeLabel(_this.baseUrl, _node.data.nodeId, data.label).then(function () {
+            _node.data.label = data.label
+          })
+        }}
       this.$store.dispatch('showDialog', {
         config: [
           {
             type: 'admin-form',
-            submitType: 'dialog',
-            fields: [
-              { field: 'nodeId', name: 'id', type: 'number', primaryKey: true },
-              {
-                field: 'label',
-                type: 'string',
-                length: 30,
-                name: '标签'
-              },
-              {
-                field: 'position',
-                type: 'select',
-                map: { 1: '添加到前面' },
-                length: 30,
-                name: '位置'
-              }
-            ],
+            submitType: 'dialogGet',
+            fields: formFields,
             groups: [],
-            primaryKey: 'qaId',
-            url: ''
+            actions: [editBtn]
           }
-        ],
-        callback: function () {
-          _this.$refs.tree.insertAfter(
-            { nodeId: 999, label: '不错', isLeaf: true },
-            _node
-          )
-        }
+        ]
       })
     },
     remove (node, data) {
-      this.$refs.tree.remove(node)
+      var _this = this
+      let _node = node
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteNode(this.baseUrl, node.data.nodeId).then(function () {
+          _this.$refs.tree.remove(_node)
+          _this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        })
+      }).catch(() => {
+        _this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }
