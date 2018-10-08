@@ -96,7 +96,7 @@ export default {
 
       var addAction = {
         'name': '添加',
-        'method': function (data) {
+        'callback': function (data) {
           _this.$store.dispatch('hiddenDialog')
           addNode(_this.baseUrl, data.label, _node.data.nodeId, data.position).then(function (newNodeId) {
             let newNode = { nodeId: newNodeId, label: data.label, isLeaf: true }
@@ -129,7 +129,7 @@ export default {
 
       var editBtn = {
         'name': '编辑',
-        'method': function (data) {
+        'callback': function (data) {
           _this.$store.dispatch('hiddenDialog')
           changeNodeLabel(_this.baseUrl, _node.data.nodeId, data.label).then(function () {
             _node.data.label = data.label

@@ -19,9 +19,7 @@ export default {
   methods: {
     getConfigs () {
       var _this = this
-      var controller = _this.$route.path
-      //  _this.$store.dispatch('addConfig', controller);
-      getConfigs(controller).then(function (response) {
+      getConfigs(this.$route.path, this.$route.query).then(function (response) {
         _this.configs = response
       })
     }

@@ -3,7 +3,7 @@
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
        <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">组件初始化失败</component>
        <el-form-item>
-         <el-button type="primary" @click="action.method(getFormData())" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
+         <el-button type="primary" @click="handleAction(action)" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
        </el-form-item>
     </el-form>
   </div>
@@ -67,14 +67,16 @@ export default {
       })
       return data
     },
-    dialogGet: function () {
-
+    handleAction: function (action) {
+      if ('callback' in action) {
+        action.callback(this.getFormData())
+      } else {
+        this.submitForm(this.getFormData())
+      }
     },
     submitForm: function (data) {
       try {
         let _this = this
-        let data = this.getFormData()
-        console.info(data)
         let getParams = {}
         getParams[this.config.primaryKey] =
           this.config.primaryKey in this.$route.query
