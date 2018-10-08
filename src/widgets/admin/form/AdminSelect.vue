@@ -20,6 +20,9 @@ export default {
   watch: {
     selectValue: function (newValue, oldValue) {
       this.$emit('input', newValue)
+    },
+    value: function (newValue, oldValue) {
+      this.selectValue = newValue
     }
   }
 }

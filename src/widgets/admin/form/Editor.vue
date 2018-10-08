@@ -1,16 +1,16 @@
 <template>
     <div class="editor">
-        <el-form-item :label="field.field">
-            <vue-editor v-model="field.value"></vue-editor>
+        <el-form-item :label="field.name">
+            <vue-editor v-model="editorData"></vue-editor>
         </el-form-item>
         
     </div>
 </template>
 <script>
-import { initFormData } from '@/utils/loader'
 import { VueEditor } from 'vue2-editor'
 export default {
   name: 'editor',
+  props: ['field', 'value'],
   components: {
     VueEditor
   },
@@ -21,17 +21,15 @@ export default {
         initialFrameWidth: null,
         initialFrameHeight: 350
       },
-      formData: initFormData(this.field.field, this.field.value)
+      editorData: this.value
     }
   },
-  props: {
-    field: {
-      type: Object
-    }
-  },
-  methods: {
-    getElementData () {
-      return this.formData
+  watch: {
+    editorData: function (newValue, oldValue) {
+      this.$emit('input', newValue)
+    },
+    value: function (newValue, oldValue) {
+      this.editorData = newValue
     }
   }
 }

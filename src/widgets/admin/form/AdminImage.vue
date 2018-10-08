@@ -19,7 +19,15 @@ export default {
   props: ['field', 'value'],
   data () {
     return {
-      imageUrl: ''
+      imageUrl: this.value
+    }
+  },
+  watch: {
+    imageUrl: function (newValue, oldValue) {
+      this.$emit('input', newValue)
+    },
+    value: function (newValue, oldValue) {
+      this.imageUrl = newValue
     }
   },
   methods: {
