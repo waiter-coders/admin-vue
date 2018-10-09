@@ -2,7 +2,7 @@
   <div>
   	<el-upload
   class="avatar-uploader"
-  action="https://jsonplaceholder.typicode.com/posts/"
+  action="index.php/Upload/UploadImage"
   :show-file-list="false"
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    handleAvatarSuccess (res, file) {
+    handleAvatarSuccess (response, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload (file) {
