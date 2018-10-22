@@ -1,25 +1,28 @@
 <template>
   <div>
-  	<el-upload
-  class="avatar-uploader"
-  action="index.php/Upload/UploadImage"
-  :show-file-list="false"
-  :on-success="handleAvatarSuccess"
-  :before-upload="beforeAvatarUpload">
-  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
+    <el-form-item :label="field.name">
+      <el-upload
+        class="avatar-uploader"
+        :action="action"
+        :show-file-list="false"
+        :name="field.field"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="'http://image.teamcorp.cn/wo_de/product/' + imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+    </el-form-item>  	
   </div>
 </template>
 
 <script>
-// import { initFormData } from '@/utils/loader'
 export default {
   name: 'AdminImage',
   props: ['field', 'value'],
   data () {
     return {
-      imageUrl: this.value
+      imageUrl: this.value,
+      action: 'index.php/' + this.$route.path + '/formUpload?field=' + this.field.field
     }
   },
   watch: {
@@ -32,16 +35,16 @@ export default {
   },
   methods: {
     handleAvatarSuccess (response, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
+      this.imageUrl = response.data
     },
     beforeAvatarUpload (file) {
       const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt2M = file.size / 1024 / 1024 < 1
       if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
+        this.$message.error('上传头像图片大小不能超过 1MB!')
       }
       return isJPG && isLt2M
     }

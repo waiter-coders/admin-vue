@@ -3,7 +3,6 @@
         <admin-builder v-bind:configs="configs"></admin-builder>
     </div>
 </template>
-
 <script>
 import { getConfigs } from '@/api/admin/adminRender'
 export default {

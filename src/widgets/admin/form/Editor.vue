@@ -1,13 +1,14 @@
 <template>
     <div class="editor">
         <el-form-item :label="field.name">
-            <vue-editor v-model="editorData"></vue-editor>
+            <vue-editor v-model="editorData" @imageAdded="uploadImage"></vue-editor>
         </el-form-item>
         
     </div>
 </template>
 <script>
 import { VueEditor } from 'vue2-editor'
+import { upload } from '@/api/admin/adminForm'
 export default {
   name: 'editor',
   props: ['field', 'value'],
@@ -30,6 +31,13 @@ export default {
     },
     value: function (newValue, oldValue) {
       this.editorData = newValue
+    }
+  },
+  methods: {
+    uploadImage: function (file, Editor, cursorLocation, resetUploader) {
+      upload(this.$route.path, 'editor-uploader', file).then(function () {
+
+      })
     }
   }
 }
