@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getList, getTotalNum } from '@/api/admin/adminList'
+import service from '@/utils/service'
 import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 import Search from '@/widgets/admin/public/Search'
 import TableList from './list/Table'
@@ -45,6 +45,7 @@ export default {
   data () {
     return {
       baseUrl: this.$route.path,
+      query: this.$route.query,
       fields: [],
       search: { url: this.$route.path, fields: [], searchParams: {} },
       hiddenSearch: {},
@@ -163,24 +164,20 @@ export default {
         text: '加载中……',
         fullscreen: false
       })
-      getTotalNum(_this.baseUrl, this.search.searchParams)
-        .then(totalNum => {
-          _this.paging.totalNum = parseInt(totalNum)
-          if (totalNum === 0) {
-            return Promise.resolve([])
-          }
-          var offset = (_this.paging.currentPage - 1) * _this.paging.pageSize
-          return getList(
-            _this.baseUrl,
-            _this.search.searchParams,
-            _this.paging.pageSize,
-            offset
-          )
-        })
-        .then(data => {
+      var params = this.query
+      params.search = this.search.searchParams
+      service.get(_this.baseUrl + '/getTotalNum', {params: params}).then(totalNum => {
+        _this.paging.totalNum = parseInt(totalNum)
+        if (totalNum === 0) {
+          return Promise.resolve([])
+        }
+        params.limit = _this.paging.pageSize
+        params.offset = (_this.paging.currentPage - 1) * _this.paging.pageSize
+        return service.get(_this.baseUrl + '/getList', {params: params}).then(data => {
           _this.list.data = data
           loading.close()
         })
+      })
     },
     searchClick (searchParams) {
       this.search.searchParams = searchParams
