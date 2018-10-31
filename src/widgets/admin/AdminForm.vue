@@ -12,12 +12,15 @@
 <script>
 import { CheckBox, Datetime, Editor, AdminInput, AdminSelect, AdminImage } from '@/widgets/admin/form'
 import { formConfig } from '@/utils/loader'
-import { getFormData, formSubmit } from '@/api/admin/adminForm'
+import service from '@/utils/service'
+let qs = require('qs')
+
 export default {
   name: 'AdminForm',
   data () {
     return {
       baseUrl: this.$route.path,
+      query: this.$route.query,
       submitType: 'page',
       formData: {},
       fields: {},
@@ -44,9 +47,7 @@ export default {
     this.actions = this.config.actions
     if (this.config.primaryKey in this.$route.query) {
       var _this = this
-      let getParams = {}
-      getParams[this.config.primaryKey] = this.$route.query[this.config.primaryKey]
-      getFormData(this.baseUrl, getParams).then(function (data) {
+      service.get(this.baseUrl + '/getFormData', {params: this.query}).then(function (data) {
         var fields = []
         for (var i in _this.fields) {
           var field = _this.fields[i]['field']
@@ -77,13 +78,12 @@ export default {
     submitForm: function (data) {
       try {
         let _this = this
-        let getParams = {}
-        getParams[this.config.primaryKey] =
-          this.config.primaryKey in this.$route.query
-            ? this.$route.query[this.config.primaryKey]
-            : 0
-        let url = this.config.url || this.baseUrl
-        formSubmit(url, { formData: data }, getParams).then(response => {
+        service.post(this.baseUrl + '/formSubmit', qs.stringify({ formData: data }), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          params: this.query
+        }).then(response => {
           alert('操作成功')
           _this.$router.go(-1)
         })
