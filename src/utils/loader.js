@@ -3,6 +3,7 @@
 export const formConfig = {
   string: 'admin-input',
   select: 'admin-select',
+  linkSelect: 'admin-link-select',
   multiSelect: 'check-box',
   undefined: 'admin-input',
   datetime: 'datetime',

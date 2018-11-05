@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<el-tree
+  	<el-tree v-if="tree.length > 0"
       :data="tree"
       node-key="nodeId"
       :default-expanded-keys="[]"
@@ -75,6 +75,26 @@ export default {
       var _this = this
       getTree(this.baseUrl, 0).then(function (response) {
         _this.tree = response
+        if (response.length === 0) {
+          _this.$store.dispatch('showDialog', {
+            config: [
+              {
+                type: 'admin-form',
+                submitType: 'dialogGet',
+                fields: [{field: 'label', type: 'string', length: 30, name: '标签'}],
+                groups: [],
+                actions: [{
+                  'name': '添加',
+                  'callback': function (data) {
+                    _this.$store.dispatch('hiddenDialog')
+                    addNode(_this.baseUrl, data.label, 0, 0).then(function (newNodeId) {
+                      _this.tree = [{'nodeId': newNodeId, 'label': data.label}]
+                    })
+                  }}]
+              }
+            ]
+          })
+        }
       })
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {

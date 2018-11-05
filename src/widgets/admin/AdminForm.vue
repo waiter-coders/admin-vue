@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { CheckBox, Datetime, Editor, AdminInput, AdminSelect, AdminImage } from '@/widgets/admin/form'
+import { CheckBox, Datetime, Editor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage } from '@/widgets/admin/form'
 import { formConfig } from '@/utils/loader'
 import service from '@/utils/service'
 let qs = require('qs')
@@ -34,6 +34,7 @@ export default {
     Editor,
     AdminInput,
     AdminSelect,
+    AdminLinkSelect,
     AdminImage
   },
   filters: {
