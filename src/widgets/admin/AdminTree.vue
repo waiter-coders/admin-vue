@@ -2,7 +2,7 @@
   <div>
   	<el-tree v-if="tree.length > 0"
       :data="tree"
-      node-key="nodeId"
+      :node-key="field_nodeId"
       :default-expanded-keys="[]"
       accordion
       @node-drop="handleDrop"
@@ -10,7 +10,7 @@
       :allowDrag="allowDrag"
       :allow-drop="allowDrop" ref="tree">
         <span class="custom-tree-node" slot-scope="{ node, data }">
-          <span>{{ node.label }}</span>
+          <span>{{ data[field_label] }}</span>
           <span>
             <el-button
             type="text"
@@ -37,13 +37,7 @@
 </template>
 
 <script>
-import {
-  getTree,
-  addNode,
-  changeNodeLabel,
-  changeNodePosition,
-  deleteNode
-} from '@/api/admin/adminTree'
+import service from '@/utils/service'
 import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
 
 export default {
@@ -52,20 +46,69 @@ export default {
   data () {
     return {
       baseUrl: this.$route.path,
-      tree: []
+      tree: [],
+      field_nodeId: this.config.treeKeys.nodeId,
+      field_label: this.config.treeKeys.label,
+      field_parentNodeId: this.config.treeKeys.parentNodeId,
+      field_preNodeId: this.config.treeKeys.preNodeId,
+      field_nextNodeId: this.config.treeKeys.nextNodeId
     }
   },
   created () {
     this.loadTree()
   },
   methods: {
+    getTree: function (controller, nodeId) {
+      let params = {}
+      params[this.field_nodeId] = nodeId
+      return service.get(controller + '/getTree', {
+        params: params
+      })
+    },
+
+    addNode: function (controller, label, moveToId, moveType) {
+      let params = {}
+      params[this.field_label] = label
+      params['moveToId'] = moveToId
+      params['moveType'] = moveType
+      return service.get(controller + '/addNode', {
+        params: params
+      })
+    },
+
+    changeNodeLabel: function (controller, nodeId, label) {
+      let params = {}
+      params[this.field_nodeId] = nodeId
+      params[this.field_label] = label
+      return service.get(controller + '/changeNodeLabel', {
+        params: params
+      })
+    },
+
+    changeNodePosition: function (controller, nodeId, moveToId, moveType) {
+      let params = {}
+      params[this.field_nodeId] = nodeId
+      params['moveToId'] = moveToId
+      params['moveType'] = moveType
+      return service.get(controller + '/changeNodePosition', {
+        params: params
+      })
+    },
+
+    deleteNode: function (controller, nodeId) {
+      let params = {}
+      params[this.field_nodeId] = nodeId
+      return service.get(controller + '/deleteNode', {
+        params: params
+      })
+    },
     formatAjaxData (response) {
       //  规范数据
       var children = []
       for (var i in response) {
         var node = {}
-        node['label'] = response[i]['label']
-        node['nodeId'] = response[i]['nodeId']
+        node[this.field_label] = response[i][this.field_label]
+        node[this.field_nodeId] = response[i][this.field_nodeId]
         node['isLeaf'] = parseInt(response[i]['isLeaf']) > 0 ? 'leaf' : false
         children.push(node)
       }
@@ -73,7 +116,7 @@ export default {
     },
     loadTree (node, callback) {
       var _this = this
-      getTree(this.baseUrl, 0).then(function (response) {
+      this.getTree(this.baseUrl, 0).then(function (response) {
         _this.tree = response
         if (response.length === 0) {
           _this.$store.dispatch('showDialog', {
@@ -81,14 +124,17 @@ export default {
               {
                 type: 'admin-form',
                 submitType: 'dialogGet',
-                fields: [{field: 'label', type: 'string', length: 30, name: '标签'}],
+                fields: [{field: _this.field_label, type: 'string', length: 30, name: '标签'}],
                 groups: [],
                 actions: [{
                   'name': '添加',
                   'callback': function (data) {
                     _this.$store.dispatch('hiddenDialog')
-                    addNode(_this.baseUrl, data.label, 0, 0).then(function (newNodeId) {
-                      _this.tree = [{'nodeId': newNodeId, 'label': data.label}]
+                    _this.addNode(_this.baseUrl, data[_this.field_label], 0, 0).then(function (newNodeId) {
+                      let node = {}
+                      node[_this.field_nodeId] = newNodeId
+                      node[_this.field_label] = data[_this.field_label]
+                      _this.tree = [node]
                     })
                   }}]
               }
@@ -98,7 +144,7 @@ export default {
       })
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {
-      changeNodePosition(this.baseUrl, draggingNode.data.nodeId, dropNode.data.nodeId, dropType)
+      this.changeNodePosition(this.baseUrl, draggingNode.data.nodeId, dropNode.data.nodeId, dropType)
     },
     allowDrag () {
       return true
@@ -110,7 +156,7 @@ export default {
       var _this = this
       var _node = node
       var formFields = [
-        {field: 'label', type: 'string', length: 30, name: '标签'},
+        {field: this.field_label, type: 'string', length: 30, name: '标签'},
         {field: 'position', type: 'select', map: { 'after': '兄弟节点', 'inner': '子节点' }, name: '位置'}
       ]
 
@@ -118,8 +164,11 @@ export default {
         'name': '添加',
         'callback': function (data) {
           _this.$store.dispatch('hiddenDialog')
-          addNode(_this.baseUrl, data.label, _node.data.nodeId, data.position).then(function (newNodeId) {
-            let newNode = { nodeId: newNodeId, label: data.label, isLeaf: true }
+          _this.addNode(_this.baseUrl, data[_this.field_label], _node.data[_this.field_nodeId], data.position).then(function (newNodeId) {
+            let newNode = {}
+            newNode[_this.field_nodeId] = newNodeId
+            newNode[_this.field_label] = data[_this.field_label]
+            newNode['isLeaf'] = true
             if (data.position === 'after') {
               _this.$refs.tree.insertAfter(newNode, _node)
             }
@@ -144,15 +193,15 @@ export default {
       var _this = this
       var _node = node
       var formFields = [
-        {field: 'label', type: 'string', length: 30, name: '标签', value: node.data.label}
+        {field: this.field_label, type: 'string', length: 30, name: '标签', value: node.data[this.field_label]}
       ]
 
       var editBtn = {
         'name': '编辑',
         'callback': function (data) {
           _this.$store.dispatch('hiddenDialog')
-          changeNodeLabel(_this.baseUrl, _node.data.nodeId, data.label).then(function () {
-            _node.data.label = data.label
+          _this.changeNodeLabel(_this.baseUrl, _node.data[_this.field_nodeId], data[_this.field_label]).then(function () {
+            _node.data[_this.field_label] = data[_this.field_label]
           })
         }}
       this.$store.dispatch('showDialog', {
@@ -183,7 +232,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteNode(this.baseUrl, node.data.nodeId).then(function () {
+        _this.deleteNode(this.baseUrl, node.data[_this.field_nodeId]).then(function () {
           _this.$refs.tree.remove(_node)
           _this.$message({
             type: 'success',

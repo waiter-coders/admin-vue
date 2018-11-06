@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/index.php': {
-        target: 'http://admina385100.teamcorp.cn/',
+        target: 'http://admin.some-coders.com', // 'http://admina385100.teamcorp.cn/',
         changeOrigin: true
       }
     },
