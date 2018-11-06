@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getTree: function (controller, nodeId) {
-      let params = {}
+      let params = this.$route.query
       params[this.field_nodeId] = nodeId
       return service.get(controller + '/getTree', {
         params: params
@@ -67,7 +67,7 @@ export default {
     },
 
     addNode: function (controller, label, moveToId, moveType) {
-      let params = {}
+      let params = this.$route.query
       params[this.field_label] = label
       params['moveToId'] = moveToId
       params['moveType'] = moveType
@@ -77,7 +77,7 @@ export default {
     },
 
     changeNodeLabel: function (controller, nodeId, label) {
-      let params = {}
+      let params = this.$route.query
       params[this.field_nodeId] = nodeId
       params[this.field_label] = label
       return service.get(controller + '/changeNodeLabel', {
@@ -86,7 +86,7 @@ export default {
     },
 
     changeNodePosition: function (controller, nodeId, moveToId, moveType) {
-      let params = {}
+      let params = this.$route.query
       params[this.field_nodeId] = nodeId
       params['moveToId'] = moveToId
       params['moveType'] = moveType
@@ -96,7 +96,7 @@ export default {
     },
 
     deleteNode: function (controller, nodeId) {
-      let params = {}
+      let params = this.$route.query
       params[this.field_nodeId] = nodeId
       return service.get(controller + '/deleteNode', {
         params: params
