@@ -144,7 +144,7 @@ export default {
       })
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {
-      this.changeNodePosition(this.baseUrl, draggingNode.data.nodeId, dropNode.data.nodeId, dropType)
+      this.changeNodePosition(this.baseUrl, draggingNode.data[this.field_nodeId], dropNode.data[this.field_nodeId], dropType)
     },
     allowDrag () {
       return true
