@@ -194,7 +194,7 @@ export default {
       case 'ajax':
         pageUtil
           .fetch(
-            params.url,
+            this.baseUrl + '/' + params.url,
             post,
             params.confirm,
             params.success,

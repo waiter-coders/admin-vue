@@ -11,7 +11,7 @@
       </el-menu>
       <!--<tags-view></tags-view>-->
       <section class="app-main" style="min-height: 100%">
-        <transition name="fade" mode="out-in">
+        <transition name="fade" mode="out-in">          
           <router-view :key="key"></router-view>
         </transition>
       </section>
@@ -44,7 +44,6 @@ export default {
       return this.$store.state.app.sidebar
     }
   }, */
-
   computed: {
     key () {
       return this.$route.name !== undefined

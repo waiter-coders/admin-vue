@@ -46,7 +46,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static', // 打包的css/js文件目录
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
