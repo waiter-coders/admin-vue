@@ -5,7 +5,7 @@
             :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
         <el-table-column v-if="config.rowActions.length > 0" label="操作">
             <template slot-scope="scope">
-                <button-group class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></button-group>
+                <buttons class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></buttons>
             </template>
         </el-table-column>
   </el-table>
@@ -26,10 +26,10 @@
 @事件：
 click(action, params)
  */
-import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
+import Buttons from '@/views/public/Buttons'
 export default {
   name: 'tableList',
-  components: { ButtonGroup },
+  components: { Buttons },
   props: ['config'],
   data () {
     return {

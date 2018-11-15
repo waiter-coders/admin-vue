@@ -60,8 +60,6 @@ export default {
         })
         view.push(child)
       }
-
-      this.$store.dispatch('initCurrentView', view)
     },
     changeView (item) {
 

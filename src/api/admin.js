@@ -1,8 +1,7 @@
 import fetch from '@/utils/service'
 
 export const isLogin = () => {
-  //  service.post()
-  return true
+  return fetch.get('/user/isLogin')
 }
 
 export const login = () => {

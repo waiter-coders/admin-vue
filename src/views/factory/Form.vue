@@ -10,7 +10,14 @@
 </template>
 
 <script>
-import { CheckBox, Datetime, Editor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage } from '@/widgets/admin/form'
+import AdminCheckBox from './form/CheckBox'
+import AdminDatetime from './form/Datetime'
+import AdminEditor from './form/Editor'
+import AdminInput from './form/Input'
+import AdminSelect from './form/Select'
+import AdminLinkSelect from './form/LinkSelect'
+import AdminImage from './form/Image'
+
 import { formConfig } from '@/utils/loader'
 import service from '@/utils/service'
 let qs = require('qs')
@@ -29,13 +36,7 @@ export default {
   },
   props: ['config'],
   components: {
-    CheckBox,
-    Datetime,
-    Editor,
-    AdminInput,
-    AdminSelect,
-    AdminLinkSelect,
-    AdminImage
+    AdminCheckBox, AdminDatetime, AdminEditor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage
   },
   filters: {
     typeFilter: function (key) {

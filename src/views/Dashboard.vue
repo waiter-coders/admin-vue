@@ -16,34 +16,24 @@
         </transition>
       </section>
     </div>
-    <admin-dialog :config="dialog"></admin-dialog>
   </div>
 </template>
 
 <script>
-import {
-  Menus,
-  Hamburger,
-  Bread,
-  AdminDialog,
-  UserActions /*, TagsView */
-} from '@/widgets/layout'
+import Menus from './dashboard/Menus'
+import Hamburger from './dashboard/Hamburger'
+import Bread from './dashboard/Bread'
+import UserActions from './dashboard/UserActions'
 
 export default {
-  name: 'appmain',
+  name: 'dashboard',
   components: {
     Menus,
     Hamburger,
     Bread,
-    UserActions,
-    AdminDialog
+    UserActions
     // TagsView,
   },
-  /* computed:{
-    sidebar(){
-      return this.$store.state.app.sidebar
-    }
-  }, */
   computed: {
     key () {
       return this.$route.name !== undefined
@@ -51,7 +41,7 @@ export default {
         : this.$route + +new Date()
     },
     dialog () {
-      return this.$store.state.dialog
+      // return this.$store.state.dialog
     }
   }
 }

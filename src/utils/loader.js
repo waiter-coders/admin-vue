@@ -4,11 +4,11 @@ export const formConfig = {
   string: 'admin-input',
   select: 'admin-select',
   linkSelect: 'admin-link-select',
-  multiSelect: 'check-box',
+  multiSelect: 'admin-checkbox',
   undefined: 'admin-input',
-  datetime: 'datetime',
-  html: 'editor',
-  date: 'datetime',
+  datetime: 'admin-datetime',
+  html: 'admin-editor',
+  date: 'admin-datetime',
   image: 'admin-image',
   number: 'admin-input'
 }

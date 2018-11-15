@@ -38,11 +38,11 @@
 
 <script>
 import service from '@/utils/service'
-import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
+import Buttons from '@/views/public/Buttons'
 
 export default {
   props: ['config'],
-  components: [ButtonGroup],
+  components: [Buttons],
   data () {
     return {
       baseUrl: this.$route.path,

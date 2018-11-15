@@ -8,7 +8,7 @@
         :name="field.field"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="'http://image.teamcorp.cn/wo_de/product/' + imageUrl" class="avatar">
+        <img v-if="imageUrl" :src="'http://image.teamcorp.cn/wo_de/' + imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </el-form-item>  	

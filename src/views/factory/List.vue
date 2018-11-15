@@ -2,7 +2,7 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-      <button-group class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></button-group>
+      <buttons class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
     </div>    
     <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
     <paging class="list-paging" 
@@ -14,8 +14,8 @@
 
 <script>
 import service from '@/utils/service'
-import ButtonGroup from '@/widgets/admin/public/ButtonGroup'
-import Search from '@/widgets/admin/public/Search'
+import Buttons from '@/views/public/Buttons'
+import Search from './list/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
 import { Loading } from 'element-ui'
@@ -60,7 +60,7 @@ export default {
   },
   components: {
     TableList,
-    ButtonGroup,
+    Buttons,
     Search,
     Paging
   },
@@ -205,40 +205,40 @@ export default {
           })
         break
       case 'dialog':
-        this.$store.dispatch('showDialog', {
-          config: [
-            {
-              type: 'admin-form',
-              submitType: 'dialog',
-              fields: [
-                {
-                  field: 'qaId',
-                  name: 'id',
-                  type: 'number',
-                  primaryKey: true
-                },
-                {
-                  field: 'title',
-                  type: 'string',
-                  length: 30,
-                  name: '\u540d\u79f0'
-                },
-                {
-                  field: 'brief',
-                  type: 'string',
-                  length: 30,
-                  name: '\u7b80\u4ecb'
-                }
-              ],
-              groups: [],
-              primaryKey: 'qaId',
-              url: ''
-            }
-          ],
-          callback: function () {
-            _this.reloadData()
-          }
-        })
+        // this.$store.dispatch('showDialog', {
+        //   config: [
+        //     {
+        //       type: 'admin-form',
+        //       submitType: 'dialog',
+        //       fields: [
+        //         {
+        //           field: 'qaId',
+        //           name: 'id',
+        //           type: 'number',
+        //           primaryKey: true
+        //         },
+        //         {
+        //           field: 'title',
+        //           type: 'string',
+        //           length: 30,
+        //           name: '\u540d\u79f0'
+        //         },
+        //         {
+        //           field: 'brief',
+        //           type: 'string',
+        //           length: 30,
+        //           name: '\u7b80\u4ecb'
+        //         }
+        //       ],
+        //       groups: [],
+        //       primaryKey: 'qaId',
+        //       url: ''
+        //     }
+        //   ],
+        //   callback: function () {
+        //     _this.reloadData()
+        //   }
+        // })
         break
       case 'page':
       default:

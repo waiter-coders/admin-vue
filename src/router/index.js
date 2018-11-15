@@ -1,47 +1,45 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-//  公共视图组件
-//  import Dashboard from '@/views/Dashboard' //  主窗口框架（含菜单）
-//  import AdminRender from '@/views/AdminRender' //  页面工厂
-const Dashboard = resolve => require(['@/views/Dashboard'], resolve) //  主窗口框架（含菜单）懒加载方案
-const AdminRender = resolve => require(['@/views/AdminRender'], resolve) //  页面工厂 懒加载方案
-
-//  页面视图组件
-//  import Home from '@/views/Home' // 首页
-//  import Login from '@/views/admin/Login' //  登录页
-//  import AdminAccount from '@/views/admin/Account' //  修改密码页
-const Home = resolve => require(['@/views/Home'], resolve) // 首页 懒加载方案
-const Login = resolve => require(['@/views/admin/Login'], resolve) // 登录页 懒加载方案
-//  const AdminAccount = resolve => require(['@/views/admin/Account'], resolve) // 修改密码页 懒加载方案
-
 //  接口
-//  import { isLogin } from '@/api/admin'
+import { isLogin } from '@/api/admin'
+
+//  公共视图组件
+const Dashboard = resolve => require(['@/views/Dashboard'], resolve) //  仪表盘
+const Factory = resolve => require(['@/views/Factory'], resolve) //  模板渲染组件
+
+//  常用页面
+const Home = resolve => require(['@/views/Home'], resolve) // 仪表盘首页
+const Login = resolve => require(['@/views/user/Login'], resolve) // 用户登录页
 
 Vue.use(VueRouter)
 
-//  页面路由， 公共路由在后面，自定义的页面路由添加到公共视图路由前，以便覆盖公共路由
 const router = new VueRouter({
   routes: [
-    //  无菜单页面路由
+    //  非仪表盘页面路由
     {
-      path: '/admin/login',
-      name: 'login',
+      path: '/user/login',
+      name: 'user.login',
       meta: {
         title: '登录'
       },
       component: Login
     },
-    //  主菜单路由
+
+    // 仪表盘页面路由
     {
       path: '/',
-      //  name: 'main', 父级路由不能有name
+      name: 'dashboard',
       component: Dashboard,
-      meta: {
-        title: '首页'
-      },
       children: [
-        //  自定义页面路由
+        // 自定义页面（可以在这里设置自己开发的页面）
+
+        //  模板渲染组件
+        {
+          path: '/:domain/:controller?/:subController?',
+          component: Factory,
+          props: true
+        },
         {
           path: '/',
           name: 'home',
@@ -49,17 +47,6 @@ const router = new VueRouter({
             title: '首页'
           },
           component: Home
-        },
-
-        //  基于配置文件的工厂页面路由
-        {
-          path: '/:domain/:controller?/:subController?',
-          name: 'factory',
-          meta: {
-            title: '列表'
-          },
-          component: AdminRender,
-          props: true
         }
       ]
     }
@@ -68,15 +55,23 @@ const router = new VueRouter({
 
 //  路由前置钩子，用于处理登录等
 router.beforeEach((to, from, next) => {
-  //  登录阻塞
-  /*
-  if (to.path != '/user/login' && !isLogin()) {
-      return next({'path':'/user/login', 'replace':true})
-  }
-  */
-
-  //  继续路由
-  next()
+  // 登录检测
+  let inNoLogin = to.path in {'/user/login': 1}
+  isLogin().then(function (status) {
+    // 登录正常路由
+    if (status === true && inNoLogin) {
+      return next('/home')
+    }
+    if (status === true && !inNoLogin) {
+      return next()
+    }
+    if (status === false && inNoLogin) {
+      return next()
+    }
+    if (status === false && !inNoLogin) {
+      return next({path: '/user/login', replace: true})
+    }
+  })
 })
 
 export default router
