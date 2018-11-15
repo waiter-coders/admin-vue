@@ -14,7 +14,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import MenuItem from './MenuItem'
-import { getMenus } from '@/api/dashboard'
+import service from '@/utils/service'
 export default {
   data () {
     return {
@@ -37,7 +37,7 @@ export default {
   methods: {
     getMenu: function () {
       var _this = this
-      getMenus().then(response => {
+      service.get('/dashboard/getMenus').then(response => {
         _this.menu = response
       })
     }

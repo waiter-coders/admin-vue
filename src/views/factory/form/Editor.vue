@@ -8,7 +8,7 @@
 </template>
 <script>
 import { VueEditor } from 'vue2-editor'
-import { upload } from '@/api/admin/adminForm'
+import service from '@/utils/service'
 export default {
   name: 'editor',
   props: ['field', 'value'],
@@ -35,7 +35,13 @@ export default {
   },
   methods: {
     uploadImage: function (file, Editor, cursorLocation, resetUploader) {
-      upload(this.$route.path, 'editor-uploader', file).then(function () {
+      var formData = new FormData()
+      formData.append('editor-uploader', file)
+      service.post({
+        url: this.$route.path + '/formUpload',
+        method: 'POST',
+        data: formData
+      }).then(function () {
 
       })
     }
