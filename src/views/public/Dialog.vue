@@ -1,4 +1,4 @@
-<template>
+ <template>
 <div>
     <el-dialog
     :title="config.title"

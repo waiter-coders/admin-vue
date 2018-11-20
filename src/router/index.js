@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 //  接口
-import { isLogin } from '@/api/admin'
+import fetch from '@/utils/service'
 
 //  公共视图组件
 const Dashboard = resolve => require(['@/views/Dashboard'], resolve) //  仪表盘
@@ -57,7 +57,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 登录检测
   let inNoLogin = to.path in {'/user/login': 1}
-  isLogin().then(function (status) {
+  fetch.get('/user/isLogin').then(function (status) {
     // 登录正常路由
     if (status === true && inNoLogin) {
       return next('/home')

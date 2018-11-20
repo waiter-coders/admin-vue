@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import { login } from '@/api/admin'
+import service from '@/utils/service'
+let qs = require('qs')
 // import { setUser } from '@/utils';
 export default {
   name: 'Login',
@@ -75,17 +76,14 @@ export default {
       var _this = this
       this.$refs[formName].validate(valid => {
         if (valid) {
-          var par = _this.form
-          login(par).then(res => {
-            if (res.code === 0) {
-              // setUser( _this.form.username , _this.form.remember );
-              _this.$router.push('/')
-            } else {
-              _this.$message.error(res.msg)
-            }
+          service.post('/user/login', qs.stringify({ formData: _this.form }), {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: this.query
+          }).then(res => {
+            _this.$router.push('/')
           })
-        } else {
-          return false
         }
       })
     }
