@@ -8,7 +8,7 @@
         :name="field.field"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="'http://image.teamcorp.cn/wo_de/' + imageUrl" class="avatar">
+        <img v-if="imageUrl" :src="baseUrl + '/' + imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </el-form-item>  	
@@ -22,7 +22,9 @@ export default {
   data () {
     return {
       imageUrl: this.value,
-      action: 'index.php/' + this.$route.path + '/formUpload?field=' + this.field.field
+      action: 'index.php/' + this.$route.path + '/formUpload?field=' + this.field.field,
+      baseUrl: this.field.baseUrl,
+      imageType: ['image/png', 'image/jpeg']
     }
   },
   watch: {
@@ -38,15 +40,16 @@ export default {
       this.imageUrl = response.data
     },
     beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 1
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+      if (!(file.type in this.imageType)) {
+        this.$message.error('不支持的图片格式!')
+        return false
       }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 1MB!')
+      const fileSize = file.size / 1024 / 1024
+      if (fileSize > 1) {
+        this.$message.error('上传图片大小不能超过 1MB!')
+        return false
       }
-      return isJPG && isLt2M
+      return true
     }
   }
 }

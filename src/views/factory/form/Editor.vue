@@ -1,9 +1,8 @@
 <template>
     <div class="editor">
         <el-form-item :label="field.name">
-            <vue-editor v-model="editorData" @imageAdded="uploadImage"></vue-editor>
-        </el-form-item>
-        
+            <vue-editor v-model="editorData" @imageAdded="uploadImage" :editorToolbar="customToolbar" class="editor"></vue-editor>
+        </el-form-item>        
     </div>
 </template>
 <script>
@@ -22,7 +21,15 @@ export default {
         initialFrameWidth: null,
         initialFrameHeight: 350
       },
-      editorData: this.value
+      editorData: this.value,
+      customToolbar: [
+        ['bold', 'italic', 'underline'],
+        [{'header': [false, 4, 3, 2, 1]}, {'color': []}],
+        // [{'font': ['宋体', '楷体', '微软雅黑']}, {'size': []}],
+        [{'list': 'ordered'}, { 'list': 'bullet' }],
+        ['image', 'code-block'],
+        ['clean']
+      ]
     }
   },
   watch: {
@@ -51,6 +58,8 @@ export default {
 <style lang="scss" scoped>
 .editor {
   margin-bottom: 20px;
+  width: 100%;
+  // height:500px;
 }
 </style>
 

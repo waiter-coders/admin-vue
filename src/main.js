@@ -6,9 +6,9 @@ import App from './App'
 import router from './router'
 import ELEMENT from 'element-ui'
 import store from './store'
-import Icon from 'vue-svg-icon/Icon.vue'
+// import Icon from 'vue-svg-icon/Icon.vue'
 
-Vue.component('icon', Icon)
+// Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
 Vue.use(ELEMENT)

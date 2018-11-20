@@ -102,7 +102,8 @@ export default {
 .admin-form {
   padding: 20px 30px;
   .form-inline {
-    width: 800px;
+    width: 90%;
+    max-width: 1200px;
   }
 }
 </style>
