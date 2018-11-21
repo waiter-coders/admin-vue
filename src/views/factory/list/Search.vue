@@ -1,8 +1,9 @@
 <template>
     <div>
-        <el-form :inline="true" ref="form" label-width="80px">
+        <el-form :inline="true" ref="form" label-width="80px" @submit.native.prevent>
             <el-form-item v-for="item in config.fields" :key="item.field">
-                <el-input v-if="item.type == 'string'" size="mini" :name="item.field" :placeholder="'请输入'+item.name" v-model="item.value"></el-input>
+                <el-input v-if="item.type == 'string'" size="mini" :name="item.field" :placeholder="'请输入'+item.name" v-model="item.value" 
+                    @keyup.enter.native="search"></el-input>
                 <el-select v-if="item.type == 'select'" size="mini" v-model="item.value" :placeholder="'请选择'+item.name">
                     <el-option value="" label="全部" key="quanbu"></el-option>
                     <el-option

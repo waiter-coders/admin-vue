@@ -1,7 +1,9 @@
 <template>
   <div class="admin-form">
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
-       <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">组件初始化失败</component>
+      <div v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">
+        <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-if="field.primaryKey !== true">组件初始化失败</component>
+      </div>       
        <el-form-item>
          <el-button type="primary" @click="handleAction(action)" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
        </el-form-item>
@@ -18,9 +20,21 @@ import AdminSelect from './form/Select'
 import AdminLinkSelect from './form/LinkSelect'
 import AdminImage from './form/Image'
 
-import { formConfig } from '@/utils/loader'
 import service from '@/utils/service'
 let qs = require('qs')
+
+const formConfig = {
+  string: 'admin-input',
+  select: 'admin-select',
+  linkSelect: 'admin-link-select',
+  multiSelect: 'admin-checkbox',
+  undefined: 'admin-input',
+  datetime: 'admin-datetime',
+  html: 'admin-editor',
+  date: 'admin-datetime',
+  image: 'admin-image',
+  number: 'admin-input'
+}
 
 export default {
   name: 'AdminForm',

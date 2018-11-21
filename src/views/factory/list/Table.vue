@@ -78,8 +78,8 @@ export default {
       switch (field.type) {
       case 'select':
         return field.map[value[row.property]]
-      case 'image':
-        return '<img src="' + value[row.property] + '">'
+      // case 'image':
+      //   return '<img src="' + value[row.property] + '">'
       default:
         return value[row.property]
       }
