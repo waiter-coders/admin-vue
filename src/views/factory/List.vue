@@ -268,18 +268,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list-container {
-  padding: 20px 30px;
+  padding: 15px 30px;
 }
 .list-header {
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: stretch; */
+  display: flex;
+  align-items: center;
+  margin: 15px 5px;
 }
 .list-search {
-  /* flex: 1; */
+  flex: 1;
 }
 .list-table-actions {
   text-align: right;
-  margin-bottom: 14px;
+  width:300px;
 }
 </style>
