@@ -1,14 +1,13 @@
 <template>
     <div class="editor">
         <el-form-item :label="field.name">
-            <mce-editor v-model="editorData" class="editor" :init="init" @onCopy="whenCopy"></mce-editor>
+            <mce-editor v-model="editorData" class="editor" :uploadImageHandle="uploadImage" :init="init"></mce-editor>
         </el-form-item>        
     </div>
 </template>
 <script>
-// Import TinyMCE
-import MceEditor from '@tinymce/tinymce-vue'
-// import 'tinymce-imageupload'
+
+import MceEditor from './editor/Tinymve'
 import service from '@/utils/service'
 
 export default {
@@ -46,15 +45,18 @@ export default {
     }
   },
   methods: {
-    uploadImage: function (file, Editor, cursorLocation, resetUploader) {
-      var formData = new FormData()
-      formData.append('editor-uploader', file)
-      service.post({
-        url: this.$route.path + '/formUpload',
-        method: 'POST',
-        data: formData
-      }).then(function () {
-
+    uploadImage: function (file) {
+      return new Promise((resolve, reject) => {
+        const formData = new FormData()
+        formData.append('editor', file)
+        return service.post(this.$route.path + '/editorUpload?field=editor', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          params: this.query
+        }).then(response => {
+          resolve(response)
+        })
       })
     },
     whenCopy: function () {
@@ -66,8 +68,8 @@ export default {
 <style lang="scss" scoped>
 .editor {
   margin-bottom: 20px;
-  width: 100%;
-  // height:500px;
+  width: 950px;
+  height:650px;
 }
 </style>
 
