@@ -1,13 +1,13 @@
 <template> 
-  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable">
+  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable" header-row-class-name="table_header">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
-        <el-table-column v-for="item in config.fields" :prop="item.field" 
-            :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
-        <el-table-column v-if="config.rowActions.length > 0" label="操作">
-            <template slot-scope="scope">
-                <buttons class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></buttons>
-            </template>
-        </el-table-column>
+      <el-table-column v-for="item in config.fields" :prop="item.field" 
+          :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
+      <el-table-column v-if="config.rowActions.length > 0" label="操作">
+          <template slot-scope="scope">
+              <buttons class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></buttons>
+          </template>
+      </el-table-column>
   </el-table>
 </template>
 <script>
@@ -104,5 +104,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.table_header {
+  background: #aabbcc;
+}
 </style>
 

@@ -2,7 +2,16 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-      <buttons class="list-table-actions" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
+      
+      <el-dropdown trigger="hover" class="header_buttons_group">
+        <el-button size="mini">
+          排序：{{ currentName }}<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <div v-for="(name, key) in allOrderNames" :key="key" @click="changeOrderIndex(key)" class="order_select_item">{{ name }}</div>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <buttons class="header_buttons_group" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
     </div>    
     <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
     <paging class="list-paging" 
@@ -48,6 +57,11 @@ export default {
       query: this.$route.query,
       fields: [],
       search: { url: this.$route.path, fields: [], searchParams: {} },
+      orderIndex: 0,
+      orderMap: [
+        ['qaId', 'desc'],
+        ['voteNum', 'desc']
+      ],
       hiddenSearch: {},
       tableActions: [],
       list: { fields: [], rowActions: [], data: [], needSelect: false },
@@ -55,7 +69,23 @@ export default {
         pageSize: 10,
         totalNum: 0,
         currentPage: 1
+      },
+      orderNames: {
+        'asc': '从小到大',
+        'desc': '从大到小'
       }
+    }
+  },
+  computed: {
+    currentName: function () {
+      return this.getOrderName(this.orderMap[this.orderIndex])
+    },
+    allOrderNames: function () {
+      let names = []
+      for (let i in this.orderMap) {
+        names.push(this.getOrderName(this.orderMap[i]))
+      }
+      return names
     }
   },
   components: {
@@ -179,6 +209,19 @@ export default {
         })
       })
     },
+    getOrderName (order) {
+      for (let i in this.fields) {
+        if (this.fields[i]['field'] === order[0]) {
+          return this.fields[i]['name'] + ' ' + this.orderNames[order[1]]
+        }
+      }
+      return ''
+    },
+    changeOrderIndex (key) {
+      this.orderIndex = key
+      this.paging.currentPage = 1 //  搜索自动跳回第一页
+      this.reloadData()
+    },
     searchClick (searchParams) {
       this.search.searchParams = searchParams
       this.paging.currentPage = 1 //  搜索自动跳回第一页
@@ -278,8 +321,16 @@ export default {
 .list-search {
   flex: 1;
 }
-.list-table-actions {
-  text-align: right;
-  width:300px;
+.header_buttons_group {
+  margin: 0 0 0 35px;
+}
+.order_select_item {
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #515151;
+  cursor: pointer;
+}
+.order_select_item:hover{
+  background: cadetblue
 }
 </style>
