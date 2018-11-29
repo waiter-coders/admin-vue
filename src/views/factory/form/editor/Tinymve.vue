@@ -1,5 +1,5 @@
 <template>
-  <div :id='randomID'>
+  <div :id='randomID' class="editor">
         <textarea :id="editorID" v-model="content"></textarea>
         <ImageManager ref='imageManager' :uploadImageHandle='uploadImageHandle' />
     </div>
@@ -24,7 +24,7 @@ import 'tinymce/plugins/insertdatetime'
 import 'tinymce/plugins/link'
 import 'tinymce/plugins/media'
 import 'tinymce/plugins/noneditable'
-import 'tinymce/plugins/paste'
+// import 'tinymce/plugins/paste'
 import 'tinymce/plugins/print'
 import 'tinymce/plugins/searchreplace'
 import 'tinymce/plugins/tabfocus'
@@ -55,7 +55,7 @@ import 'tinymce/plugins/visualchars'
 import 'tinymce/skins/lightgray/skin.min.css'
 import 'tinymce/skins/lightgray/fonts/tinymce.woff'
 
-import './assets/content.css'
+// import './assets/content.css'
 // import './langs/zh_CN.js'
 
 // 图片组件
@@ -71,7 +71,7 @@ export default {
           'advlist autolink lists link image charmap print preview hr anchor pagebreak ' +
                         'searchreplace wordcount visualblocks visualchars code fullscreen ' +
                         'insertdatetime media nonbreaking save table contextmenu directionality ' +
-                        'template paste textcolor colorpicker textpattern imagetools toc help emoticons '
+                        'template textcolor colorpicker textpattern imagetools toc help emoticons '
         ]
       },
       type: Array
@@ -85,7 +85,7 @@ export default {
     other_options: {
       default: function () {
         return {
-          // font_formats: 'Verdana=Verdana;微软雅黑=Microsoft YaHei;宋体=SimSun;黑体=SimHei;仿宋=FangSong;楷体=kaiTi;隶书=LiSu;幼圆=YouYuan;'
+          font_formats: 'Verdana=Verdana;微软雅黑=Microsoft YaHei;宋体=SimSun;黑体=SimHei;仿宋=FangSong;楷体=kaiTi;隶书=LiSu;幼圆=YouYuan;'
         }
       },
       type: Object
@@ -209,4 +209,5 @@ export default {
     width: 90%;
     left: 5% !important;
 }
+.editor tr,td {border:1px solid #999;}
 </style>

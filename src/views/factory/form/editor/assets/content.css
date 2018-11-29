@@ -16,7 +16,8 @@ iframe body {
 
 .mce-tinymce td, .mce-tinymce th {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 14px
+    font-size: 14px;
+    border : solid 1px #999999
 }
 
 .mce-tinymce .word-wrap {
