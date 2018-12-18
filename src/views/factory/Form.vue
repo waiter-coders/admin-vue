@@ -3,7 +3,7 @@
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
       <div v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">
         <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-if="field.primaryKey !== true">组件初始化失败</component>
-      </div>       
+      </div>
        <el-form-item>
          <el-button type="primary" @click="handleAction(action)" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
        </el-form-item>
