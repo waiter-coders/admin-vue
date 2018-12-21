@@ -10,8 +10,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/index.php': {
-        target: 'http://admina385100.teamcorp.cn/', // 'http://admin.some-coders.com', //
+      '/meta/develop/public/index.php': {
+        target: 'http://report.zoldbs.com.cn/',
         changeOrigin: true
       }
     },

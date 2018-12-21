@@ -2,8 +2,8 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-      
-      <el-dropdown trigger="hover" class="header_buttons_group">
+
+      <el-dropdown trigger="hover" class="header_buttons_group" v-if="allOrderNames.length > 0">
         <el-button size="mini">
           排序：{{ currentName }}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
@@ -12,13 +12,13 @@
         </el-dropdown-menu>
       </el-dropdown>
       <buttons class="header_buttons_group" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
-    </div>    
+    </div>
     <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
-    <paging class="list-paging" 
+    <paging class="list-paging"
     @changePaging="changePaging"
     :config="paging"
      v-if="paging.totalNum > paging.pageSize"></paging>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -59,8 +59,8 @@ export default {
       search: { url: this.$route.path, fields: [], searchParams: {} },
       orderIndex: 0,
       orderMap: [
-        ['qaId', 'desc'],
-        ['voteNum', 'desc']
+        // ['qaId', 'desc'],
+        // ['voteNum', 'desc']
       ],
       hiddenSearch: {},
       tableActions: [],
@@ -196,14 +196,17 @@ export default {
       })
       var params = this.query
       params.search = this.search.searchParams
-      service.get(_this.baseUrl + '/getTotalNum', {params: params}).then(totalNum => {
+      params.index = 0
+      params.action = 'getTotalNum'
+      service.get(_this.baseUrl + '/query', {params: params}).then(totalNum => {
         _this.paging.totalNum = parseInt(totalNum)
         if (totalNum === 0) {
           return Promise.resolve([])
         }
         params.limit = _this.paging.pageSize
         params.offset = (_this.paging.currentPage - 1) * _this.paging.pageSize
-        return service.get(_this.baseUrl + '/getList', {params: params}).then(data => {
+        params.action = 'getList'
+        return service.get(_this.baseUrl + '/query', {params: params}).then(data => {
           _this.list.data = data
           loading.close()
         })

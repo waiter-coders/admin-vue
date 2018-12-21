@@ -2,7 +2,7 @@
   <div class="admin-form">
   	<el-form ref="form" :model="formData" label-width="100px" class="form-inline" @submit.native.prevent>
       <div v-for="(field,index) in fields" :key="index" v-if="fields.length > 0">
-        <component :is="field.type | typeFilter" v-model="field.value" :field="field" v-if="field.primaryKey !== true">组件初始化失败</component>
+        <component :is="field.type | typeFilter" v-model="field.value" :field="field" :initData="initData" v-if="field.primaryKey !== true">组件初始化失败</component>
       </div>
        <el-form-item>
          <el-button type="primary" @click="handleAction(action)" v-for="(action,actionIndex) in actions" :key="actionIndex">{{action.name}}</el-button>
@@ -19,21 +19,23 @@ import AdminInput from './form/Input'
 import AdminSelect from './form/Select'
 import AdminLinkSelect from './form/LinkSelect'
 import AdminImage from './form/Image'
+import AdminJson from './form/Json'
 
 import service from '@/utils/service'
 let qs = require('qs')
 
 const formConfig = {
-  string: 'admin-input',
-  select: 'admin-select',
-  linkSelect: 'admin-link-select',
-  multiSelect: 'admin-checkbox',
-  undefined: 'admin-input',
-  datetime: 'admin-datetime',
-  html: 'admin-editor',
-  date: 'admin-datetime',
-  image: 'admin-image',
-  number: 'admin-input'
+  string: 'adminInput',
+  select: 'adminSelect',
+  linkSelect: 'adminLinkSelect',
+  multiSelect: 'adminCheckbox',
+  undefined: 'adminInput',
+  datetime: 'adminDatetime',
+  html: 'adminEditor',
+  date: 'adminDatetime',
+  image: 'adminImage',
+  number: 'adminInput',
+  json: 'adminJson'
 }
 
 export default {
@@ -45,12 +47,13 @@ export default {
       submitType: 'page',
       formData: {},
       fields: {},
-      actions: {}
+      actions: {},
+      initData: {}
     }
   },
   props: ['config'],
   components: {
-    AdminCheckBox, AdminDatetime, AdminEditor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage
+    AdminCheckBox, AdminDatetime, AdminEditor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage, AdminJson
   },
   filters: {
     typeFilter: function (key) {
@@ -63,7 +66,11 @@ export default {
     this.actions = this.config.actions
     if (this.config.primaryKey in this.$route.query) {
       var _this = this
-      service.get(this.baseUrl + '/getFormData', {params: this.query}).then(function (data) {
+      let params = this.query
+      params['action'] = 'getFormData'
+      params['index'] = 0
+      service.get(this.baseUrl + '/query', {params: params}).then(function (data) {
+        _this.initData = data
         var fields = []
         for (var i in _this.fields) {
           var field = _this.fields[i]['field']
@@ -94,7 +101,9 @@ export default {
     submitForm: function (data) {
       try {
         let _this = this
-        service.post(this.baseUrl + '/formSubmit', qs.stringify({ formData: data }), {
+        service.post(this.baseUrl + '/query', qs.stringify({
+          formData: data, 'action': 'formSubmit', 'index': 0
+        }), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },

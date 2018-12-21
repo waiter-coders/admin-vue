@@ -18,17 +18,17 @@
     				</div>
     			</div>
     			<el-row class="form-info">
-    				<el-col :span="24">请输入账号、密码登录</el-col>
+    				<el-col :span="24">请输入WIFI账号、密码登录</el-col>
     			</el-row>
     			<el-form-item label="账号" prop="username">
     				<el-input placeholder="账号" v-model="form.username" clearable ></el-input><!--icon="close" :on-icon-click="clearInput('account')"-->
     			</el-form-item>
     			<el-form-item label="密码" prop="password">
-    				<el-input placeholder="密码" v-model="form.password" clearable type="password" @focus="pwdFocusBlur('5px','65px','120px')" @blur="pwdFocusBlur('40px','20px','160px')"></el-input>
+    				<el-input placeholder="密码" v-model="form.password" clearable type="password" @focus="pwdFocusBlur('5px','65px','120px')" @blur="pwdFocusBlur('40px','20px','160px')" @keyup.enter.native="login('form')"></el-input>
     			</el-form-item>
     			<el-form-item>
-    				<el-col :span="10">	
-    					<el-checkbox v-model="form.remember">7天免登录</el-checkbox>
+    				<el-col :span="10">
+    					<!-- <el-checkbox v-model="form.remember">7天免登录</el-checkbox> -->
     				</el-col>
     				<el-col :span="6" :offset="2">
 	    				<el-button type="primary" @click="login('form')">登录</el-button>
@@ -42,8 +42,10 @@
 
 <script>
 import service from '@/utils/service'
-let qs = require('qs')
 // import { setUser } from '@/utils';
+import { Message } from 'element-ui'
+let qs = require('qs')
+
 export default {
   name: 'Login',
   data () {
@@ -76,12 +78,16 @@ export default {
       var _this = this
       this.$refs[formName].validate(valid => {
         if (valid) {
-          service.post('/user/login', qs.stringify({ formData: _this.form }), {
+          service.post('/user/login', qs.stringify(_this.form), {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },
             params: this.query
           }).then(res => {
+            if (res === false) {
+              Message.error('登录失败！请检查账号、密码')
+              return false
+            }
             _this.$router.push('/')
           })
         }
@@ -94,7 +100,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 /*@import '../style/common';*/
-$imgUrl: "/static/image/";
+$imgUrl: "/meta/develop/public/static/image/";
 .top {
   height: 100px;
   line-height: 100px;
