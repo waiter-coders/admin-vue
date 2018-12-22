@@ -81,7 +81,6 @@ export default {
     answers: {
       handler (newValue, oldValue) {
         this.$emit('input', JSON.stringify(newValue))
-        console.info(newValue)
       },
       deep: true
     },

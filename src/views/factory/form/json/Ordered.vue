@@ -68,27 +68,29 @@ export default {
         onEnd: evt => {
           const tempIndex = this.value.userAnswer.splice(evt.oldIndex, 1)[0]
           this.value.userAnswer.splice(evt.newIndex, 0, tempIndex)
-          this.$emit('makeAnswer', this.index, this.value.userAnswer.filter(function (row) {
-            return row['isShow'] === 'flex'
-          }).map(function (row) { return row['name'] }))
+          this.pushValue()
         }
       })
     },
     removeItem (key) {
       this.value.range[key]['isShow'] = 'none'
-      this.$emit('makeAnswer', this.index, this.value.userAnswer.filter(function (row) {
-        return row['isShow'] === 'flex'
-      }).map(function (row) { return row['name'] }))
+      this.pushValue()
     },
     clearChange () {
       for (let i = 0; i < this.value.range.length; i++) {
         this.value.range[i]['isShow'] = 'flex'
       }
+      this.pushValue()
+    },
+    pushValue () {
+      this.$emit('makeAnswer', this.index, this.value.userAnswer.filter(function (row) {
+        return row['isShow'] === 'flex'
+      }).map(function (row) { return row['name'] }))
     }
   },
   watch: {
     value: function (newValue, oldValue) {
-      console.info(newValue)
+
     }
   }
 }

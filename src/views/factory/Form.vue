@@ -22,6 +22,7 @@ import AdminImage from './form/Image'
 import AdminJson from './form/Json'
 
 import service from '@/utils/service'
+import { Message } from 'element-ui'
 let qs = require('qs')
 
 const formConfig = {
@@ -100,16 +101,43 @@ export default {
     },
     submitForm: function (data) {
       try {
+        if (data['answer'] !== undefined) {
+          let answers = JSON.parse(data['answer'])
+          if (answers.length < 6) {
+            Message.error('有题目未回答')
+            return false
+          }
+          for (let i = 0; i < 6; i++) {
+            if (answers[i] === null) {
+              Message.error('第' + (i + 1) + '题未回答')
+              return false
+            }
+            if (i > 3) {
+              if (answers[i].length === 0) {
+                Message.error('第' + (i + 1) + '题未回答')
+                return false
+              }
+              for (var x in answers[i]) {
+                if (answers[i][x] === '') {
+                  Message.error('第' + (i + 1) + '题,第' + (parseInt(x) + 1) + '空未回答')
+                  return false
+                }
+              }
+            }
+          }
+        }
         let _this = this
+        let params = this.query
+        params['action'] = 'formSubmit'
         service.post(this.baseUrl + '/query', qs.stringify({
-          formData: data, 'action': 'formSubmit', 'index': 0
+          formData: data
         }), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          params: this.query
+          params: params
         }).then(response => {
-          alert('操作成功')
+          Message.success('操作成功')
           _this.$router.go(-1)
         })
       } catch (e) {

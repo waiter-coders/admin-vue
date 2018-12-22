@@ -1,5 +1,5 @@
 <template>
-  <div>主页{{ msg }}</div>
+  <div>{{ msg }}</div>
 </template>
 
 <script>
@@ -9,6 +9,9 @@ export default {
     return {
       msg: ''
     }
+  },
+  created () {
+    this.$router.push('/vote/myVote')
   },
   method: {
     getConfig: function () {
@@ -21,4 +24,3 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
- 
