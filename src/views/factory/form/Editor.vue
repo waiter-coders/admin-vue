@@ -2,12 +2,12 @@
     <div class="editor">
         <el-form-item :label="field.name">
             <mce-editor v-model="editorData" class="editor" :uploadImageHandle="uploadImage" :init="init"></mce-editor>
-        </el-form-item>        
+        </el-form-item>
     </div>
 </template>
 <script>
 
-import MceEditor from './editor/Tinymve'
+import MceEditor from './editor/Tinymce'
 import service from '@/utils/service'
 
 export default {

@@ -78,7 +78,7 @@ export default {
     },
     toolbar1: {
       default:
-                'fullscreen code preview | formatselect removeformat | bold italic underline strikethrough forecolor backcolor fontselect fontsizeselect | anchor charmap link unlink | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | table insertImage',
+                'fullscreen code preview | formatselect removeformat | bold italic underline strikethrough forecolor backcolor fontselect fontsizeselect | anchor charmap link unlink | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | table insertImage | undo redo',
       type: String
     },
     toolbar2: { default: '', type: String },
