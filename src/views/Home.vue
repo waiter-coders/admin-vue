@@ -11,7 +11,7 @@ export default {
     }
   },
   created () {
-    this.$router.push('/vote/myVote')
+    // this.$router.push('/vote/myVote')
   },
   method: {
     getConfig: function () {

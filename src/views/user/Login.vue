@@ -100,7 +100,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 /*@import '../style/common';*/
-$imgUrl: "/meta/develop/public/static/image/";
+$imgUrl: "/static/image/";
 .top {
   height: 100px;
   line-height: 100px;

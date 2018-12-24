@@ -4,7 +4,7 @@ import { Message } from 'element-ui'
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded'
 const service = axios.create({
-  baseURL: '/meta/develop/public/index.php',
+  baseURL: '/index.php',
   timeout: 5000
   //  headers: {'X-Custom-Header': 'foobar'}
 })

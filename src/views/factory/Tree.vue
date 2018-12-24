@@ -61,7 +61,9 @@ export default {
     getTree: function (controller, nodeId) {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
-      return service.get(controller + '/getTree', {
+      params['action'] = 'getTree'
+      params['index'] = 0
+      return service.get(controller + '/query', {
         params: params
       })
     },
@@ -71,7 +73,9 @@ export default {
       params[this.field_label] = label
       params['moveToId'] = moveToId
       params['moveType'] = moveType
-      return service.get(controller + '/addNode', {
+      params['action'] = 'addNode'
+      params['index'] = 0
+      return service.get(controller + '/query', {
         params: params
       })
     },
@@ -80,7 +84,9 @@ export default {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
       params[this.field_label] = label
-      return service.get(controller + '/changeNodeLabel', {
+      params['action'] = 'changeNodeLabel'
+      params['index'] = 0
+      return service.get(controller + '/query', {
         params: params
       })
     },
@@ -90,7 +96,9 @@ export default {
       params[this.field_nodeId] = nodeId
       params['moveToId'] = moveToId
       params['moveType'] = moveType
-      return service.get(controller + '/changeNodePosition', {
+      params['action'] = 'changeNodePosition'
+      params['index'] = 0
+      return service.get(controller + '/query', {
         params: params
       })
     },
@@ -98,7 +106,9 @@ export default {
     deleteNode: function (controller, nodeId) {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
-      return service.get(controller + '/deleteNode', {
+      params['action'] = 'deleteNode'
+      params['index'] = 0
+      return service.get(controller + '/query', {
         params: params
       })
     },
