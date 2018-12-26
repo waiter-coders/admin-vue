@@ -240,7 +240,7 @@ export default {
       case 'ajax':
         pageUtil
           .fetch(
-            this.baseUrl + '/' + params.url,
+            this.baseUrl + '/query?index=0&action=' + params.url.replace('/?', '&'),
             post,
             params.confirm,
             params.success,
