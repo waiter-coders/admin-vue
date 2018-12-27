@@ -2,7 +2,6 @@
   <div class="list-container">
     <div class="list-header">
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
-
       <el-dropdown trigger="hover" class="header_buttons_group" v-if="allOrderNames.length > 0">
         <el-button size="mini">
           排序：{{ currentName }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -18,6 +17,7 @@
     @changePaging="changePaging"
     :config="paging"
      v-if="paging.totalNum > paging.pageSize"></paging>
+     <admin-dialog :configs="fastEditConfigs" :title="fastEditTitle" :visible="fastEditVisible" @before-close="clearFastEditDialog"></admin-dialog>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import Buttons from '@/views/public/Buttons'
 import Search from './list/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
+import Dialog from '@/views/public/Dialog'
 import { Loading } from 'element-ui'
 
 // import fetch from '@/utils/service'
@@ -73,7 +74,10 @@ export default {
       orderNames: {
         'asc': '从小到大',
         'desc': '从大到小'
-      }
+      },
+      fastEditConfigs: {},
+      fastEditTitle: '快速编辑',
+      fastEditVisible: false
     }
   },
   computed: {
@@ -92,7 +96,8 @@ export default {
     TableList,
     Buttons,
     Search,
-    Paging
+    Paging,
+    Dialog
   },
   created () {
     this.fields = 'fields' in this.config ? this.config.fields : []
@@ -114,77 +119,6 @@ export default {
         ? this.config.paging['pageSize']
         : 10
     this.reloadData()
-    this.$emit('showDialog', {
-      type: 'admin-form',
-      fields: [
-        {
-          name: 'id',
-          field: 'id',
-          type: 'number',
-          primaryKey: true,
-          fastEdit: false,
-          value: '12'
-        },
-        {
-          name: '姓名',
-          field: 'username',
-          primaryKey: false,
-          type: 'string',
-          fastEdit: true,
-          value: 'hanhan'
-        },
-        {
-          name: '性别',
-          field: 'sex',
-          type: 'select',
-          map: { '1': '男', '2': '女' },
-          value: '2'
-        },
-        {
-          name: '爱好',
-          field: 'hobby',
-          type: 'multiSelect',
-          map: { '1': '电影', '2': '看书', '3': '旅行', '4': '烹饪' },
-          value: '[2,4]'
-        },
-        {
-          name: '年份',
-          field: 'year',
-          type: 'datetime',
-          datetime: 'year',
-          value: '2018'
-        }, // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
-        {
-          name: '月份',
-          field: 'month',
-          type: 'datetime',
-          datetime: 'month',
-          value: '201807'
-        },
-        {
-          name: '日期',
-          field: 'date',
-          type: 'datetime',
-          datetime: 'date',
-          value: '20180706'
-        },
-        {
-          name: '日期时间范围',
-          field: 'datetimerange',
-          type: 'datetime',
-          datetime: 'datetimerange',
-          value: ['2018-07-01 00:00:00', '2018-08-01 00:00:00']
-        },
-        {
-          name: '日期时间',
-          field: 'datetime',
-          type: 'datetime',
-          datetime: 'datetime',
-          value: '2018-06-30 10:10:23'
-        }
-      ],
-      url: 'controller/add'
-    })
   },
   methods: {
     reloadData () {
@@ -251,40 +185,78 @@ export default {
           })
         break
       case 'dialog':
-        // this.$store.dispatch('showDialog', {
-        //   config: [
-        //     {
-        //       type: 'admin-form',
-        //       submitType: 'dialog',
-        //       fields: [
-        //         {
-        //           field: 'qaId',
-        //           name: 'id',
-        //           type: 'number',
-        //           primaryKey: true
-        //         },
-        //         {
-        //           field: 'title',
-        //           type: 'string',
-        //           length: 30,
-        //           name: '\u540d\u79f0'
-        //         },
-        //         {
-        //           field: 'brief',
-        //           type: 'string',
-        //           length: 30,
-        //           name: '\u7b80\u4ecb'
-        //         }
-        //       ],
-        //       groups: [],
-        //       primaryKey: 'qaId',
-        //       url: ''
-        //     }
-        //   ],
-        //   callback: function () {
-        //     _this.reloadData()
-        //   }
-        // })
+        this.showFastEditDialog()
+        this.$emit('showDialog', {
+          type: 'admin-form',
+          fields: [
+            {
+              name: 'id',
+              field: 'id',
+              type: 'number',
+              primaryKey: true,
+              fastEdit: false,
+              value: '12'
+            },
+            {
+              name: '姓名',
+              field: 'username',
+              primaryKey: false,
+              type: 'string',
+              fastEdit: true,
+              value: 'hanhan'
+            },
+            {
+              name: '性别',
+              field: 'sex',
+              type: 'select',
+              map: { '1': '男', '2': '女' },
+              value: '2'
+            },
+            {
+              name: '爱好',
+              field: 'hobby',
+              type: 'multiSelect',
+              map: { '1': '电影', '2': '看书', '3': '旅行', '4': '烹饪' },
+              value: '[2,4]'
+            },
+            {
+              name: '年份',
+              field: 'year',
+              type: 'datetime',
+              datetime: 'year',
+              value: '2018'
+            }, // datetime的类型选择year/month/date/week/ datetime/datetimerange/daterange
+            {
+              name: '月份',
+              field: 'month',
+              type: 'datetime',
+              datetime: 'month',
+              value: '201807'
+            },
+            {
+              name: '日期',
+              field: 'date',
+              type: 'datetime',
+              datetime: 'date',
+              value: '20180706'
+            },
+            {
+              name: '日期时间范围',
+              field: 'datetimerange',
+              type: 'datetime',
+              datetime: 'datetimerange',
+              value: ['2018-07-01 00:00:00', '2018-08-01 00:00:00']
+            },
+            {
+              name: '日期时间',
+              field: 'datetime',
+              type: 'datetime',
+              datetime: 'datetime',
+              value: '2018-06-30 10:10:23'
+            }
+          ],
+          url: 'controller/add'
+        })
         break
       case 'page':
       default:
@@ -306,6 +278,11 @@ export default {
         })
       })
       return fields
+    },
+    clearFastEditDialog () {
+      this.fastEditConfigs = {}
+      this.fastEditTitle = '快速编辑'
+      this.fastEditVisible = false
     }
   }
 }

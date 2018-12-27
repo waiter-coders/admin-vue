@@ -33,16 +33,18 @@
           </span>
         </span>
     </el-tree>
+    <admin-dialog :configs="fastEditConfigs" :title="fastEditTitle" :visible="fastEditVisible" @before-close="clearFastEditDialog"></admin-dialog>
   </div>
 </template>
 
 <script>
 import service from '@/utils/service'
 import Buttons from '@/views/public/Buttons'
+import AdminDialog from '@/views/public/Dialog'
 
 export default {
   props: ['config'],
-  components: [Buttons],
+  components: {Buttons, AdminDialog},
   data () {
     return {
       baseUrl: this.$route.path,
@@ -51,7 +53,10 @@ export default {
       field_label: this.config.treeKeys.label,
       field_parentNodeId: this.config.treeKeys.parentNodeId,
       field_preNodeId: this.config.treeKeys.preNodeId,
-      field_nextNodeId: this.config.treeKeys.nextNodeId
+      field_nextNodeId: this.config.treeKeys.nextNodeId,
+      fastEditConfigs: {},
+      fastEditTitle: '快速编辑',
+      fastEditVisible: false
     }
   },
   created () {
@@ -129,27 +134,29 @@ export default {
       this.getTree(this.baseUrl, 0).then(function (response) {
         _this.tree = response
         if (response.length === 0) {
-          _this.$store.dispatch('showDialog', {
-            config: [
-              {
-                type: 'admin-form',
-                submitType: 'dialogGet',
-                fields: [{field: _this.field_label, type: 'string', length: 30, name: '标签'}],
-                groups: [],
-                actions: [{
-                  'name': '添加',
-                  'callback': function (data) {
-                    _this.$store.dispatch('hiddenDialog')
-                    _this.addNode(_this.baseUrl, data[_this.field_label], 0, 0).then(function (newNodeId) {
-                      let node = {}
-                      node[_this.field_nodeId] = newNodeId
-                      node[_this.field_label] = data[_this.field_label]
-                      _this.tree = [node]
-                    })
-                  }}]
-              }
-            ]
-          })
+          let _this = this
+          this.fastEditTitle = '添加节点'
+          this.fastEditVisible = true
+          this.fastEditConfigs = [
+            {
+              type: 'admin-form',
+              submitType: 'dialogGet',
+              fields: [{field: this.field_label, type: 'string', length: 30, name: '标签'}],
+              groups: [],
+              actions: [{
+                'name': '添加',
+                'callback': function (data) {
+                  let value = data[_this.field_label]
+                  _this.addNode(_this.baseUrl, value, 0, 0).then(function (newNodeId) {
+                    let node = {}
+                    node[_this.field_nodeId] = newNodeId
+                    node[_this.field_label] = data[_this.field_label]
+                    _this.tree = [node]
+                    _this.clearFastEditDialog()
+                  })
+                }}]
+            }
+          ]
         }
       })
     },
@@ -163,68 +170,64 @@ export default {
       return true
     },
     append (node, data) {
-      var _this = this
+      let _this = this
       var _node = node
-      var formFields = [
-        {field: this.field_label, type: 'string', length: 30, name: '标签'},
-        {field: 'position', type: 'select', map: { 'after': '兄弟节点', 'inner': '子节点' }, name: '位置'}
+      this.fastEditTitle = '添加节点'
+      this.fastEditVisible = true
+      this.fastEditConfigs = [
+        {
+          type: 'admin-form',
+          submitType: 'dialogGet',
+          fields: [
+            {field: this.field_label, type: 'string', length: 30, name: '标签'},
+            {field: 'position', type: 'select', map: { 'after': '兄弟节点', 'inner': '子节点' }, name: '位置'}
+          ],
+          groups: [],
+          actions: [{
+            'name': '添加',
+            'callback': function (data) {
+              _this.addNode(_this.baseUrl, data[_this.field_label], _node.data[_this.field_nodeId], data.position).then(function (newNodeId) {
+                let newNode = {}
+                newNode[_this.field_nodeId] = newNodeId
+                newNode[_this.field_label] = data[_this.field_label]
+                newNode['isLeaf'] = true
+                if (data.position === 'after') {
+                  _this.$refs.tree.insertAfter(newNode, _node)
+                }
+                if (data.position === 'inner') {
+                  _this.$refs.tree.append(newNode, _node)
+                }
+                _this.clearFastEditDialog()
+              })
+            }
+          }]
+        }
       ]
-
-      var addAction = {
-        'name': '添加',
-        'callback': function (data) {
-          _this.$store.dispatch('hiddenDialog')
-          _this.addNode(_this.baseUrl, data[_this.field_label], _node.data[_this.field_nodeId], data.position).then(function (newNodeId) {
-            let newNode = {}
-            newNode[_this.field_nodeId] = newNodeId
-            newNode[_this.field_label] = data[_this.field_label]
-            newNode['isLeaf'] = true
-            if (data.position === 'after') {
-              _this.$refs.tree.insertAfter(newNode, _node)
-            }
-            if (data.position === 'inner') {
-              _this.$refs.tree.append(newNode, _node)
-            }
-          })
-        }}
-      this.$store.dispatch('showDialog', {
-        config: [
-          {
-            type: 'admin-form',
-            submitType: 'dialogGet',
-            fields: formFields,
-            groups: [],
-            actions: [addAction]
-          }
-        ]
-      })
     },
     edit (node, data) {
-      var _this = this
+      let _this = this
       var _node = node
-      var formFields = [
-        {field: this.field_label, type: 'string', length: 30, name: '标签', value: node.data[this.field_label]}
+      this.fastEditTitle = '添加节点'
+      this.fastEditVisible = true
+      this.fastEditConfigs = [
+        {
+          type: 'admin-form',
+          submitType: 'dialogGet',
+          fields: [
+            {field: this.field_label, type: 'string', length: 30, name: '标签', value: node.data[this.field_label]}
+          ],
+          groups: [],
+          actions: [{
+            'name': '编辑',
+            'callback': function (data) {
+              _this.changeNodeLabel(_this.baseUrl, _node.data[_this.field_nodeId], data[_this.field_label]).then(function () {
+                _node.data[_this.field_label] = data[_this.field_label]
+                _this.clearFastEditDialog()
+              })
+            }}
+          ]
+        }
       ]
-
-      var editBtn = {
-        'name': '编辑',
-        'callback': function (data) {
-          _this.$store.dispatch('hiddenDialog')
-          _this.changeNodeLabel(_this.baseUrl, _node.data[_this.field_nodeId], data[_this.field_label]).then(function () {
-            _node.data[_this.field_label] = data[_this.field_label]
-          })
-        }}
-      this.$store.dispatch('showDialog', {
-        config: [
-          {
-            type: 'admin-form',
-            submitType: 'dialogGet',
-            fields: formFields,
-            groups: [],
-            actions: [editBtn]
-          }
-        ]
-      })
     },
     remove (node, data) {
       var _this = this
@@ -254,6 +257,11 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    clearFastEditDialog () {
+      this.fastEditConfigs = {}
+      this.fastEditTitle = '快速编辑'
+      this.fastEditVisible = false
     }
   }
 }
