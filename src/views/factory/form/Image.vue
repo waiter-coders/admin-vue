@@ -11,7 +11,7 @@
         <img v-if="imageUrl" :src="baseUrl + '/' + imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
-    </el-form-item>  	
+    </el-form-item>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       imageUrl: this.value,
-      action: 'index.php/' + this.$route.path + '/formUpload?field=' + this.field.field,
+      action: 'index.php/' + this.$route.path + '/query?index=0&action=imageUpload&field=' + this.field.field,
       baseUrl: this.field.baseUrl,
       imageType: {'image/png': 1, 'image/jpeg': 1}
     }

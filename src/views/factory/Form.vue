@@ -36,7 +36,8 @@ const formConfig = {
   date: 'adminDatetime',
   image: 'adminImage',
   number: 'adminInput',
-  json: 'adminJson'
+  json: 'adminJson',
+  editor: 'adminEditor'
 }
 
 export default {

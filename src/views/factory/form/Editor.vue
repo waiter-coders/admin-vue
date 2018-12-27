@@ -46,16 +46,17 @@ export default {
   },
   methods: {
     uploadImage: function (file) {
+      let _this = this
       return new Promise((resolve, reject) => {
         const formData = new FormData()
-        formData.append('editor', file)
-        return service.post(this.$route.path + '/editorUpload?field=editor', formData, {
+        formData.append(_this.field.field, file)
+        return service.post(_this.$route.path + '/query?index=0&action=editorUpload&field=' + _this.field.field, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
-          params: this.query
+          params: _this.query
         }).then(response => {
-          resolve(response)
+          resolve(_this.field.baseUrl + '/' + response)
         })
       })
     },
