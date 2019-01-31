@@ -1,9 +1,9 @@
-<template> 
-  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable" header-row-class-name="table_header">
+<template>
+  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable" :header-cell-style="header_cell_style" stripe="true" :cell-style="cellStyle">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
-      <el-table-column v-for="item in config.fields" :prop="item.field" 
-          :label="item.name" :key="item.id" :formatter="itemFormatter"></el-table-column>
-      <el-table-column v-if="config.rowActions.length > 0" label="操作">
+      <el-table-column v-for="item in config.fields" :prop="item.field"
+          :label="item.name" :key="item.id" :formatter="itemFormatter" :width="columnWitdh(item)"></el-table-column>
+      <el-table-column v-if="config.rowActions.length > 0" label="操作" width="270">
           <template slot-scope="scope">
               <buttons class="list-table-actions" :config="{actions:rowActions[scope.$index]}" @click="rowActionClick" v-if="config.rowActions.length > 0"></buttons>
           </template>
@@ -99,13 +99,39 @@ export default {
     },
     handleSelectionChange (val) {
       this.multipleSelection = val
+    },
+    header_cell_style (args) {
+      let style = 'background:#e5e5e5;'
+      if (args.column.label === '操作' || args.column.label === 'id') {
+        style += 'text-align:center;'
+      }
+      return style
+    },
+    header_cell_class_name (args) {
+      let cellClass = 'table_header'
+      // if (args.columnIndex === 0) {
+      //   cellClass += ' table_id'
+      // }
+      return cellClass
+    },
+    columnWitdh (field) {
+      return field.name === 'id' ? '90' : 'flex'
+    },
+    cellStyle (args) {
+      if (args.column.label === '操作' || args.column.label === 'id') {
+        return 'text-align:center;'
+      }
+      return ''
     }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .table_header {
   background: #aabbcc;
+}
+.table_id {
+  width:30px;
 }
 </style>
 

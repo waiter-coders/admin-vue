@@ -6,9 +6,14 @@
       <div v-for="(i,key) in value.index" :key="key" class="orderedIndexItem">{{ i }}</div>
     </div>
     <div class="orderedRange"  :class="sortClass">
-      <div v-for="(row,key) in value.range" :key="key" class="orderedRangeItem" :style="{display:row.isShow}">
-        <div class="orderedRangeItemTitle">{{ row.name }}</div>
-        <div v-if="value.canRemove"><el-button type="text" size="mini" @click="removeItem(key)">删除</el-button></div>
+      <div v-for="(row,key) in value.range" :key="key" >
+        <div v-if="row.isShow" class="orderedRangeItem">
+          <div class="orderedRangeItemTitle">{{ row.name }}</div>
+          <div v-if="value.canRemove"><el-button type="text" size="mini" @click="removeItem(key)">删除</el-button></div>
+        </div>
+        <div v-else class="orderedRangeItem orderedRangeItemRemove">
+          无
+        </div>
       </div>
     </div>
   </div>
@@ -47,7 +52,7 @@ export default {
   created () {
     this.createParams = this.params
     this.value.topic = this.params.topic
-    this.value.range = this.params.range.map(function (name) { return {'name': name, 'isShow': 'flex'} })
+    this.value.range = this.params.range.map(function (name) { return {'name': name, 'isShow': true} })
     this.value.canRemove = this.params.canRemove
     for (let i = 1; i <= this.value.range.length; i++) {
       this.value.index.push(i)
@@ -73,19 +78,19 @@ export default {
       })
     },
     removeItem (key) {
-      this.value.range[key]['isShow'] = 'none'
+      this.value.range[key]['isShow'] = false
       this.pushValue()
     },
     clearChange () {
       for (let i = 0; i < this.value.range.length; i++) {
-        this.value.range[i]['isShow'] = 'flex'
+        this.value.range[i]['isShow'] = true
       }
       this.pushValue()
     },
     pushValue () {
-      this.$emit('makeAnswer', this.index, this.value.userAnswer.filter(function (row) {
-        return row['isShow'] === 'flex'
-      }).map(function (row) { return row['name'] }))
+      this.$emit('makeAnswer', this.index, this.value.userAnswer.map(function (row) {
+        return row['isShow'] ? row['name'] : ''
+      }))
     }
   },
   watch: {
@@ -114,14 +119,17 @@ export default {
 .orderedIndex{
  text-align: left;
  background: #aaa;
+ display: flex;
+ flex-direction: column;
 }
 .orderedIndexItem{
   padding: 9px 12px 8px 12px;
-  height:28px;
-  line-height: 28px;
   color:crimson;
   font-weight: 800;
-
+  flex:1;
+  text-align: center;
+  height:28px;
+  line-height: 28px;
 }
 .orderedRange{
 border: solid 1px #abc;
@@ -132,6 +140,15 @@ border: solid 1px #abc;
     padding: 8px 25px;
     border-bottom:solid 1px #abc;
     display: flex;
+}
+.orderedRangeItemRemove{
+background:#efefef;
+text-align:center;
+color:#888;
+  flex:1;
+  line-height: 28px;
+  justify-items: center;
+  align-items: center;
 }
 .orderedRangeItem:hover{
   background: #abc;

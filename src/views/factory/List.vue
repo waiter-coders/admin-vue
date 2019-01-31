@@ -27,7 +27,7 @@ import Buttons from '@/views/public/Buttons'
 import Search from './list/Search'
 import TableList from './list/Table'
 import Paging from './list/Paging'
-import Dialog from '@/views/public/Dialog'
+import AdminDialog from '@/views/public/Dialog'
 import { Loading } from 'element-ui'
 
 // import fetch from '@/utils/service'
@@ -52,6 +52,13 @@ config:{
 export default {
   name: 'AdminList',
   props: ['config'],
+  components: {
+    TableList,
+    Buttons,
+    Search,
+    Paging,
+    AdminDialog
+  },
   data () {
     return {
       baseUrl: this.$route.path,
@@ -91,13 +98,6 @@ export default {
       }
       return names
     }
-  },
-  components: {
-    TableList,
-    Buttons,
-    Search,
-    Paging,
-    Dialog
   },
   created () {
     this.fields = 'fields' in this.config ? this.config.fields : []
