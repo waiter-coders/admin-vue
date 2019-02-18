@@ -11,11 +11,11 @@ export default {
     }
   },
   created () {
-    this.$router.push('/vote/myVote')
+    this.getConfig()
   },
-  method: {
-    getConfig: function () {
-      alert(1)
+  methods: {
+    getConfig () {
+      this.msg = '欢迎！'
     }
   }
 }

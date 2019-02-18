@@ -98,19 +98,17 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-/*@import '../style/common';*/
-$imgUrl: "/meta/develop/public/static/image/";
+<style scoped>
 .top {
   height: 100px;
   line-height: 100px;
   font-size: 36px;
-  background: url($imgUrl+"/login-bg.png") repeat 0 0;
+  background: url("../../assets/img/login-bg.png") repeat 0 0;
   color: #fff;
 }
 .main {
   height: 255px;
-  background: url($imgUrl+"/login-bg.png") repeat 0 0;
+  background: url("../../assets/img/login-bg.png") repeat 0 0;
   background-origin: content-box;
 }
 .form {
@@ -125,31 +123,32 @@ $imgUrl: "/meta/develop/public/static/image/";
 .owl {
   width: 211px;
   height: 108px;
-  background: url($imgUrl+"/owl.png") -51px 0 no-repeat;
+  background: url("../../assets/img/owl.png") -51px 0 no-repeat;
   position: absolute;
   left: 50%;
   top: -100px;
   margin-left: -111px;
-  .arms {
+
+}
+.owl .arms {
     top: 58px;
     position: absolute;
     height: 40px;
     width: 100%;
     overflow: hidden;
-    .arm {
-      width: 40px;
-      height: 65px;
-      background: url($imgUrl+"/owl.png") 0 0 no-repeat;
-      position: absolute;
-      left: 20px;
-      top: 40px;
-      transition: all 0.3s ease;
-    }
-    .arm-r {
-      background: url($imgUrl+"/owl.png") -278px 0 no-repeat;
-      left: 160px;
-    }
   }
+.owl .arm {
+  width: 40px;
+  height: 65px;
+  background: url("../../assets/img/owl.png") 0 0 no-repeat;
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  transition: all 0.3s ease;
+}
+.owl .arm-r {
+  background: url("../../assets/img/owl.png") -278px 0 no-repeat;
+  left: 160px;
 }
 .el-input > input {
   border-radius: 3px !important;
@@ -162,9 +161,10 @@ $imgUrl: "/meta/develop/public/static/image/";
   margin-bottom: 22px;
   font-size: 0.12rem;
   color: #20a0ff;
-  .left {
-    padding-left: 4px;
-    margin-top: -2px;
-  }
+
+}
+.form-info .left {
+  padding-left: 4px;
+  margin-top: -2px;
 }
 </style>

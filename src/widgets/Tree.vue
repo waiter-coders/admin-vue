@@ -39,8 +39,8 @@
 
 <script>
 import service from '@/utils/service'
-import Buttons from '@/views/public/Buttons'
-import AdminDialog from '@/views/public/Dialog'
+import Buttons from '@/widgets/public/Buttons'
+import AdminDialog from '@/widgets/public/Dialog'
 
 export default {
   props: ['config'],
@@ -66,9 +66,7 @@ export default {
     getTree: function (controller, nodeId) {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
-      params['action'] = 'getTree'
-      params['index'] = 0
-      return service.get(controller + '/query', {
+      return service.get(controller + '/getTree', {
         params: params
       })
     },
@@ -78,9 +76,7 @@ export default {
       params[this.field_label] = label
       params['moveToId'] = moveToId
       params['moveType'] = moveType
-      params['action'] = 'addNode'
-      params['index'] = 0
-      return service.get(controller + '/query', {
+      return service.get(controller + '/addNode', {
         params: params
       })
     },
@@ -89,9 +85,7 @@ export default {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
       params[this.field_label] = label
-      params['action'] = 'changeNodeLabel'
-      params['index'] = 0
-      return service.get(controller + '/query', {
+      return service.get(controller + '/changeNodeLabel', {
         params: params
       })
     },
@@ -101,9 +95,7 @@ export default {
       params[this.field_nodeId] = nodeId
       params['moveToId'] = moveToId
       params['moveType'] = moveType
-      params['action'] = 'changeNodePosition'
-      params['index'] = 0
-      return service.get(controller + '/query', {
+      return service.get(controller + '/changeNodePosition', {
         params: params
       })
     },
@@ -111,9 +103,7 @@ export default {
     deleteNode: function (controller, nodeId) {
       let params = this.$route.query
       params[this.field_nodeId] = nodeId
-      params['action'] = 'deleteNode'
-      params['index'] = 0
-      return service.get(controller + '/query', {
+      return service.get(controller + '/deleteNode', {
         params: params
       })
     },

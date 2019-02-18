@@ -69,9 +69,8 @@ export default {
     if (this.config.primaryKey in this.$route.query) {
       var _this = this
       let params = this.query
-      params['action'] = 'getFormData'
       params['index'] = 0
-      service.get(this.baseUrl + '/query', {params: params}).then(function (data) {
+      service.get(this.baseUrl + '/getFormData', {params: params}).then(function (data) {
         _this.initData = data
         var fields = []
         for (var i in _this.fields) {
@@ -129,8 +128,7 @@ export default {
         }
         let _this = this
         let params = this.query
-        params['action'] = 'formSubmit'
-        service.post(this.baseUrl + '/query', qs.stringify({
+        service.post(this.baseUrl + '/formSubmit', qs.stringify({
           formData: data
         }), {
           headers: {

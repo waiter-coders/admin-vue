@@ -14,7 +14,7 @@
 </div>
 </template>
 <script>
-import AdminForm from '@/views/factory/Form'
+import AdminForm from '@/widgets/Form'
 
 export default {
   props: ['configs', 'title', 'visible'],

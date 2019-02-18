@@ -6,7 +6,7 @@ import fetch from '@/utils/service'
 
 //  公共视图组件
 const Dashboard = resolve => require(['@/views/Dashboard'], resolve) //  仪表盘
-const Factory = resolve => require(['@/views/Factory'], resolve) //  模板渲染组件
+const Widgets = resolve => require(['@/views/Widgets'], resolve) //  模板渲染组件
 
 //  常用页面
 const Home = resolve => require(['@/views/Home'], resolve) // 仪表盘首页
@@ -37,7 +37,7 @@ const router = new VueRouter({
         //  模板渲染组件
         {
           path: '/:domain/:controller?/:subController?',
-          component: Factory,
+          component: Widgets,
           props: true
         },
         {

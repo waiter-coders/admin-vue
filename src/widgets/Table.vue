@@ -12,7 +12,7 @@
       </el-dropdown>
       <buttons class="header_buttons_group" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
     </div>
-    <table-list class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-list>
+    <table-core class="list-table" :config="list" @click="actionsClick" ref="table_list"></table-core>
     <paging class="list-paging"
     @changePaging="changePaging"
     :config="paging"
@@ -23,11 +23,11 @@
 
 <script>
 import service from '@/utils/service'
-import Buttons from '@/views/public/Buttons'
-import Search from './list/Search'
-import TableList from './list/Table'
-import Paging from './list/Paging'
-import AdminDialog from '@/views/public/Dialog'
+import Buttons from '@/widgets/public/Buttons'
+import Search from './table/Search'
+import TableCore from './table/Core'
+import Paging from './table/Paging'
+import AdminDialog from '@/widgets/public/Dialog'
 import { Loading } from 'element-ui'
 
 // import fetch from '@/utils/service'
@@ -53,7 +53,7 @@ export default {
   name: 'AdminList',
   props: ['config'],
   components: {
-    TableList,
+    TableCore,
     Buttons,
     Search,
     Paging,
@@ -131,16 +131,14 @@ export default {
       var params = this.query
       params.search = this.search.searchParams
       params.index = 0
-      params.action = 'getTotalNum'
-      service.get(_this.baseUrl + '/query', {params: params}).then(totalNum => {
+      service.get(_this.baseUrl + '/getTotalNum', {params: params}).then(totalNum => {
         _this.paging.totalNum = parseInt(totalNum)
         if (totalNum === 0) {
           return Promise.resolve([])
         }
         params.limit = _this.paging.pageSize
         params.offset = (_this.paging.currentPage - 1) * _this.paging.pageSize
-        params.action = 'getList'
-        return service.get(_this.baseUrl + '/query', {params: params}).then(data => {
+        return service.get(_this.baseUrl + '/getList', {params: params}).then(data => {
           _this.list.data = data
           loading.close()
         })

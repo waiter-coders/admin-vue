@@ -2,7 +2,7 @@
   "name": "admin",
   "version": "1.0.0",
   "description": "the waiter php admin js vue",
-  "author": "949855040@qq.com",
+  "author": "tian zheng",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

@@ -50,7 +50,7 @@ export default {
       return new Promise((resolve, reject) => {
         const formData = new FormData()
         formData.append(_this.field.field, file)
-        return service.post(_this.$route.path + '/query?index=0&action=editorUpload&field=' + _this.field.field, formData, {
+        return service.post(_this.$route.path + '/editorUpload&field=' + _this.field.field, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },

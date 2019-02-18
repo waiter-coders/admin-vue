@@ -3,7 +3,7 @@ import { Message } from 'element-ui'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 let currentUrl = window.location.origin + window.location.pathname
-let baseUrl = currentUrl.substring(0, currentUrl.length - 5) + '.php'
+let baseUrl = currentUrl.replace('index.html', '') + 'index.php'
 
 const service = axios.create({
   baseURL: baseUrl,

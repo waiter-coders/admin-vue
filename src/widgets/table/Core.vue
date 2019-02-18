@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable" :header-cell-style="header_cell_style" stripe="true" :cell-style="cellStyle">
+  <el-table :data="config.data" border width="800" @selection-change="handleSelectionChange" ref="multipleTable" :header-cell-style="header_cell_style" :stripe="true" :cell-style="cellStyle">
       <el-table-column v-if="config.needSelect == true" type="selection" width="50"></el-table-column>
       <el-table-column v-for="item in config.fields" :prop="item.field"
           :label="item.name" :key="item.id" :formatter="itemFormatter" :width="columnWitdh(item)"></el-table-column>
@@ -26,7 +26,7 @@
 @事件：
 click(action, params)
  */
-import Buttons from '@/views/public/Buttons'
+import Buttons from '@/widgets/public/Buttons'
 export default {
   name: 'tableList',
   components: { Buttons },
