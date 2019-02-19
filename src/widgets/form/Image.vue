@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       imageUrl: this.value,
-      action: 'index.php/' + this.$route.path + '/query?index=0&action=imageUpload&field=' + this.field.field,
+      action: 'index.php/' + this.$route.path + '/upload?field=' + this.field.field,
       baseUrl: this.field.baseUrl,
       imageType: {'image/png': 1, 'image/jpeg': 1}
     }

@@ -2,7 +2,7 @@
   <el-dropdown class="avatar-container" trigger="click">
     <div class="avatar-wrapper">
       用户
-      <i class="el-icon-caret-bottom"></i>
+      <i class="el-icon-caret-bottom unline_aa"></i>
     </div>
     <el-dropdown-menu class="user-dropdown" slot="dropdown">
       <!-- <router-link class='inlineBlock' to="/">
@@ -28,4 +28,7 @@ export default {
 </script>
 
 <style scoped>
+.unline_aa{
+  margin-top:-5px;
+}
 </style>

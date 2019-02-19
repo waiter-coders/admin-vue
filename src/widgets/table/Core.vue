@@ -101,7 +101,7 @@ export default {
       this.multipleSelection = val
     },
     header_cell_style (args) {
-      let style = 'background:#e5e5e5;'
+      let style = 'background:#f1f1f1;'
       if (args.column.label === '操作' || args.column.label === 'id') {
         style += 'text-align:center;'
       }

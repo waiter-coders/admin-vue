@@ -4,14 +4,14 @@
       <menus></menus>
     </div>
     <div class="main-container">
-      <el-menu class="navbar" mode="horizontal">    
+      <el-menu class="navbar" mode="horizontal">
         <hamburger class="hamburger-container"></hamburger>
         <bread class="bread-container"></bread>
         <user-actions></user-actions>
       </el-menu>
       <!--<tags-view></tags-view>-->
       <section class="app-main" style="min-height: 100%">
-        <transition name="fade" mode="out-in">          
+        <transition name="fade" mode="out-in">
           <router-view :key="key"></router-view>
         </transition>
       </section>
@@ -74,7 +74,8 @@ export default {
     left: 0;
     bottom: 0;
     z-index: 111;
-    background: rgb(84, 92, 100);
+    color: #BFCBD9;
+    background-color:#304156;
   }
   .navbar {
     width: 100%;

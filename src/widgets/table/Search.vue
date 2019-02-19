@@ -57,6 +57,6 @@ export default {
 
 <style lang="scss" scoped>
 .el-form-item {
-  margin-bottom: 10px !important;
+  margin-bottom: 0 !important;
 }
 </style>

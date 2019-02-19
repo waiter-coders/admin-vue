@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<el-menu mode="vertical" 
-			background-color="#545c64"
-      		text-color="#fff"
-      		active-text-color="#ffd04b"
+		<el-menu mode="vertical"
+			background-color="#304156"
+      		text-color="#BFCBD9"
+      		active-text-color="#409eff"
 			:unique-opened="unique"
       		:collapse="isCollapse" >
 			<menu-item :menus="menu"></menu-item>

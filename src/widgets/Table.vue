@@ -172,7 +172,7 @@ export default {
       case 'ajax':
         pageUtil
           .fetch(
-            this.baseUrl + '/query?index=0&action=' + params.url.replace('/?', '&'),
+            this.baseUrl + '/' + params.url,
             post,
             params.confirm,
             params.success,
@@ -289,7 +289,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list-container {
-  padding: 15px 30px;
+  padding: 5px 30px;
 }
 .list-header {
   display: flex;
@@ -298,6 +298,8 @@ export default {
 }
 .list-search {
   flex: 1;
+  flex-direction: column;
+  justify-content: center;
 }
 .header_buttons_group {
   margin: 0 0 0 35px;

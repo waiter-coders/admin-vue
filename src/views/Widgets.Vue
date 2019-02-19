@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component :is="config.type" :config="config"  v-for="(config, index) in configs" v-if='configs.length > 0'>
+    <component :is="config.type" :config="config"  v-for="(config, index) in configs" :key="index" v-if='configs.length > 0'>
       组件初始化中
     </component>
   </div>
