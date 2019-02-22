@@ -22,4 +22,24 @@ export default {
   font-size:14px;
   color: #515151;
 }
+
+a, a:link, a:visited, a:active, a:focus, a:hover{
+  color:#009a61;
+}
+
+summary::-webkit-details-marker {display: none;}
+summary:after {
+  content: "\2193";
+   color: #009a61;
+   margin-left: 5px;
+}
+summary {
+  cursor: pointer;
+  outline: none;
+}
+
+abbr[title]{
+  text-decoration:none;
+}
+
 </style>

@@ -5,7 +5,7 @@
     </div>
     <div class="main-container">
       <el-menu class="navbar" mode="horizontal">
-        <hamburger class="hamburger-container"></hamburger>
+        <hamburger class="hamburger-container" :isActive="isActive" :toggleClick="toggleClick"></hamburger>
         <bread class="bread-container"></bread>
         <user-actions></user-actions>
       </el-menu>
@@ -34,6 +34,11 @@ export default {
     UserActions
     // TagsView,
   },
+  data () {
+    return {
+      isActive: true
+    }
+  },
   computed: {
     key () {
       return this.$route.name !== undefined
@@ -43,6 +48,9 @@ export default {
     dialog () {
       // return this.$store.state.dialog
     }
+  },
+  methods: {
+    toggleClick () {}
   }
 }
 </script>
