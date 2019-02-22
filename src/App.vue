@@ -27,6 +27,9 @@ a, a:link, a:visited, a:active, a:focus, a:hover{
   color:#009a61;
 }
 
+details {
+  display: inline;
+}
 summary::-webkit-details-marker {display: none;}
 summary:after {
   content: "\2193";

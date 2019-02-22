@@ -35,15 +35,12 @@ export default {
   },
   watch: {
     configs: function (newValue, oldValue) {
-      console.info(newValue)
       this.dialogConfigs = newValue
     },
     title: function (newValue, oldValue) {
-      console.info(newValue)
       this.dialogTitle = newValue
     },
     visible: function (newValue, oldValue) {
-      console.info(newValue)
       this.dialogVisible = newValue
     }
   }

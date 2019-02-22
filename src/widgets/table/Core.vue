@@ -5,6 +5,9 @@
           :label="item.name" :key="item.id" :width="columnWitdh(item)" :sortable="isSortable(item)">
         <template slot-scope="scope">
           <span v-html="itemFormatter(item, scope.row, scope.$index)"></span>
+          <span  v-if="('fastEdit' in item && item.fastEdit === true)" class=" table-row-fast-edit-icon" @click="showFastEdit(item, scope.row, scope.$index)">
+            <i class="el-icon-edit-outline"></i>
+          </span>
         </template>
       </el-table-column>
       <el-table-column v-if="config.rowActions.length > 0" label="操作" width="140">
@@ -33,6 +36,7 @@ click(action, params)
 import Buttons from '@/widgets/public/Buttons'
 
 import DateFormatter from '@/utils/date'
+import service from '@/utils/service'
 
 export default {
   name: 'tableList',
@@ -174,18 +178,15 @@ export default {
         return '92'
       }
       if (field.type === 'select') {
-        return '90'
+        return ('fastEdit' in field && field.fastEdit === true) ? '110' : '90'
       }
       if (field.type === 'datetime') {
         return '80'
       }
-      if (field.name === '点击率') {
-        return '70'
-      }
       return 'flex'
     },
     isSortable (field) {
-      return field.sortable
+      return ('sortable' in field && field.sortable === true)
     },
     cellStyle (args) {
       if (args.column.label === '操作' || args.column.label === 'id') {
@@ -200,16 +201,56 @@ export default {
         let sorted = orderSeq.order === 'ascending' ? 'asc' : 'desc'
         this.$emit('changeOrderBy', orderSeq.prop + ' ' + sorted)
       }
+    },
+    showFastEdit (field, rowData, rowIndex) {
+      let _this = this
+      let config = {'type': 'AdminForm'}
+      field.value = rowData[field.field]
+      config.fields = [field]
+      config.actions = [
+        {id: 'fastEdit',
+          type: 'ajax',
+          isShow: true,
+          isDisabled: false,
+          url: 'formSubmit',
+          name: '更新',
+          callback: function (values) {
+            // 无内容修改则直接跳过
+            if (values[field.field] + '' === rowData[field.field] + '') {
+              _this.$emit('clearDialog')
+              return false
+            }
+            let params = {}
+            params[_this.config.primaryKey] = rowData[_this.config.primaryKey]
+            params['field'] = field.field
+            params['value'] = values[field.field]
+            service.get(_this.$route.path + '/fieldUpdate', {params: params}).then(function (response) {
+              _this.config.data[rowIndex][field.field] = values[field.field]
+              _this.$emit('clearDialog')
+            })
+          }}
+      ]
+      this.$emit('click', 'fastEdit', {
+        'type': 'dialog',
+        'configs': [config],
+        'title': '快速编辑'
+      })
     }
   }
 }
 </script>
-<style scoped>
+<style>
 .table_header {
   background: #aabbcc;
 }
 .table_id {
   width:30px;
+}
+.table-row-fast-edit-icon {
+  display: inline-block;
+  padding: 0 0 0 5px;
+  cursor: pointer;
+  color:#67c23a;
 }
 </style>
 

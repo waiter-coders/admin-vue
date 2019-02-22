@@ -4,7 +4,7 @@
       <search class="list-search" :config="search" @search="searchClick" v-if="search.fields.length > 0"></search>
       <buttons class="header_buttons_group" :config="{actions:tableActions}" @click="actionsClick" v-if="tableActions.length > 0"></buttons>
     </div>
-    <table-core class="list-table" :config="list" @click="actionsClick" @changeOrderBy="changeOrderBy" ref="table_list"></table-core>
+    <table-core class="list-table" :config="list" @click="actionsClick" @changeOrderBy="changeOrderBy" @clearDialog="clearDialog" ref="table_list"></table-core>
     <paging class="list-paging"
     @changePaging="changePaging"
     :config="paging"
@@ -64,7 +64,7 @@ export default {
       ],
       hiddenSearch: {},
       tableActions: [],
-      list: { fields: [], rowActions: [], data: [], needSelect: false, detail: '' },
+      list: { fields: [], rowActions: [], data: [], needSelect: false, detail: '', primaryKey: 'id' },
       paging: {
         pageSize: 10,
         totalNum: 0,
@@ -93,25 +93,17 @@ export default {
   },
   created () {
     this.fields = 'fields' in this.config ? this.config.fields : []
-    this.search.fields =
-      'search' in this.config
-        ? this.filterSearchFields(this.config.search, this.config.fields)
-        : []
-    this.tableActions =
-      'tableActions' in this.config ? this.config.tableActions : []
+    this.search.fields = 'search' in this.config ? this.filterSearchFields(this.config.search, this.config.fields) : []
+    this.tableActions = 'tableActions' in this.config ? this.config.tableActions : []
     this.list.fields = this.fields
-    this.list.rowActions =
-      'rowActions' in this.config ? this.config.rowActions : []
-    this.list.needSelect =
-      this.tableActions.filter(function (row) {
-        return row.location === 'select'
-      }).length > 0
+    this.list.rowActions = 'rowActions' in this.config ? this.config.rowActions : []
+    this.list.needSelect = this.tableActions.filter(function (row) {
+      return row.location === 'select'
+    }).length > 0
     this.list.detail = this.config.detail
     this.list.orderBy = 'orderBy' in this.config ? this.config.orderBy : this.defaultOrdered()
-    this.paging.pageSize =
-      'paging' in this.config && 'pageSize' in this.config.paging
-        ? this.config.paging['pageSize']
-        : 10
+    this.list.primaryKey = this.config.fields.find(function (val) { return val.primaryKey === true }).field
+    this.paging.pageSize = 'paging' in this.config && 'pageSize' in this.config.paging ? this.config.paging['pageSize'] : 10
     this.reloadData()
   },
   methods: {
@@ -166,12 +158,39 @@ export default {
       this.list.orderBy = orderBy
       this.reloadData()
     },
+    fastAdd () {
+      let _this = this
+      let config = {'type': 'AdminForm'}
+      config.fields = this.fields
+      config.actions = [
+        {id: 'fastAdd',
+          type: 'ajax',
+          isShow: true,
+          isDisabled: false,
+          url: 'formSubmit',
+          name: '添加'
+        }
+      ]
+      config.needCallback = function () {
+        _this.clearDialog()
+        _this.reloadData()
+      }
+      this.showDialog({
+        'type': 'dialog',
+        'configs': [config],
+        'title': '快速添加'
+      })
+    },
     actionsClick (action, params) {
       var _this = this
       var post = {}
       if (params.location === 'select') {
         post.ids = this.$refs.table_list.getSelectIds()
       }
+      if (params.id === 'fastAdd') {
+        return this.fastAdd()
+      }
+
       switch (params.type) {
       case 'ajax':
         pageUtil.fetch(this.baseUrl + '/' + params.url, post,
@@ -204,8 +223,10 @@ export default {
       })
       return fields
     },
-    showDialog () {
-
+    showDialog (params) {
+      this.dialogConfigs = params.configs
+      this.dialogTitle = params.title
+      this.dialogVisible = true
     },
     clearDialog () {
       this.dialogConfigs = {}
