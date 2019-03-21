@@ -119,6 +119,7 @@ export default {
       service.get(_this.baseUrl + '/getTotalNum', {params: params}).then(totalNum => {
         _this.paging.totalNum = parseInt(totalNum)
         if (totalNum === 0) {
+          loading.close()
           return Promise.resolve([])
         }
         params.limit = _this.paging.pageSize

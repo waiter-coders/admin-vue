@@ -174,7 +174,7 @@ export default {
       return cellClass
     },
     columnWitdh (field) {
-      if (field.name === 'id' || field.type === 'number') {
+      if (field.name === 'id' || field.type === 'number' || field.type === 'decimal') {
         return '92'
       }
       if (field.type === 'select') {

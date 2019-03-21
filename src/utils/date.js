@@ -20,6 +20,20 @@ const dateFormatter = {
   },
   getDate: (dateString) => {
     return new Date(dateString.replace(/-/g, '/'))
+  },
+  padLeft: (number) => {
+    let pad = '00'
+    number = number + ''
+    number = pad.substring(0, pad.length - number.length) + number
+    return number
+  },
+  getDateString: (dateObject) => {
+    return dateObject.getFullYear() +
+    '-' + dateFormatter.padLeft(dateObject.getMonth() + 1) +
+    '-' + dateFormatter.padLeft(dateObject.getDate()) +
+    ' ' + dateFormatter.padLeft(dateObject.getHours()) +
+    ':' + dateFormatter.padLeft(dateObject.getMinutes()) +
+    ':' + dateFormatter.padLeft(dateObject.getSeconds())
   }
 }
 

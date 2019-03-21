@@ -13,23 +13,31 @@
           <span>{{ data[field_label] }}</span>
           <span>
             <el-button
-            type="text"
-            size="mini"
-            @click.stop="() => append(node, data)">
-            添加
-          </el-button>
-          <el-button
-            type="text"
-            size="mini"
-            @click.stop="() => edit(node, data)">
-            编辑
-          </el-button>
-          <el-button
-            type="text"
-            size="mini"
-            @click.stop="() => remove(node, data)">
-            删除
-          </el-button>
+              type="text"
+              size="mini"
+              @click.stop="() => append(node, data)">
+              添加
+            </el-button>
+            <el-button
+              type="text"
+              size="mini"
+              @click.stop="() => edit(node, data)">
+              编辑
+            </el-button>
+            <el-button
+              type="text"
+              size="mini"
+              @click.stop="() => remove(node, data)">
+              删除
+            </el-button>
+                <el-button
+                  type="text"
+                  size="mini"
+                  v-if="actions.length > 0 && (action.onlyLeaf == false || (action.onlyLeaf == true && !('children' in data)))"
+                  v-for="(action,index) in actions" :key="index"
+                  @click.stop="() => actionClick(node, data, action)" >
+                  {{ action.name }}
+              </el-button>
           </span>
         </span>
     </el-tree>
@@ -41,6 +49,7 @@
 import service from '@/utils/service'
 import Buttons from '@/widgets/public/Buttons'
 import AdminDialog from '@/widgets/public/Dialog'
+import pageUtil from '@/utils/page'
 
 export default {
   props: ['config'],
@@ -56,7 +65,8 @@ export default {
       field_nextNodeId: this.config.treeKeys.nextNodeId,
       fastEditConfigs: {},
       fastEditTitle: '快速编辑',
-      fastEditVisible: false
+      fastEditVisible: false,
+      actions: this.config.actions
     }
   },
   created () {
@@ -124,14 +134,13 @@ export default {
       this.getTree(this.baseUrl, 0).then(function (response) {
         _this.tree = response
         if (response.length === 0) {
-          let _this = this
-          this.fastEditTitle = '添加节点'
-          this.fastEditVisible = true
-          this.fastEditConfigs = [
+          _this.fastEditTitle = '添加节点'
+          _this.fastEditVisible = true
+          _this.fastEditConfigs = [
             {
               type: 'admin-form',
               submitType: 'dialogGet',
-              fields: [{field: this.field_label, type: 'string', length: 30, name: '标签'}],
+              fields: [{field: _this.field_label, type: 'string', length: 30, name: '标签'}],
               groups: [],
               actions: [{
                 'name': '添加',
@@ -252,6 +261,35 @@ export default {
       this.fastEditConfigs = {}
       this.fastEditTitle = '快速编辑'
       this.fastEditVisible = false
+    },
+    actionClick (node, data, action) {
+      var _this = this
+      action.url = action.url.replace('@primaryKey@', this.field_nodeId)
+      action.url = action.url.replace('@data.id@', data[this.field_nodeId])
+
+      var post = {}
+      if (action.location === 'select') {
+        post.ids = this.$refs.table_list.getSelectIds()
+      }
+      if (action.id === 'fastAdd') {
+        return this.fastAdd()
+      }
+
+      switch (action.type) {
+      case 'ajax':
+        pageUtil.fetch(this.baseUrl + '/' + action.url, post,
+          action.confirm, action.success, action.error
+        ).then(function () {
+          _this.reloadData()
+        })
+        break
+      case 'dialog':
+        this.showDialog(action)
+        break
+      case 'page':
+      default:
+        this.$router.push({ path: action.url, params: action.params })
+      }
     }
   }
 }

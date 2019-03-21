@@ -1,12 +1,14 @@
 <template>
     <div>
         <el-form-item :label="field.name">
-            <el-date-picker :type="field.datetime" v-model="inputValue" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" :value-format="field.datetime | time"></el-date-picker>
+            <el-date-picker type="datetime" v-model="inputValue"  :value-format="field.datetime | time" placeholder="选择日期时间"></el-date-picker>
         </el-form-item>
     </div>
 </template>
 <script>
 import { timeFormat } from '@/utils/loader'
+import dateFormatter from '@/utils/date'
+
 export default {
   name: 'datetime',
   props: ['field', 'value'],
@@ -17,7 +19,9 @@ export default {
   },
   watch: {
     inputValue: function (newValue, oldValue) {
-      this.$emit('input', newValue)
+      if (oldValue !== undefined) {
+        this.$emit('input', dateFormatter.getDateString(newValue))
+      }
     },
     value: function (newValue, oldValue) {
       this.inputValue = newValue

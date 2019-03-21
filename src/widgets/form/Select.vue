@@ -2,7 +2,7 @@
   <div>
   	<el-form-item :label="field.name">
       <el-select v-model="selectValue" :name="field.field" filterable placeholder="请选择">
-        <el-option v-for="(item,key) in field.map" :key="'option_'+key" :label="item" :value="key"></el-option>
+        <el-option v-for="(item,key) in selectMap" :key="'option_'+key" :label="item" :value="key"></el-option>
       </el-select>
     </el-form-item>
   </div>
@@ -17,9 +17,18 @@ export default {
       selectValue: ''
     }
   },
+  computed: {
+    selectMap () {
+      let map = {}
+      for (let i in this.field.map) {
+        map['' + i] = this.field.map[i] // k全部string化
+      }
+      return map
+    }
+  },
   created () {
     if (this.value !== undefined) {
-      this.selectValue = parseInt(this.value)
+      this.selectValue = this.value + ''
     }
   },
   watch: {
