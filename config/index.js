@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/index.php': {
-        target: 'http://report.zoldbs.com.cn/meta/log_admin/public/',
+        target: 'http://admin.some-coders.com',
         changeOrigin: true
       }
     },

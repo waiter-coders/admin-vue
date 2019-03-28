@@ -15,6 +15,7 @@
 import AdminCheckBox from './form/CheckBox'
 import AdminDatetime from './form/Datetime'
 import AdminEditor from './form/Editor'
+import AdminMarkdown from './form/Markdown'
 import AdminInput from './form/Input'
 import AdminSelect from './form/Select'
 import AdminLinkSelect from './form/LinkSelect'
@@ -37,7 +38,8 @@ const formConfig = {
   image: 'adminImage',
   number: 'adminInput',
   json: 'adminJson',
-  editor: 'adminEditor'
+  editor: 'adminEditor',
+  markdown: 'adminMarkdown'
 }
 
 export default {
@@ -55,7 +57,7 @@ export default {
   },
   props: ['config'],
   components: {
-    AdminCheckBox, AdminDatetime, AdminEditor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage, AdminJson
+    AdminCheckBox, AdminDatetime, AdminEditor, AdminInput, AdminSelect, AdminLinkSelect, AdminImage, AdminJson, AdminMarkdown
   },
   filters: {
     typeFilter: function (key) {
